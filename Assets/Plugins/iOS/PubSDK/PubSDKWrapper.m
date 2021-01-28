@@ -52,7 +52,7 @@
                loginType:(int)loginType
       accountServiceType:(int)accountServiceType
 {
-    
+    [[PubApiClient getInstance]login:0 uiview:UnityGetGLViewController() obj:UnityGetGLViewController()];
 }
 
 - (void)logout:(NSString *)identifier
