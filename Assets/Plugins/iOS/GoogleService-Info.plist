@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>892923933661-q436l9ngqgbtt3qr043bh0o333htoje7.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.892923933661-q436l9ngqgbtt3qr043bh0o333htoje7</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>892923933661-dspbp68bifd78erbg2gh8qlp5cma87qh.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDhU1ShrRHosKEhbX9AR6c7KzBESP14gVY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>892923933661</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.gamepub.ios.testapp</string>
+	<key>PROJECT_ID</key>
+	<string>pub-sdk-unity</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pub-sdk-unity.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:892923933661:ios:3433c572253ba2f4513c34</string>
+	<key>DATABASE_URL</key>
+	<string>https://pub-sdk-unity.firebaseio.com</string>
+</dict>
+</plist>

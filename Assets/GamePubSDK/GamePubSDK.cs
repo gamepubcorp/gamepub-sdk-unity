@@ -26,7 +26,7 @@ namespace GamePub.PubSDK
                 Destroy(gameObject);
             }
             DontDestroyOnLoad(gameObject);
-            SetupSDK(SystemInfo.deviceUniqueIdentifier);
+            SetupSDK();
         }
 
         private void OnApplicationPause(bool pause)
@@ -65,11 +65,11 @@ namespace GamePub.PubSDK
             }
         }        
 
-        private void SetupSDK(string deviceUID)
+        private void SetupSDK()
         {
             PubLanguageCode langCode;
 
-            GamePubAPI.SetupSDK(deviceUID, result =>
+            GamePubAPI.SetupSDK(result =>
             {
                 result.Match(
                     value =>

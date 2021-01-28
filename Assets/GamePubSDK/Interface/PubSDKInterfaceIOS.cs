@@ -17,12 +17,12 @@ namespace GamePub.PubSDK
         }
 
         [DllImport("__Internal")]
-        private static extern void pub_sdk_setup(string identifier, string deviceUID);
-        public static void SetupSDK(string identifier, string deviceUID)
+        private static extern void pub_sdk_setup(string identifier);
+        public static void SetupSDK(string identifier)
         {
             if (!Application.isPlaying) { return; }
 
-            pub_sdk_setup(identifier, deviceUID);
+            pub_sdk_setup(identifier);
         }
 
         [DllImport("__Internal")]
