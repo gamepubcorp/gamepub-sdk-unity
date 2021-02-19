@@ -19,7 +19,7 @@ namespace GamePub.PubSDK.Editor
             
             //-------
             string googlePlistPath = Application.dataPath + "/Plugins/iOS/GoogleService-Info.plist";
-            //File.Copy(googlePlistPath, pathToBuiltProject + "/GoogleService-Info.plist");
+            File.Copy(googlePlistPath, pathToBuiltProject + "/GoogleService-Info.plist");
 
             //-------
             PlistDocument googlePlist = new PlistDocument();
@@ -38,20 +38,7 @@ namespace GamePub.PubSDK.Editor
             SetupQueriesSchemes(rootDict);
 
             File.WriteAllText(plistPath, plist.WriteToString());
-
-
-            //-------
-            //var projectPath = PBXProject.GetPBXProjectPath(pathToBuiltProject);
-            //var project = new PBXProject();
-            //project.ReadFromFile(projectPath);
-            //var appTarget = project.GetUnityMainTargetGuid();
-
-            //project.AddCapability(appTarget, PBXCapabilityType.InAppPurchase);
-            //project.AddCapability(appTarget, PBXCapabilityType.PushNotifications);
-
-            //project.AddFileToBuild(appTarget, project.AddFile("GoogleService-Info.plist", "GoogleService-Info.plist"));            
-
-            //File.WriteAllText(projectPath, project.WriteToString());
+                        
         }
 
         static void SetupURLScheme(PlistElementDict rootDict, PlistElementDict googleDict)

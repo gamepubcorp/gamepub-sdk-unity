@@ -72,9 +72,8 @@ namespace GamePub.PubSDK.Editor
 
             var target = project.GetUnityFrameworkTargetGuid();
 
-            project.SetBuildProperty(target, "GCC_PREPROCESSOR_DEFINITIONS", "$(inherited) PubSDK_COCOAPODS=1");
-            
-            project.WriteToFile(path);
+            project.SetBuildProperty(target, "GCC_PREPROCESSOR_DEFINITIONS", "$(inherited) PubSDK_COCOAPODS=1");            
+            project.WriteToFile(path);            
         }
     }
 }

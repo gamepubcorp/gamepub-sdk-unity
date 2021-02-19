@@ -24,6 +24,7 @@ namespace GamePub.PubSDK.Editor
             var appTarget = proj.GetUnityFrameworkTargetGuid();
 
             proj.SetBuildProperty(appTarget, "CLANG_ENABLE_MODULES", "YES");
+           
             File.WriteAllText(projPath, proj.WriteToString());
         }
     }

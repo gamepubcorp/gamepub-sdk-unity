@@ -1,0 +1,6 @@
+platform :ios, '10.0'
+
+target 'Unity-iPhone' do
+    use_frameworks!
+    pod 'PubSDK', :git => 'https://github.com/gamepubcorp/pub-sdk-ios.git'
+end
