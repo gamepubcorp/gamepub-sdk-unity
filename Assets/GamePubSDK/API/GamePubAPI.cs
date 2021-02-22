@@ -163,7 +163,7 @@ namespace GamePub.PubSDK
             }
         }
 
-        public static void _OnUpdate(string result)
+        public static void _OnApiUpdate(string result)
         {
             var payload = CallbackMessageForUnity.FromJson(result);
             var action = FindActionFromPayload(payload);

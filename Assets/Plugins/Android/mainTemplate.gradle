@@ -6,7 +6,7 @@ apply plugin: 'com.android.library'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.gamepub.pubsdk:pubsdk:0.2.57'
+    implementation 'com.gamepub.pubsdk:pubsdk:0.2.59'
 
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.11"
