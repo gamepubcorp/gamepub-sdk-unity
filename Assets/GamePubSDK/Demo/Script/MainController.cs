@@ -233,7 +233,7 @@ public class MainController : MonoBehaviour
 
     public void OnClickInPurchase1000()
     {
-        GamePubSDK.Ins.InAppPurchase("gamepub_1000", "11", "22", "aa", result =>
+        GamePubSDK.Ins.InAppPurchase("com.gamepub.unity.inapp1200", "11", "22", "aa", result =>
         {
             result.Match(
                 value => {
@@ -255,7 +255,7 @@ public class MainController : MonoBehaviour
     public void OnClickInPurchase2000()
     {
         GamePubSDK.Ins.InAppPurchase(
-            "gamepub_2000",
+            "com.gamepub.unity.inapp2500",
             "serverId",
             "playerId",
             "etc",

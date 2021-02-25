@@ -2,6 +2,7 @@
 using UnityEditor;
 using System;
 using System.Collections.Generic;
+using GamePub.PubSDK.Editor;
 
 public class BuildMenu : ScriptableObject
 {
@@ -110,13 +111,10 @@ public class BuildMenu : ScriptableObject
         PerformiOSBuild(GetIOSOutputFile(), "", false);
     }
 
-    //[UnityEditor.MenuItem("BuildMenu/iOS_Auto", false, 3003)]
+    [UnityEditor.MenuItem("BuildMenu/iOS_TEST", false, 3003)]
     static void Buildmachine_iOSAuto()
     {
-        PlayerSettings.productName = "SDKUnityDemo";
-        PrepareiOSBuild("com.gamepub.ios.testapp");
-
-        PerformiOSBuild(GetAndroidOutputFile(), "", true);
+        Debug.Log("fb"+PubSDKSettings.GetOrCreateSettings().FacebookAppID);
     }
     
     static void PrepareAndroidBuild(string bundleID)

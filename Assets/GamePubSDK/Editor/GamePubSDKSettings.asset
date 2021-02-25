@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GamePubSDKSettings
   m_EditorClassIdentifier: 
   iOSDependencyManager: CocoaPods
+  facebookAppID: 206076617381252

@@ -10,10 +10,12 @@ namespace GamePub.PubSDK.Editor
     {
         const string assetPath = "Assets/GamePubSDK/Editor/GamePubSDKSettings.asset";
 
-        internal static string[] dependencyManagerOptions = new string[] { "CocoaPods", "Carthage" };
+        internal static string[] dependencyManagerOptions = new string[] { "CocoaPods" };
 
         [SerializeField]
         private string iOSDependencyManager;
+        [SerializeField]
+        private string facebookAppID;
 
         internal static int DependencySelectedIndex(string selected)
         {
@@ -21,7 +23,7 @@ namespace GamePub.PubSDK.Editor
         }
 
         internal bool UseCocoaPods { get { return iOSDependencyManager.Equals("CocoaPods"); } }
-        internal bool UseCarthage { get { return iOSDependencyManager.Equals("Carthage"); } }
+        internal string FacebookAppID { get { return facebookAppID; } }
 
         internal static PubSDKSettings GetOrCreateSettings()
         {
@@ -74,7 +76,7 @@ namespace GamePub.PubSDK.Editor
             EditorGUI.BeginChangeCheck();
 
             var property = settings.FindProperty("iOSDependencyManager");
-            var selected = PubSDKSettings.DependencySelectedIndex(property.stringValue);
+            var selected = PubSDKSettings.DependencySelectedIndex(property.stringValue);            
 
             selected = EditorGUILayout.Popup("iOS Dependency Manager", selected, PubSDKSettings.dependencyManagerOptions);
 

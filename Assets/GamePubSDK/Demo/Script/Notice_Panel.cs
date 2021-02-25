@@ -22,9 +22,8 @@ public class Notice_Panel : MonoBehaviour
     [SerializeField]
     public List<Notices> notices;
     public GameObject[] toggleObj;
-
-    // Start is called before the first frame update
-    void Start()
+    
+    void OnEnable()
     {       
 
         GamePubSDK.Ins.OpenNotice(result =>

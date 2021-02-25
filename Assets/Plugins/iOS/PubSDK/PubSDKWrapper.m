@@ -42,27 +42,30 @@
         if(error)
         {
             PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
         }else{
             PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:sdkResult];
-            
             [callbackMsg sendMessageOK];
         }
     }];
+    
+    [[PubWebviewController GetInstance] InitializeWithParentUIView:UnityGetGLViewController().view pubDelegate:nil];
 }
 
 - (void)login:(NSString *)identifier
          type:(int)loginType
   serviceType:(int)accountServiceType
 {
-    [[PubApiClient getInstance]login:GOOGLE viewController:UnityGetGLViewController()
+    [[PubApiClient getInstance]login:(LoginType)loginType
+                      viewController:UnityGetGLViewController()
                           completion:^(NSString * _Nullable loginResult, NSError * _Nullable error)
     {
        if(error)
        {
            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+           [callbackMsg sendMessageError];
        }else{
            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:loginResult];
-           
            [callbackMsg sendMessageOK];
        }
     }];
@@ -102,14 +105,27 @@
             policyType:(int)policyType
 
 {
-    
+    [[PubApiClient getInstance] openPolicyLinkSafariView:UnityGetGLViewController()
+                                              policyType:policyType];
 }
 
 - (void)imageBanner:(NSString *)identifier
          ratioWidth:(NSString *)ratioWidth
         ratioHeight:(NSString *)ratioHeight
 {
-    
+    [[PubApiClient getInstance] imageBanner:ratioWidth
+                                ratioHeight:ratioHeight
+                                 completion:^(NSString *unitResult, NSError *error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
 }
 
 - (void)purchaseLaunch:(NSString *)identifier
@@ -118,22 +134,67 @@
               playerId:(NSString *)playerId
                    etc:(NSString *)etc
 {
-    
+    [[PubApiClient getInstance] purchaseLaunch:pid
+                                      serverId:serverId
+                                      playerId:playerId
+                                           etc:etc
+                                    completion:^(NSString *unitResult, NSError *error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
 }
 
 - (void)versionCheck:(NSString *)identifier
 {
-    
+    [[PubApiClient getInstance] versionCheck:^(NSString *unitResult, NSError *error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
 }
 
 - (void)openNotice:(NSString *)identifier
 {
-    
+    [[PubApiClient getInstance] openNotice:^(NSString *unitResult, NSError *error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
 }
 
 - (void)openHelpURL:(NSString *)identifier
 {
-    
+    [[PubApiClient getInstance] openHelpURL:UnityGetGLViewController()
+                                 completion:^(NSString *unitResult, NSError *error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
 }
 
 - (void)couponUse:(NSString *)identifier
@@ -142,7 +203,21 @@
          playerId:(NSString *)playerId
               etc:(NSString *)etc
 {
-    
+    [[PubApiClient getInstance] couponUse:key
+                                 serverId:serverId
+                                 playerId:playerId
+                                      etc:etc
+                               completion:^(NSString *unitResult, NSError *error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
 }
 
 - (void)ping:(NSString *)identifier

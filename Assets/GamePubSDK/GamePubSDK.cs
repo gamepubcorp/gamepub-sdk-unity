@@ -193,19 +193,19 @@ namespace GamePub.PubSDK
         public void OnApiOk(string result)
         {
             Debug.Log("OnApiOk : " + result);
-            GamePubAPI._OnApiOk(result);
+            //GamePubAPI._OnApiOk(result);
         }
 
         public void OnApiError(string result)
         {
             Debug.Log("OnApiError : " + result);
-            GamePubAPI._OnApiError(result);
+            //GamePubAPI._OnApiError(result);
         }
 
         public void OnApiUpdate(string result)
         {
             Debug.Log("OnApiUpdate : " + result);
-            GamePubAPI._OnApiUpdate(result);
+            //GamePubAPI._OnApiUpdate(result);
         }
     }
 }

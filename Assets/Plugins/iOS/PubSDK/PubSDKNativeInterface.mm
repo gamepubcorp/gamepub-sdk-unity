@@ -55,7 +55,6 @@ void pub_sdk_login(const char* identifier,
                    int serviceType)
 {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
-    
     [[PubSDKWrapper sharedInstance] login:nsIdentifier
                                      type:loginType
                               serviceType:serviceType];
@@ -92,6 +91,9 @@ void pub_sdk_authenticationState()
 PUB_SDK_EXTERNC void pub_sdk_openPolicyLink(const char* identifier, int policyType);
 void pub_sdk_openPolicyLink(const char* identifier, int policyType)
 {
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    [[PubSDKWrapper sharedInstance] openPolicyLink:nsIdentifier
+                                        policyType:policyType];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_imageBanner(const char* identifier,
@@ -101,6 +103,12 @@ void pub_sdk_imageBanner(const char* identifier,
                          const char* ratioWidth,
                          const char* ratioHeight)
 {
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    NSString *nsRatioWidth = PubSDKMakeNSString(ratioWidth);
+    NSString *nsRatioHeight = PubSDKMakeNSString(ratioHeight);
+    [[PubSDKWrapper sharedInstance] imageBanner:nsIdentifier
+                                     ratioWidth:nsRatioWidth
+                                    ratioHeight:nsRatioHeight];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_inAppPurchase(const char* identifier,
@@ -114,21 +122,37 @@ void pub_sdk_inAppPurchase(const char* identifier,
                            const char* playerId,
                            const char* etc)
 {
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    NSString *nsPid = PubSDKMakeNSString(pid);
+    NSString *nsServerId = PubSDKMakeNSString(serverId);
+    NSString *nsPlayerId = PubSDKMakeNSString(playerId);
+    NSString *nsEtc = PubSDKMakeNSString(etc);
+    [[PubSDKWrapper sharedInstance] purchaseLaunch:nsIdentifier
+                                               pid:nsPid
+                                          serverId:nsServerId
+                                          playerId:nsPlayerId
+                                               etc:nsEtc];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_versionCheck(const char* identifier);
 void pub_sdk_versionCheck(const char* identifier)
 {
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    [[PubSDKWrapper sharedInstance] versionCheck:nsIdentifier];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_openNotice(const char* identifier);
 void pub_sdk_openNotice(const char* identifier)
 {
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    [[PubSDKWrapper sharedInstance] openNotice:nsIdentifier];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_openHelpURL(const char* identifier);
 void pub_sdk_openHelpURL(const char* identifier)
 {
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    [[PubSDKWrapper sharedInstance] openHelpURL:nsIdentifier];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_couponUse(const char* identifier,
@@ -142,6 +166,16 @@ void pub_sdk_couponUse(const char* identifier,
                        const char* playerId,
                        const char* etc)
 {
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    NSString *nsKey = PubSDKMakeNSString(key);
+    NSString *nsServerId = PubSDKMakeNSString(serverId);
+    NSString *nsPlayerId = PubSDKMakeNSString(playerId);
+    NSString *nsEtc = PubSDKMakeNSString(etc);
+    [[PubSDKWrapper sharedInstance] couponUse:nsIdentifier
+                                          key:nsKey
+                                     serverId:nsServerId
+                                     playerId:nsPlayerId
+                                          etc:nsEtc];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_ping(const char* identifier);

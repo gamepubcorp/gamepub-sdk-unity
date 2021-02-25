@@ -36,6 +36,7 @@ namespace GamePub.PubSDK.Editor
 
             SetupURLScheme(rootDict, googleDict);
             SetupQueriesSchemes(rootDict);
+            SetupFacebookSetting(rootDict);
 
             File.WriteAllText(plistPath, plist.WriteToString());
                         
@@ -49,6 +50,7 @@ namespace GamePub.PubSDK.Editor
             lineURLScheme.SetString("CFBundleURLName", "Client");
             var schemes = lineURLScheme.CreateArray("CFBundleURLSchemes");
             schemes.AddString(googleDict["REVERSED_CLIENT_ID"].AsString());
+            schemes.AddString("fb"+ PubSDKSettings.GetOrCreateSettings().FacebookAppID);
         }
 
         static void SetupQueriesSchemes(PlistElementDict rootDict)
@@ -56,6 +58,11 @@ namespace GamePub.PubSDK.Editor
             PlistElementArray array = GetOrCreateArray(rootDict, "LSApplicationQueriesSchemes");
             array.AddString("fbapi");
             array.AddString("fbauth2");
+        }
+
+        static void SetupFacebookSetting(PlistElementDict rootDict)
+        {
+            rootDict.SetString("FacebookAppID", PubSDKSettings.GetOrCreateSettings().FacebookAppID);
         }
 
         static PlistElementArray GetOrCreateArray(PlistElementDict dict, string key)
