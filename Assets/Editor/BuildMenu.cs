@@ -137,7 +137,7 @@ public class BuildMenu : ScriptableObject
         //PlayerSettings.bundleVersion = "";
         //PlayerSettings.iOS.buildNumber = "";
         PlayerSettings.iOS.appleEnableAutomaticSigning = true;
-        PlayerSettings.iOS.appleDeveloperTeamID = "LR5GNR467V";
+        PlayerSettings.iOS.appleDeveloperTeamID = "PRPC4C837N";        
     }
 
     static string PerformAndroidBuild(string output, string define, bool isDev)

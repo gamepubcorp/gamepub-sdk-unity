@@ -9,9 +9,7 @@ namespace GamePub.PubSDK
         [SerializeField]
         private string accountID = "";
         [SerializeField]
-        private string language = "";
-        [SerializeField]
-        private string status = "";
+        private string language = "";        
         [SerializeField]
         private string regDate = "";
         [SerializeField]
@@ -27,6 +25,8 @@ namespace GamePub.PubSDK
         [SerializeField]
         private int intDate = 0;
         [SerializeField]
+        private int status = 0;
+        [SerializeField]
         private int agreePush = 0;
         [SerializeField]
         private int agreeNight = 0;
@@ -37,7 +37,7 @@ namespace GamePub.PubSDK
 
         public string AccountID { get { return accountID; } }
         public string Language { get { return language; } }
-        public string Status { get { return status; } }
+        
         public string RegDate { get { return regDate; } }
         public string SecedeDate { get { return secedeDate; } }
         public string BlockDate { get { return blockDate; } }
@@ -46,6 +46,7 @@ namespace GamePub.PubSDK
 
         public int AppId { get { return appId; } }
         public int IntDate { get { return intDate; } }
+        public int Status { get { return status; } }
         public int AgreePush { get { return agreePush; } }
         public int AgreeNight { get { return agreeNight; } }
         public int AgreeAd { get { return agreeAd; } }

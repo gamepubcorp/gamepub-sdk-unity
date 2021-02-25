@@ -14,9 +14,9 @@
 
 - (void)setupSDK:(NSString *)identifier;
 
-- (void)loginWithGamepub:(NSString *)identifier
-                  loginType:(int)loginType
-         accountServiceType:(int)accountServiceType;
+- (void)login:(NSString *)identifier
+         type:(int)loginType
+  serviceType:(int)accountServiceType;
 
 - (void)logout:(NSString *)identifier
      loginType:(int)loginType;

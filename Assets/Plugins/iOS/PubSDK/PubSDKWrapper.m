@@ -36,23 +36,36 @@
     }
     self.setup = YES;
     
-    [[PubApiClient getInstance]setupSDK:@""
-                                success:^(id val)
+    [[PubApiClient getInstance] setupSDK:^(NSString *sdkResult,
+                                           NSError *error)
     {
-        PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:@"callbackMessage"];
-        
-        [callbackMsg sendMessageOK];
-        
-    }failure:^(int val){
-        
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:sdkResult];
+            
+            [callbackMsg sendMessageOK];
+        }
     }];
 }
 
-- (void)loginWithGamepub:(NSString *)identifier
-               loginType:(int)loginType
-      accountServiceType:(int)accountServiceType
+- (void)login:(NSString *)identifier
+         type:(int)loginType
+  serviceType:(int)accountServiceType
 {
-    [[PubApiClient getInstance]login:0 uiview:UnityGetGLViewController() obj:UnityGetGLViewController()];
+    [[PubApiClient getInstance]login:GOOGLE viewController:UnityGetGLViewController()
+                          completion:^(NSString * _Nullable loginResult, NSError * _Nullable error)
+    {
+       if(error)
+       {
+           PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+       }else{
+           PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:loginResult];
+           
+           [callbackMsg sendMessageOK];
+       }
+    }];
 }
 
 - (void)logout:(NSString *)identifier
@@ -147,5 +160,11 @@
     
 }
 
+- (NSString *)wrapError:(NSError *)error {
+    NSDictionary *dic = @{@"code": @(error.code), @"message": error.localizedDescription};
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:kNilOptions error:nil];
+    if (!data) { return nil; }
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
 
 @end

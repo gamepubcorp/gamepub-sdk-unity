@@ -55,7 +55,10 @@ void pub_sdk_login(const char* identifier,
                    int serviceType)
 {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
-    [[PubSDKWrapper sharedInstance] loginWithGamepub:nsIdentifier loginType:loginType accountServiceType:serviceType];
+    
+    [[PubSDKWrapper sharedInstance] login:nsIdentifier
+                                     type:loginType
+                              serviceType:serviceType];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_logout(const char* identifier, int loginType);

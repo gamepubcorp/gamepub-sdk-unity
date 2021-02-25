@@ -26,7 +26,7 @@ public class MainController : MonoBehaviour
 
     void Awake()
     {
-        GamePubSDK.Ins.Ping(Test);
+        //GamePubSDK.Ins.Ping(Test);
     }    
 
     private void Test(Result<PubUnit> result)
@@ -90,18 +90,18 @@ public class MainController : MonoBehaviour
                     UpdateRawSection(value);
                     if(value.ResponseCode == (int)PubApiResponseCode.SUCCESS)
                     {                        
-                        if(value.UserLoginInfo.Status == "B")
+                        if(value.UserLoginInfo.Status == (int)PubAccountStatus.B)
                         {
                             messageText.text = value.UserLoginInfo.BlockMessage;
                             popup_panel.SetActive(true);
-                        }else if(value.UserLoginInfo.Status == "U")
+                        }else if(value.UserLoginInfo.Status == (int)PubAccountStatus.U)
                         {
                             displayNameText.text = value.UserProfile.DisplayName;
                             uniqueIdText.text = value.UserProfile.UniqueId;
                             channelIdText.text = value.UserProfile.ChannelId;
                             emailText.text = value.UserProfile.Email;                            
                         }
-                        else if(value.UserLoginInfo.Status == "S")
+                        else if(value.UserLoginInfo.Status == (int)PubAccountStatus.S)
                         {
                             //탈퇴처리.
                             rawJsonText.text += "탈퇴된 계정입니다.";

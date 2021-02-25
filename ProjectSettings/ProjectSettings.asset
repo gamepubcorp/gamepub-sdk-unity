@@ -124,7 +124,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.1.1.3
+  bundleVersion: 1.1.1.4
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -170,7 +170,8 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.gamepub.testapp
     iPhone: com.gamepub.ios.testapp
-  buildNumber: {}
+  buildNumber:
+    iPhone: 1
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 29
@@ -234,10 +235,10 @@ PlayerSettings:
   metalAPIValidation: 1
   iOSRenderExtraFrameOnPause: 0
   iosCopyPluginsCodeInsteadOfSymlink: 0
-  appleDeveloperTeamID: LR5GNR467V
-  iOSManualSigningProvisioningProfileID: 
+  appleDeveloperTeamID: PRPC4C837N
+  iOSManualSigningProvisioningProfileID: abc2a648-ec51-4264-87f2-481278230b2b
   tvOSManualSigningProvisioningProfileID: 
-  iOSManualSigningProvisioningProfileType: 0
+  iOSManualSigningProvisioningProfileType: 1
   tvOSManualSigningProvisioningProfileType: 0
   appleEnableAutomaticSigning: 1
   iOSRequireARKit: 0

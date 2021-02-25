@@ -53,4 +53,11 @@ namespace GamePub.PubSDK
         INTERNAL_ERROR,
         PURCHASE_ERROR,
     }
+
+    public enum PubAccountStatus
+    {
+        U, //available
+        B, //block
+        S, //secession
+    }
 }
