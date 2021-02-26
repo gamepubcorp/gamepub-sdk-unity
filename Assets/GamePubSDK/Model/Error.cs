@@ -5,24 +5,19 @@ namespace GamePub.PubSDK
 {
     [Serializable]
     public class Error
-    {
+    {        
         [SerializeField]
-        private int responseCode;
+        private int code;
         [SerializeField]
-        private int errorCode;
-        [SerializeField]
-        private string message;
-        
-        public int ResponseCode { get { return responseCode; } }
+        private string message;               
 
-        public int ErrorCode { get { return errorCode; } }
+        public int Code { get { return code; } }
 
         public string Message { get { return message; } }
 
-        public Error(int responseCode, int errorCode, string message)
-        {
-            this.responseCode = responseCode;
-            this.errorCode = errorCode;
+        public Error(int code, string message)
+        {            
+            this.code = code;
             this.message = message;
         }
     }

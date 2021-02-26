@@ -19,6 +19,7 @@ namespace GamePub.PubSDK
         public static void SetupSDK(string identifier)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(null)) { return; }
 
             object[] param = new object[1];
             param[0] = identifier;            
@@ -32,6 +33,7 @@ namespace GamePub.PubSDK
                                  PubAccountServiceType serviceType)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             object[] param = new object[3];
             param[0] = identifier;
@@ -45,6 +47,7 @@ namespace GamePub.PubSDK
         public static void Logout(string identifier, PubLoginType loginType)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             object[] param = new object[2];
             param[0] = identifier;
@@ -61,6 +64,7 @@ namespace GamePub.PubSDK
                                           bool pushAd)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             object[] param = new object[5];
             param[0] = identifier;
@@ -76,6 +80,7 @@ namespace GamePub.PubSDK
         public static void AutoLogin(string identifier)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             object[] param = new object[1];
             param[0] = identifier;
@@ -87,7 +92,7 @@ namespace GamePub.PubSDK
         public static string AuthenticationState()
         {
             if (!Application.isPlaying) { return null; }
-            if(pubSdkWrapper == null) { return null; }
+            if (IsInvalidRuntime(null)) { return null; }            
 
             return pubSdkWrapper.Call<string>("authenticationState");
         }
@@ -96,6 +101,7 @@ namespace GamePub.PubSDK
                                           PubPolicyType policyType)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             object[] param = new object[2];
             param[0] = identifier;
@@ -110,6 +116,7 @@ namespace GamePub.PubSDK
                                        string ratioHeight)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             object[] param = new object[3];
             param[0] = identifier;
@@ -127,6 +134,7 @@ namespace GamePub.PubSDK
                                          string etc)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             object[] param = new object[5];
             param[0] = identifier;
@@ -142,6 +150,7 @@ namespace GamePub.PubSDK
         public static void VersionCheck(string identifier)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             object[] param = new object[1];
             param[0] = identifier;
@@ -153,6 +162,7 @@ namespace GamePub.PubSDK
         public static void OpenNotice(string identifier)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             object[] param = new object[1];
             param[0] = identifier;
@@ -164,6 +174,7 @@ namespace GamePub.PubSDK
         public static void OpenHelpURL(string identifier)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             object[] param = new object[1];
             param[0] = identifier;
@@ -179,6 +190,7 @@ namespace GamePub.PubSDK
                                      string etc)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             object[] param = new object[5];
             param[0] = identifier;
@@ -194,6 +206,7 @@ namespace GamePub.PubSDK
         public static void Ping(string identifier)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(null)) { return; }
 
             object[] param = new object[1];
             param[0] = identifier;
@@ -205,6 +218,7 @@ namespace GamePub.PubSDK
         public static void StartPing()
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(null)) { return; }
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("startPing");
@@ -213,9 +227,15 @@ namespace GamePub.PubSDK
         public static void StopPing()
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(null)) { return; }
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("stopPing");            
+        }
+
+        private static bool IsInvalidRuntime(string identifier)
+        {
+            return Helpers.IsInvalidRuntime(identifier, RuntimePlatform.Android);
         }
     }
 }

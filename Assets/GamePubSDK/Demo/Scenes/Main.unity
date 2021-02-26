@@ -6225,6 +6225,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropdown: {fileID: 1526257646}
+  push: {fileID: 1611821161}
+  pushNight: {fileID: 392017997}
+  pushAd: {fileID: 1921818094}
   langList: 
 --- !u!1 &997360394
 GameObject:
@@ -8384,8 +8387,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1542072948}
   m_HandleRect: {fileID: 1542072947}
   m_Direction: 2
-  m_Value: 0.9999999
-  m_Size: 0.36756235
+  m_Value: 1
+  m_Size: 0.3681475
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13112,7 +13115,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 44923250}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.6023666
+  m_Size: 0.60329676
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

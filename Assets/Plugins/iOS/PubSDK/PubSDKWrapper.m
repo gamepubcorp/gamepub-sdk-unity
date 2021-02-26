@@ -74,7 +74,18 @@
 - (void)logout:(NSString *)identifier
      loginType:(int)loginType
 {
-    
+    [[PubApiClient getInstance] logout:loginType
+                            completion:^(NSString * _Nullable unitResult, NSError * _Nullable error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
 }
 
 - (void)userInfoUpdate:(NSString *)identifier
@@ -83,7 +94,21 @@
              pushNight:(BOOL)pushNight
                 pushAd:(BOOL)pushAd
 {
-    
+    [[PubApiClient getInstance] userInfoUpdate:languageCode
+                                          push:push
+                                     pushNight:pushNight
+                                        pushAd:pushAd
+                                    completion:^(NSString *unitResult, NSError *error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
 }
 
 - (void)autoLogin:(NSString *)identifier
@@ -91,9 +116,19 @@
     
 }
 
-- (NSString *)authenticationState
+- (void)authenticationState:(NSString *)identifier
 {
-    return @"null";
+    [[PubApiClient getInstance] getAuthState:^(NSString *unitResult, NSError *error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
 }
 
 - (void)secede:(NSString *)identifier

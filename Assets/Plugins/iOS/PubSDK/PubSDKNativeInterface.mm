@@ -63,6 +63,9 @@ void pub_sdk_login(const char* identifier,
 PUB_SDK_EXTERNC void pub_sdk_logout(const char* identifier, int loginType);
 void pub_sdk_logout(const char* identifier, int loginType)
 {
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    [[PubSDKWrapper sharedInstance] logout:nsIdentifier
+                                 loginType:loginType];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_userInfoUpdate(const char* identifier,
@@ -76,6 +79,13 @@ void pub_sdk_userInfoUpdate(const char* identifier,
                             bool pushNight,
                             bool pushAd)
 {
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    NSString *nsLanguageCode = PubSDKMakeNSString(languageCode);
+    [[PubSDKWrapper sharedInstance] userInfoUpdate:nsIdentifier
+                                      languageCode:nsLanguageCode
+                                              push:push
+                                         pushNight:pushNight
+                                            pushAd:pushAd];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_autoLogin(const char* identifier);
@@ -83,9 +93,11 @@ void pub_sdk_autoLogin(const char* identifier)
 {
 }
 
-PUB_SDK_EXTERNC void pub_sdk_authenticationState();
-void pub_sdk_authenticationState()
+PUB_SDK_EXTERNC void pub_sdk_authenticationState(const char* identifier);
+void pub_sdk_authenticationState(const char* identifier)
 {
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    [[PubSDKWrapper sharedInstance] authenticationState:nsIdentifier];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_openPolicyLink(const char* identifier, int policyType);

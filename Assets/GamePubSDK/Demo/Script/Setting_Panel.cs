@@ -7,6 +7,9 @@ using GamePub.PubSDK;
 public class Setting_Panel : MonoBehaviour
 {
     public Dropdown dropdown;
+    public Toggle push;
+    public Toggle pushNight;
+    public Toggle pushAd;
 
     public List<PubLanguageCode> langList = new List<PubLanguageCode>();
 
@@ -14,6 +17,7 @@ public class Setting_Panel : MonoBehaviour
     
     void Start()
     {
+        langList = GamePubSDK.Ins.LangList;
         dropdown.captionText.text = "언어설정";
 
         foreach(PubLanguageCode code in langList)
@@ -45,16 +49,16 @@ public class Setting_Panel : MonoBehaviour
                     currentCode = langList[2];
                 }
                 break;
-        }
+        }        
     }
 
     public void OnClickClose()
     {
         GamePubSDK.Ins.UserInfoUpdate(
             currentCode.ToString(),
-            true,
-            true,
-            true,
+            push.isOn,
+            pushNight.isOn,
+            pushAd.isOn,
             result =>
             {
                 result.Match(

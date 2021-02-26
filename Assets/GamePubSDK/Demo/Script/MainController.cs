@@ -181,7 +181,7 @@ public class MainController : MonoBehaviour
 
     public void OnClickLogout()
     {
-        GamePubSDK.Ins.Logout(GamePubSDK.Ins.GetActiveLoginType(), result =>
+        GamePubSDK.Ins.Logout(PubLoginType.GOOGLE, result =>
         {
             result.Match(
                 value =>
@@ -273,24 +273,13 @@ public class MainController : MonoBehaviour
 
     public void OnClickVersionCheck()
     {
+        versionCheck_panel.gameObject.SetActive(true);
         Application.OpenURL(appUrl);
     }
 
     public void OnClickOpenNotice()
     {
-        notice_panel.SetActive(true);
-        //GamePubSDK.Instance.OpenNotice(result =>
-        //{
-        //    result.Match(
-        //        value =>
-        //        {
-        //            UpdateRawSection(value);
-        //        },
-        //        error =>
-        //        {
-        //            UpdateRawSection(error);
-        //        });
-        //});
+        notice_panel.SetActive(true);        
     }
 
     public void OnClickOpenServiceCenter()

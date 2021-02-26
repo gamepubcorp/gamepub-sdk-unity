@@ -85,7 +85,7 @@ namespace GamePub.PubSDK
                     },
                     error =>
                     {
-                        Debug.LogError("code = " + error.ErrorCode + ", msg = " + error.Message);
+                        Debug.LogError("code = " + error.Code + ", msg = " + error.Message);
                     });
             });
         }
@@ -116,21 +116,21 @@ namespace GamePub.PubSDK
             GamePubAPI.AutoLogin(action);
         }
 
-        private PubAuthenticationState AuthenticationState
-        {
-            get {
-                var result = NativeInterface.AuthenticationState();                
-                if (string.IsNullOrEmpty(result)) { return null; }
-                return JsonUtility.FromJson<PubAuthenticationState>(result);
-            }
-        }
+        //private PubAuthenticationState AuthenticationState
+        //{
+        //    get {
+        //        var result = NativeInterface.AuthenticationState();                
+        //        if (string.IsNullOrEmpty(result)) { return null; }
+        //        return JsonUtility.FromJson<PubAuthenticationState>(result);
+        //    }
+        //}
 
-        public PubLoginType GetActiveLoginType()
-        {
-            if (AuthenticationState == null)
-                return PubLoginType.NONE;
-            return (PubLoginType)AuthenticationState.LoginType;
-        }
+        //public PubLoginType GetActiveLoginType()
+        //{
+        //    if (AuthenticationState == null)
+        //        return PubLoginType.NONE;
+        //    return (PubLoginType)AuthenticationState.LoginType;
+        //}
 
         public void OpenPolicyLink(PubPolicyType policyType)
         {
@@ -193,19 +193,19 @@ namespace GamePub.PubSDK
         public void OnApiOk(string result)
         {
             Debug.Log("OnApiOk : " + result);
-            //GamePubAPI._OnApiOk(result);
+            GamePubAPI._OnApiOk(result);
         }
 
         public void OnApiError(string result)
         {
             Debug.Log("OnApiError : " + result);
-            //GamePubAPI._OnApiError(result);
+            GamePubAPI._OnApiError(result);
         }
 
         public void OnApiUpdate(string result)
         {
             Debug.Log("OnApiUpdate : " + result);
-            //GamePubAPI._OnApiUpdate(result);
+            GamePubAPI._OnApiUpdate(result);
         }
     }
 }

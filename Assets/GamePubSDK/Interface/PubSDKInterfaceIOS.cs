@@ -21,6 +21,7 @@ namespace GamePub.PubSDK
         public static void SetupSDK(string identifier)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(null)) { return; }
 
             pub_sdk_setup(identifier);
         }
@@ -34,6 +35,7 @@ namespace GamePub.PubSDK
                                  PubAccountServiceType serviceType)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             pub_sdk_login(identifier, (int)loginType, (int)serviceType);
         }
@@ -43,6 +45,7 @@ namespace GamePub.PubSDK
         public static void Logout(string identifier, PubLoginType loginType)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             pub_sdk_logout(identifier, (int)loginType);
         }
@@ -60,6 +63,7 @@ namespace GamePub.PubSDK
                                           bool pushAd)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             pub_sdk_userInfoUpdate(identifier, languageCode, push, pushNight, pushAd);
         }
@@ -69,17 +73,19 @@ namespace GamePub.PubSDK
         public static void AutoLogin(string identifier)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             pub_sdk_autoLogin(identifier);
         }
 
         [DllImport("__Internal")]
-        private static extern string pub_sdk_authenticationState();
-        public static string AuthenticationState()
+        private static extern void pub_sdk_authenticationState(string identifier);
+        public static void AuthenticationState(string identifier)
         {
-            if (!Application.isPlaying) { return null; }
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(null)) { return; }
 
-            return pub_sdk_authenticationState();
+            pub_sdk_authenticationState(identifier);
         }
 
         [DllImport("__Internal")]
@@ -87,6 +93,7 @@ namespace GamePub.PubSDK
         public static void OpenPolicyLink(string identifier, PubPolicyType policyType)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             pub_sdk_openPolicyLink(identifier, (int)policyType);
         }
@@ -98,6 +105,7 @@ namespace GamePub.PubSDK
         public static void ImageBanner(string identifier, string ratioWidth, string ratioHeight)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             pub_sdk_imageBanner(identifier, ratioWidth, ratioHeight);
         }
@@ -115,6 +123,7 @@ namespace GamePub.PubSDK
                                          string etc)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             pub_sdk_inAppPurchase(identifier, pid, serverId, playerId, etc);
         }
@@ -124,6 +133,7 @@ namespace GamePub.PubSDK
         public static void VersionCheck(string identifier)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             pub_sdk_versionCheck(identifier);
         }
@@ -133,6 +143,7 @@ namespace GamePub.PubSDK
         public static void OpenNotice(string identifier)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             pub_sdk_openNotice(identifier);
         }
@@ -142,6 +153,7 @@ namespace GamePub.PubSDK
         public static void OpenHelpURL(string identifier)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             pub_sdk_openHelpURL(identifier);
         }
@@ -159,6 +171,7 @@ namespace GamePub.PubSDK
                                      string etc)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
 
             pub_sdk_couponUse(identifier, key, serverId, playerId, etc);
         }
@@ -168,6 +181,7 @@ namespace GamePub.PubSDK
         public static void Ping(string identifier)
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(null)) { return; }
 
             pub_sdk_ping(identifier);
         }
@@ -177,6 +191,7 @@ namespace GamePub.PubSDK
         public static void StartPing()
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(null)) { return; }
 
             pub_sdk_startPing();
         }
@@ -186,8 +201,14 @@ namespace GamePub.PubSDK
         public static void StopPing()
         {
             if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(null)) { return; }
 
             pub_sdk_stopPing();
+        }
+
+        private static bool IsInvalidRuntime(string identifier)
+        {
+            return Helpers.IsInvalidRuntime(identifier, RuntimePlatform.IPhonePlayer);
         }
     }
 }

@@ -29,7 +29,7 @@
 
 - (void)autoLogin:(NSString *)identifier;
 
-- (NSString *)authenticationState;
+- (void)authenticationState:(NSString *)identifier;
 
 - (void)secede:(NSString *)identifier;
 
