@@ -89,6 +89,30 @@ namespace GamePub.PubSDK
         }
 
         [DllImport("__Internal")]
+        private static extern void pub_sdk_secede(string identifier,
+                                                  int loginType);
+        public static void Secede(string identifier,
+                                 PubLoginType loginType)
+        {
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
+
+            pub_sdk_secede(identifier, (int)loginType);
+        }
+
+        [DllImport("__Internal")]
+        private static extern void pub_sdk_secedeCancel(string identifier,
+                                                        int loginType);
+        public static void SecedeCancel(string identifier,
+                                 PubLoginType loginType)
+        {
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
+
+            pub_sdk_secedeCancel(identifier, (int)loginType);
+        }
+
+        [DllImport("__Internal")]
         private static extern void pub_sdk_openPolicyLink(string identifier, int policyType);
         public static void OpenPolicyLink(string identifier, PubPolicyType policyType)
         {

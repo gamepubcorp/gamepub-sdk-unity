@@ -31,7 +31,10 @@
 
 - (void)authenticationState:(NSString *)identifier;
 
-- (void)secede:(NSString *)identifier;
+- (void)secede:(NSString *)identifier
+     loginType:(int)loginType;
+- (void)secedeCancel:(NSString *)identifier
+           loginType:(int)loginType;
 
 - (void)openPolicyLink:(NSString *)identifier
             policyType:(int)policyType;

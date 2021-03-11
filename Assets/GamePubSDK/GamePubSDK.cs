@@ -67,6 +67,7 @@ namespace GamePub.PubSDK
 
         private void SetupSDK()
         {
+            Debug.LogError("isSetup = " + isSetup);            
             PubLanguageCode langCode;
 
             GamePubAPI.SetupSDK(result =>
@@ -114,6 +115,16 @@ namespace GamePub.PubSDK
         public void AutoLogin(Action<Result<PubLoginResult>> action)
         {
             GamePubAPI.AutoLogin(action);
+        }
+
+        public void Secede(Action<Result<PubUnit>> action)
+        {
+            GamePubAPI.Secede(action);
+        }
+
+        public void SecedeCancel(Action<Result<PubUnit>> action)
+        {
+            GamePubAPI.SecedeCancel(action);
         }
 
         //private PubAuthenticationState AuthenticationState

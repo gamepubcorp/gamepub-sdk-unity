@@ -39,19 +39,30 @@ namespace GamePub.PubSDK
                                           Action<Result<PubUserLoginInfo>> action)
         {
             var identifier = AddAction(FlattenAction.JsonFlatten<PubUserLoginInfo>(action));
-            NativeInterface.UserInfoUpdate(
-                identifier,
-                languageCode,
-                push,
-                pushNight,
-                pushAd);
+            NativeInterface.UserInfoUpdate(identifier,
+                                           languageCode,
+                                           push,
+                                           pushNight,
+                                           pushAd);
         }
 
         public static void AutoLogin(Action<Result<PubLoginResult>> action)
         {
             var identifier = AddAction(FlattenAction.JsonFlatten<PubLoginResult>(action));
             NativeInterface.AutoLogin(identifier);
-        }        
+        }
+
+        public static void Secede(Action<Result<PubUnit>> action)
+        {
+            var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
+            NativeInterface.Secede(identifier);
+        }
+
+        public static void SecedeCancel(Action<Result<PubUnit>> action)
+        {
+            var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
+            NativeInterface.SecedeCancel(identifier);
+        }
 
         public static void ImageBanner(string ratioWidth,
                                        string ratioHeight,

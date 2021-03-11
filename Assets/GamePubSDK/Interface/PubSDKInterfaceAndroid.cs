@@ -69,9 +69,9 @@ namespace GamePub.PubSDK
             object[] param = new object[5];
             param[0] = identifier;
             param[1] = languageCode;
-            param[2] = (push == true) ? 1 : 0;
-            param[3] = (pushNight == true) ? 1 : 0;
-            param[4] = (pushAd == true) ? 1 : 0;
+            param[2] = push;
+            param[3] = pushNight;
+            param[4] = pushAd;
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("userInfoUpdate", param);
@@ -95,6 +95,30 @@ namespace GamePub.PubSDK
             if (IsInvalidRuntime(null)) { return null; }            
 
             return pubSdkWrapper.Call<string>("authenticationState");
+        }
+
+        public static void Secede(string identifier)
+        {
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
+
+            object[] param = new object[1];
+            param[0] = identifier;
+
+            if (pubSdkWrapper != null)
+                pubSdkWrapper.Call("secede", param);
+        }
+
+        public static void SecedeCancel(string identifier)
+        {
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
+
+            object[] param = new object[1];
+            param[0] = identifier;
+
+            if (pubSdkWrapper != null)
+                pubSdkWrapper.Call("secedeCancel", param);
         }
 
         public static void OpenPolicyLink(string identifier,

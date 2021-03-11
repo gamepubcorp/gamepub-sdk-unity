@@ -56,9 +56,10 @@
          type:(int)loginType
   serviceType:(int)accountServiceType
 {
-    [[PubApiClient getInstance]login:(LoginType)loginType
-                      viewController:UnityGetGLViewController()
-                          completion:^(NSString * _Nullable loginResult, NSError * _Nullable error)
+    [[PubApiClient getInstance]loginWithGamepub:(LoginType)loginType
+                                    serviceType:(AccountServiceType)accountServiceType
+                                 viewController:UnityGetGLViewController()
+                                     completion:^(NSString * _Nullable loginResult, NSError * _Nullable error)
     {
        if(error)
        {
@@ -132,8 +133,37 @@
 }
 
 - (void)secede:(NSString *)identifier
+          type:(int)loginType
 {
-    
+    [[PubApiClient getInstance] secede:loginType
+                            completion:^(NSString *unitResult, NSError *error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
+}
+
+- (void)secedeCancel:(NSString *)identifier
+                type:(int)loginType
+{
+    [[PubApiClient getInstance] secedeCancel:loginType
+                                  completion:^(NSString *unitResult, NSError *error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
 }
 
 - (void)openPolicyLink:(NSString *)identifier

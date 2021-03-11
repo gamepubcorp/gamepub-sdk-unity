@@ -1,16 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using GamePub.PubSDK;
 
 public class MainController : MonoBehaviour
 {
+#if UNITY_ANDROID
+    string productID_1 = "gamepub_1000";
+    string productID_2 = "gamepub_2000";
+#elif UNITY_IOS
+    string productID_1 = "com.gamepub.unity.inapp1200";
+    string productID_2 = "com.gamepub.unity.inapp2500";    
+#endif
+
     public Image userImage;
     public Text displayNameText;
     public Text uniqueIdText;
     public Text channelIdText;
     public Text emailText;
+
+    public Text accountIdText;
 
     public Text rawJsonText;
     public Text messageText;
@@ -18,9 +29,13 @@ public class MainController : MonoBehaviour
     public GameObject policy_panel;
     public GameObject notice_panel;
     public GameObject versionCheck_panel;
-    public Setting_Panel setting_panel;
+    public GameObject setting_panel;
     public GameObject coupon_panel;
     public GameObject popup_panel;
+
+    public GameObject   pushToggle;
+    public GameObject   adPushToggle;
+    public GameObject   nightPushToggle;
 
     string appUrl = "";
 
@@ -61,57 +76,51 @@ public class MainController : MonoBehaviour
     }
 
     void Start()
-    {        
-        //if (GamePubSDK.Ins.GetActiveLoginType() != PubLoginType.NONE)
-        //{
-        //    GamePubSDK.Ins.AutoLogin(autoLogin =>
-        //    {
-        //        autoLogin.Match(
-        //            autoLoginValue =>
-        //            {
-        //                UpdateRawSection(autoLoginValue);                        
-        //            },
-        //            error =>
-        //            {
-        //                UpdateRawSection(error);
-        //            });
-        //    });
-        //}
+    {
+        PubLoginResult result = UserInfoManager.Instance.loginResult;
+        UpdateUserInfo(result);
     }
 
-    public void OnClickGoogleLogin()
+    public void OnPushClick()
     {
-        GamePubSDK.Ins.Login(PubLoginType.GOOGLE,
-            PubAccountServiceType.ACCOUNT_LOGIN, result =>
-        {            
+        SliderToggle push = pushToggle.GetComponent<SliderToggle>();
+        push.callback = (bool status) =>
+        {
+            //push.SetToggle(!status);
+            Debug.Log(status);
+        };
+        push.ChangeToggle();
+    }
+
+    public void OnAdPushClick()
+    {
+        SliderToggle push = adPushToggle.GetComponent<SliderToggle>();
+        push.callback = (bool status) =>
+        {
+            Debug.Log(status);
+        };
+        push.ChangeToggle();
+    }
+
+    public void OnNightPushClick()
+    {
+        SliderToggle push = nightPushToggle.GetComponent<SliderToggle>();
+        push.callback = (bool status) =>
+        {
+            Debug.Log(status);
+        };
+        push.ChangeToggle();
+    }
+
+    public void OnClickSecede()
+    {
+        GamePubSDK.Ins.Secede(result =>
+        {
             result.Match(
                 value =>
                 {
-                    UpdateRawSection(value);
-                    if(value.ResponseCode == (int)PubApiResponseCode.SUCCESS)
-                    {                        
-                        if(value.UserLoginInfo.Status == (int)PubAccountStatus.B)
-                        {
-                            messageText.text = value.UserLoginInfo.BlockMessage;
-                            popup_panel.SetActive(true);
-                        }else if(value.UserLoginInfo.Status == (int)PubAccountStatus.U)
-                        {
-                            displayNameText.text = value.UserProfile.DisplayName;
-                            uniqueIdText.text = value.UserProfile.UniqueId;
-                            channelIdText.text = value.UserProfile.ChannelId;
-                            emailText.text = value.UserProfile.Email;                            
-                        }
-                        else if(value.UserLoginInfo.Status == (int)PubAccountStatus.S)
-                        {
-                            //탈퇴처리.
-                            rawJsonText.text += "탈퇴된 계정입니다.";
-                        }
-                    }
-                    else if(value.ResponseCode == (int)PubApiResponseCode.SERVICE_MAINTENANCE)
-                    {
-                        messageText.text = value.Maintenance.Message;
-                        popup_panel.SetActive(true);
-                    }
+                    //UpdateRawSection(value);
+                    SceneManager.LoadSceneAsync("Login");
                 },
                 error =>
                 {
@@ -120,61 +129,21 @@ public class MainController : MonoBehaviour
         });
     }
 
-    public void OnClickFacebookLogin()
+    public void OnClickLoginConvert()
     {
-        GamePubSDK.Ins.Login(PubLoginType.FACEBOOK,
-            PubAccountServiceType.ACCOUNT_LOGIN, result =>
-        {
-            result.Match(
-                value => {
-                    UpdateRawSection(value);
-                    displayNameText.text = value.UserProfile.DisplayName;
-                    uniqueIdText.text = value.UserProfile.UniqueId;
-                    channelIdText.text = value.UserProfile.ChannelId;
-                    emailText.text = value.UserProfile.Email;
-                },
-                error => {
-                    UpdateRawSection(error);
-                });
-        });
-    }
-
-    public void OnClickGuestLogin()
-    {
-        GamePubSDK.Ins.Login(PubLoginType.GUEST,
-            PubAccountServiceType.NONE, result =>
-        {
-            result.Match(
-                value => {
-                    UpdateRawSection(value);
-                    displayNameText.text = value.UserProfile.DisplayName;
-                    uniqueIdText.text = value.UserProfile.UniqueId;
-                    channelIdText.text = value.UserProfile.ChannelId;
-                    emailText.text = value.UserProfile.Email;
-                },
-                error => {
-                    UpdateRawSection(error);
-                });
-        });
-    }
-
-    public void OnClickAppleLogin()
-    {
-        GamePubSDK.Ins.Login(PubLoginType.APPLE,
-            PubAccountServiceType.ACCOUNT_LOGIN, result =>
+        GamePubSDK.Ins.Login(PubLoginType.GOOGLE,
+            PubAccountServiceType.ACCOUNT_CONVERSION, result =>
             {
                 result.Match(
                     value =>
                     {
-                        UpdateRawSection(value);
-                        displayNameText.text = value.UserProfile.DisplayName;
-                        uniqueIdText.text = value.UserProfile.UniqueId;
-                        channelIdText.text = value.UserProfile.ChannelId;
-                        emailText.text = value.UserProfile.Email;
+                        UpdateUserInfo(value);                        
                     },
                     error =>
                     {
                         UpdateRawSection(error);
+                        messageText.text = error.Code.ToString();
+                        popup_panel.SetActive(true);
                     });
             });
     }
@@ -185,14 +154,15 @@ public class MainController : MonoBehaviour
         {
             result.Match(
                 value =>
-                {                    
-                    UpdateRawSection(value);                    
+                {
+                    //UpdateRawSection(value);
+                    SceneManager.LoadSceneAsync("Login");
                 },
                 error =>
                 {
                     UpdateRawSection(error);
                 });
-        });
+        });        
     }
 
     public void OnClickOpenPolicyPanel()
@@ -233,7 +203,7 @@ public class MainController : MonoBehaviour
 
     public void OnClickInPurchase1000()
     {
-        GamePubSDK.Ins.InAppPurchase("com.gamepub.unity.inapp1200", "11", "22", "aa", result =>
+        GamePubSDK.Ins.InAppPurchase(productID_1, "11", "22", "aa", result =>
         {
             result.Match(
                 value => {
@@ -255,7 +225,7 @@ public class MainController : MonoBehaviour
     public void OnClickInPurchase2000()
     {
         GamePubSDK.Ins.InAppPurchase(
-            "com.gamepub.unity.inapp2500",
+            productID_2,
             "serverId",
             "playerId",
             "etc",
@@ -319,7 +289,12 @@ public class MainController : MonoBehaviour
 
     public void OnClickOpenSettingPanel()
     {
-        setting_panel.gameObject.SetActive(true);
+        setting_panel.SetActive(true);
+    }
+
+    public void OnClickCloseSettingPanel()
+    {
+        setting_panel.SetActive(false);
     }
 
     public void OnClickOpenCoupon()
@@ -330,7 +305,7 @@ public class MainController : MonoBehaviour
     public void OnClickCloseMaintenance()
     {
         popup_panel.SetActive(false);
-    }    
+    }
 
     public void UpdateRawSection(object obj)
     {
@@ -348,5 +323,40 @@ public class MainController : MonoBehaviour
         rawJsonText.text = text + "\n\n" +rawJsonText.text;
         var scrollContentTransform = (RectTransform)rawJsonText.gameObject.transform.parent;
         scrollContentTransform.localPosition = Vector3.zero;
+    }
+
+    public void UpdateUserInfo(PubLoginResult result)
+    {
+        if (result != null)
+        {
+            UpdateRawSection(result);
+            if (result.ResponseCode == (int)PubApiResponseCode.SUCCESS)
+            {
+                if (result.UserLoginInfo.Status == (int)PubAccountStatus.B)
+                {
+                    messageText.text = result.UserLoginInfo.BlockMessage;
+                    popup_panel.SetActive(true);
+                }
+                else if (result.UserLoginInfo.Status == (int)PubAccountStatus.U)
+                {
+                    displayNameText.text = result.UserProfile.DisplayName;
+                    uniqueIdText.text = result.UserProfile.UniqueId;
+                    channelIdText.text = result.UserProfile.ChannelId;
+                    emailText.text = result.UserProfile.Email;
+
+                    accountIdText.text = result.UserLoginInfo.AccountID;
+                }
+                else if (result.UserLoginInfo.Status == (int)PubAccountStatus.S)
+                {
+                    //탈퇴처리.
+                    rawJsonText.text += "탈퇴된 계정입니다.";
+                }
+            }
+            else if (result.ResponseCode == (int)PubApiResponseCode.SERVICE_MAINTENANCE)
+            {
+                messageText.text = result.Maintenance.Message;
+                popup_panel.SetActive(true);
+            }            
+        }
     }
 }

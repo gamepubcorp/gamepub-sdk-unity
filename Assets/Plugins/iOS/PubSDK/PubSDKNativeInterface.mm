@@ -100,6 +100,22 @@ void pub_sdk_authenticationState(const char* identifier)
     [[PubSDKWrapper sharedInstance] authenticationState:nsIdentifier];
 }
 
+PUB_SDK_EXTERNC void pub_sdk_secede(const char* identifier, int loginType);
+void pub_sdk_secede(const char* identifier, int loginType)
+{
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);    
+    [[PubSDKWrapper sharedInstance] secede:nsIdentifier
+                                 loginType:loginType];
+}
+
+PUB_SDK_EXTERNC void pub_sdk_secedeCancel(const char* identifier, int loginType);
+void pub_sdk_secedeCancel(const char* identifier, int loginType)
+{
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    [[PubSDKWrapper sharedInstance] secedeCancel:nsIdentifier
+                                       loginType:loginType];
+}
+
 PUB_SDK_EXTERNC void pub_sdk_openPolicyLink(const char* identifier, int policyType);
 void pub_sdk_openPolicyLink(const char* identifier, int policyType)
 {
