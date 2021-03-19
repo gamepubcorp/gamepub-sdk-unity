@@ -8,12 +8,16 @@ namespace GamePub.PubSDK.Editor
 {
     class PubSDKSettings : ScriptableObject
     {
-        const string assetPath = "Assets/GamePubSDK/Editor/GamePubSDKSettings.asset";
+        const string assetPath = "Assets/Editor/GamePubSDK/GamePubSDKSettings.asset";
 
         internal static string[] dependencyManagerOptions = new string[] { "CocoaPods" };
 
         [SerializeField]
-        private string iOSDependencyManager;
+        private string iOSDependencyManager;        
+        [SerializeField]
+        private bool appleLogin;
+        [SerializeField]
+        private bool facebookLogin;
         [SerializeField]
         private string facebookAppID;
 
@@ -24,6 +28,8 @@ namespace GamePub.PubSDK.Editor
 
         internal bool UseCocoaPods { get { return iOSDependencyManager.Equals("CocoaPods"); } }
         internal string FacebookAppID { get { return facebookAppID; } }
+        internal bool UseAppleLogin { get { return appleLogin; } }
+        internal bool UseFacebookLogin { get { return facebookLogin; } }
 
         internal static PubSDKSettings GetOrCreateSettings()
         {
@@ -32,6 +38,8 @@ namespace GamePub.PubSDK.Editor
             {
                 settings = ScriptableObject.CreateInstance<PubSDKSettings>();
                 settings.iOSDependencyManager = "CocoaPods";
+                settings.appleLogin = false;
+                settings.facebookLogin = false;
 
                 Directory.CreateDirectory("Assets/Editor/GamePubSDK/");
 
@@ -75,16 +83,36 @@ namespace GamePub.PubSDK.Editor
             settings.Update();
             EditorGUI.BeginChangeCheck();
 
-            var property = settings.FindProperty("iOSDependencyManager");
-            var selected = PubSDKSettings.DependencySelectedIndex(property.stringValue);            
+            var property = settings.FindProperty("iOSDependencyManager");            
+            var selected = PubSDKSettings.DependencySelectedIndex(property.stringValue);
+
+            var propertyAppleLogin = settings.FindProperty("appleLogin");
+            var enableAppleLogin = propertyAppleLogin.boolValue;
+
+            var propertyFacebookLogin = settings.FindProperty("facebookLogin");
+            var enableFacebookLogin = propertyFacebookLogin.boolValue;
+
+            var propertyFacebookAppId = settings.FindProperty("facebookAppID");
+            var facebookAppId = propertyFacebookAppId.stringValue;
 
             selected = EditorGUILayout.Popup("iOS Dependency Manager", selected, PubSDKSettings.dependencyManagerOptions);
+            enableAppleLogin = EditorGUILayout.Toggle("Apple Login Enable", enableAppleLogin);
+
+            GUILayout.Space(20);
+            GUI.skin.label.fontSize = 17;
+            GUILayout.Label("Facebook", GUILayout.Width(200), GUILayout.Height(30));
+            enableFacebookLogin = EditorGUILayout.BeginToggleGroup("Facebook Login Enable", enableFacebookLogin);
+            facebookAppId = EditorGUILayout.TextField("Facebook App ID", facebookAppId);
+            EditorGUILayout.EndToggleGroup();
 
             if (selected < 0)
             {
                 selected = 0;
             }
             property.stringValue = PubSDKSettings.dependencyManagerOptions[selected];
+            propertyAppleLogin.boolValue = enableAppleLogin;
+            propertyFacebookLogin.boolValue = enableFacebookLogin;
+            propertyFacebookAppId.stringValue = facebookAppId;
 
             if (EditorGUI.EndChangeCheck())
             {

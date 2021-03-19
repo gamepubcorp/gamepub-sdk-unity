@@ -15,6 +15,7 @@ namespace GamePub.PubSDK
         NONE,
         ACCOUNT_LOGIN,
         ACCOUNT_CONVERSION,
+        ACCOUNT_LINK,
     }
 
     public enum PubPolicyType
