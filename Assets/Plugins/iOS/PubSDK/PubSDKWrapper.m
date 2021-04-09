@@ -133,9 +133,8 @@
 }
 
 - (void)secede:(NSString *)identifier
-          type:(int)loginType
 {
-    [[PubApiClient getInstance] secede:loginType
+    [[PubApiClient getInstance] secede:0
                             completion:^(NSString *unitResult, NSError *error)
     {
         if(error)
@@ -150,9 +149,8 @@
 }
 
 - (void)secedeCancel:(NSString *)identifier
-                type:(int)loginType
 {
-    [[PubApiClient getInstance] secedeCancel:loginType
+    [[PubApiClient getInstance] secedeCancel:0
                                   completion:^(NSString *unitResult, NSError *error)
     {
         if(error)
@@ -181,6 +179,22 @@
     [[PubApiClient getInstance] imageBanner:ratioWidth
                                 ratioHeight:ratioHeight
                                  completion:^(NSString *unitResult, NSError *error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
+}
+
+- (void)purchaseInit:(NSString *)identifier
+{
+    [[PubApiClient getInstance] purchaseInit:^(NSString * _Nullable unitResult,
+                                               NSError * _Nullable error)
     {
         if(error)
         {

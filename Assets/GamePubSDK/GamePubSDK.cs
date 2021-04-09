@@ -12,8 +12,8 @@ namespace GamePub.PubSDK
         private bool isPaused;
 
         //temp
-        public PubInAppProduct[] ProductList { get; set; }
-        public List<PubLanguageCode> LangList = new List<PubLanguageCode>();
+        //public PubInAppProduct[] ProductList { get; set; }
+        //public List<PubLanguageCode> LangList = new List<PubLanguageCode>();
 
         void Awake()
         {
@@ -74,13 +74,11 @@ namespace GamePub.PubSDK
             {
                 result.Match(
                     value =>
-                    {
-                        ProductList = value.InAppProducts;
-                        
-                        foreach(string strLang in value.LangList)
+                    {                        
+                        foreach (string strLang in value.LangList)
                         {
                             Enum.TryParse(strLang, out langCode);
-                            LangList.Add(langCode);
+                            UserInfoManager.Instance.LangList.Add(langCode);
                         }
                         isSetup = true;
                     },
@@ -151,6 +149,11 @@ namespace GamePub.PubSDK
         public void ImageBanner(string ratioWidth, string ratioHeight, Action<Result<PubUnit>> action)
         {
             GamePubAPI.ImageBanner(ratioWidth, ratioHeight, action);
+        }
+
+        public void PurchaseInit(Action<Result<PubInAppListResult>> action)
+        {
+            GamePubAPI.PurchaseInit(action);
         }
 
         public void InAppPurchase(string pid,

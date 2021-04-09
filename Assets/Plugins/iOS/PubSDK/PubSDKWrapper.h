@@ -31,10 +31,8 @@
 
 - (void)authenticationState:(NSString *)identifier;
 
-- (void)secede:(NSString *)identifier
-     loginType:(int)loginType;
-- (void)secedeCancel:(NSString *)identifier
-           loginType:(int)loginType;
+- (void)secede:(NSString *)identifier;
+- (void)secedeCancel:(NSString *)identifier;
 
 - (void)openPolicyLink:(NSString *)identifier
             policyType:(int)policyType;
@@ -43,6 +41,7 @@
          ratioWidth:(NSString *)ratioWidth
         ratioHeight:(NSString *)ratioHeight;
 
+- (void)purchaseInit:(NSString *)identifier;
 - (void)purchaseLaunch:(NSString *)identifier
                    pid:(NSString *)pid
               serverId:(NSString *)serverId

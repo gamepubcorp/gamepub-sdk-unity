@@ -17,14 +17,23 @@ public class MainController : MonoBehaviour
 
     public Image userImage;
     public Text displayNameText;
-    public Text uniqueIdText;
+    //public Text uniqueIdText;
     public Text channelIdText;
     public Text emailText;
-
     public Text accountIdText;
 
     public Text rawJsonText;
-    public Text messageText;
+
+    //popup
+    public Text popupTitleText;
+    public Text popupMessageText;
+
+    //coupon
+    public InputField input;
+
+    //language setting
+    public Dropdown dropdownLang;
+    private PubLanguageCode currentCode;
 
     public GameObject policy_panel;
     public GameObject notice_panel;
@@ -42,6 +51,30 @@ public class MainController : MonoBehaviour
     void Awake()
     {
         //GamePubSDK.Ins.Ping(Test);
+        GamePubSDK.Ins.PurchaseInit(result =>
+        {
+            result.Match(
+                value =>
+                {
+                    UserInfoManager.Instance.ProductList = value.InAppProducts;
+                    UpdateRawSection(value);
+                }, error =>
+                 {
+                     UpdateRawSection(error);
+                 });
+        });
+
+        //demo
+        //UserInfoManager.Instance.LangList.Add(PubLanguageCode.ko);
+        //UserInfoManager.Instance.LangList.Add(PubLanguageCode.en);
+        //UserInfoManager.Instance.LangList.Add(PubLanguageCode.ja);
+        dropdownLang.captionText.text = "언어설정";
+        foreach (PubLanguageCode code in UserInfoManager.Instance.LangList)
+        {
+            Dropdown.OptionData option = new Dropdown.OptionData();
+            option.text = code.ToString();
+            dropdownLang.options.Add(option);
+        }
     }    
 
     private void Test(Result<PubUnit> result)
@@ -79,6 +112,103 @@ public class MainController : MonoBehaviour
     {
         PubLoginResult result = UserInfoManager.Instance.loginResult;
         UpdateUserInfo(result);
+    }    
+
+    public void OnClickSecede()
+    {
+        GamePubSDK.Ins.Secede(result =>
+        {
+            result.Match(
+                value =>
+                {
+                    //UpdateRawSection(value);
+                    SceneManager.LoadSceneAsync("Login");
+                },
+                error =>
+                {
+                    UpdateRawSection(error);
+                });
+        });
+    }
+
+    public void OnClickGoogleLoginConvert()
+    {
+        GamePubSDK.Ins.Login(PubLoginType.GOOGLE,
+            PubAccountServiceType.ACCOUNT_CONVERSION, result =>
+            {
+                result.Match(
+                    value =>
+                    {
+                        UpdateUserInfo(value);                        
+                    },
+                    error =>
+                    {
+                        UpdateRawSection(error);
+                        popupTitleText.text = error.Code.ToString();
+                        popupMessageText.text = error.Message.ToString();
+                        popup_panel.SetActive(true);
+                    });
+            });
+    }
+
+    public void OnClickFacebookLoginConvert()
+    {
+        GamePubSDK.Ins.Login(PubLoginType.FACEBOOK,
+            PubAccountServiceType.ACCOUNT_CONVERSION, result =>
+            {
+                result.Match(
+                    value =>
+                    {
+                        UpdateUserInfo(value);
+                    },
+                    error =>
+                    {
+                        UpdateRawSection(error);
+                        popupTitleText.text = error.Code.ToString();
+                        popupMessageText.text = error.Message.ToString();
+                        popup_panel.SetActive(true);
+                    });
+            });
+    }
+
+    public void OnClickGoogleLoginLink()
+    {
+        GamePubSDK.Ins.Login(PubLoginType.GOOGLE,
+            PubAccountServiceType.ACCOUNT_LINK, result =>
+            {
+                result.Match(
+                    value =>
+                    {
+                        UpdateUserInfo(value);
+                    },
+                    error =>
+                    {
+                        UpdateRawSection(error);
+                        popupTitleText.text = error.Code.ToString();
+                        popupMessageText.text = error.Message.ToString();
+                        popup_panel.SetActive(true);
+                    });
+            });
+    }
+
+    public void OnClickFacebookLoginLink()
+    {
+        GamePubSDK.Ins.Login(PubLoginType.FACEBOOK,
+            PubAccountServiceType.ACCOUNT_LINK, result =>
+            {
+                result.Match(
+                    value =>
+                    {
+                        UpdateUserInfo(value);
+                    },
+                    error =>
+                    {
+                        UpdateRawSection(error);
+                        popupTitleText.text = error.Code.ToString();
+                        popupMessageText.text = error.Message.ToString();
+                        popup_panel.SetActive(true);
+                    });
+            });
     }
 
     public void OnPushClick()
@@ -112,38 +242,49 @@ public class MainController : MonoBehaviour
         push.ChangeToggle();
     }
 
-    public void OnClickSecede()
+    public void SelectedLangBtn(int index)
     {
-        GamePubSDK.Ins.Secede(result =>
+        
+        switch (index)
         {
-            result.Match(
-                value =>
+            case 0:
                 {
-                    //UpdateRawSection(value);
-                    SceneManager.LoadSceneAsync("Login");
-                },
-                error =>
+                    currentCode = UserInfoManager.Instance.LangList[0];
+                    
+                }
+                break;
+            case 1:
                 {
-                    UpdateRawSection(error);
-                });
-        });
+                    currentCode = UserInfoManager.Instance.LangList[1];
+                    
+                }
+                break;
+            case 2:
+                {
+                    currentCode = UserInfoManager.Instance.LangList[2];
+                    
+                }
+                break;
+        }
     }
 
-    public void OnClickLoginConvert()
+    public void UserInfoUpdate()
     {
-        GamePubSDK.Ins.Login(PubLoginType.GOOGLE,
-            PubAccountServiceType.ACCOUNT_CONVERSION, result =>
+        GamePubSDK.Ins.UserInfoUpdate(
+            currentCode.ToString(),
+            false,
+            false,
+            false,
+            result =>
             {
                 result.Match(
                     value =>
                     {
-                        UpdateUserInfo(value);                        
+                        //value.AccountId
                     },
                     error =>
                     {
-                        UpdateRawSection(error);
-                        messageText.text = error.Code.ToString();
-                        popup_panel.SetActive(true);
+                        //error.Message
                     });
             });
     }
@@ -302,6 +443,28 @@ public class MainController : MonoBehaviour
         coupon_panel.SetActive(true);
     }
 
+    public void OnClickCouponUse()
+    {
+        Debug.Log(input.text);
+        coupon_panel.SetActive(false);
+
+        string key = input.text;
+        string server_id = "1";
+        string player_id = "5dd5326c63d62c74a05787d0";
+        string etc = "a=b=c";
+
+        GamePubSDK.Ins.CouponUse(key, server_id, player_id, etc, result =>
+        {
+            result.Match(value =>
+            {
+                UpdateRawSection(value);
+            }, error =>
+            {
+                UpdateRawSection(error);
+            });
+        });
+    }
+
     public void OnClickCloseMaintenance()
     {
         popup_panel.SetActive(false);
@@ -334,13 +497,12 @@ public class MainController : MonoBehaviour
             {
                 if (result.UserLoginInfo.Status == (int)PubAccountStatus.B)
                 {
-                    messageText.text = result.UserLoginInfo.BlockMessage;
+                    popupMessageText.text = result.UserLoginInfo.BlockMessage;
                     popup_panel.SetActive(true);
                 }
                 else if (result.UserLoginInfo.Status == (int)PubAccountStatus.U)
                 {
-                    displayNameText.text = result.UserProfile.DisplayName;
-                    uniqueIdText.text = result.UserProfile.UniqueId;
+                    displayNameText.text = result.UserProfile.DisplayName;                    
                     channelIdText.text = result.UserProfile.ChannelId;
                     emailText.text = result.UserProfile.Email;
 
@@ -354,7 +516,7 @@ public class MainController : MonoBehaviour
             }
             else if (result.ResponseCode == (int)PubApiResponseCode.SERVICE_MAINTENANCE)
             {
-                messageText.text = result.Maintenance.Message;
+                popupMessageText.text = result.Maintenance.Message;
                 popup_panel.SetActive(true);
             }            
         }

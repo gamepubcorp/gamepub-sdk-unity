@@ -7,7 +7,7 @@ namespace GamePub.PubSDK
     public class PubUserProfile
     {
         [SerializeField]
-        private string uniqueId = "";
+        private string idToken = "";
         [SerializeField]
         private string displayName = "";
         [SerializeField]
@@ -15,7 +15,7 @@ namespace GamePub.PubSDK
         [SerializeField]
         private string email = "";
 
-        public string UniqueId { get { return uniqueId; } }
+        public string IdToken { get { return idToken; } }
 
         public string DisplayName { get { return displayName; } }
 

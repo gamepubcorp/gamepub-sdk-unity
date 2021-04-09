@@ -100,20 +100,18 @@ void pub_sdk_authenticationState(const char* identifier)
     [[PubSDKWrapper sharedInstance] authenticationState:nsIdentifier];
 }
 
-PUB_SDK_EXTERNC void pub_sdk_secede(const char* identifier, int loginType);
-void pub_sdk_secede(const char* identifier, int loginType)
+PUB_SDK_EXTERNC void pub_sdk_secede(const char* identifier);
+void pub_sdk_secede(const char* identifier)
 {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);    
-    [[PubSDKWrapper sharedInstance] secede:nsIdentifier
-                                 loginType:loginType];
+    [[PubSDKWrapper sharedInstance] secede:nsIdentifier];
 }
 
-PUB_SDK_EXTERNC void pub_sdk_secedeCancel(const char* identifier, int loginType);
-void pub_sdk_secedeCancel(const char* identifier, int loginType)
+PUB_SDK_EXTERNC void pub_sdk_secedeCancel(const char* identifier);
+void pub_sdk_secedeCancel(const char* identifier)
 {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
-    [[PubSDKWrapper sharedInstance] secedeCancel:nsIdentifier
-                                       loginType:loginType];
+    [[PubSDKWrapper sharedInstance] secedeCancel:nsIdentifier];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_openPolicyLink(const char* identifier, int policyType);
@@ -137,6 +135,13 @@ void pub_sdk_imageBanner(const char* identifier,
     [[PubSDKWrapper sharedInstance] imageBanner:nsIdentifier
                                      ratioWidth:nsRatioWidth
                                     ratioHeight:nsRatioHeight];
+}
+
+PUB_SDK_EXTERNC void pub_sdk_purchaseInit(const char* identifier);
+void pub_sdk_purchaseInit(const char* identifier)
+{
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    [[PubSDKWrapper sharedInstance] purchaseInit:nsIdentifier];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_inAppPurchase(const char* identifier,

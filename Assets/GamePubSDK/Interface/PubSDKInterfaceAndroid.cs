@@ -151,6 +151,18 @@ namespace GamePub.PubSDK
                 pubSdkWrapper.Call("imageBanner", param);
         }
 
+        public static void PurchaseInit(string identifier)
+        {
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
+
+            object[] param = new object[1];
+            param[0] = identifier;
+
+            if (pubSdkWrapper != null)
+                pubSdkWrapper.Call("purchaseInit", param);
+        }
+
         public static void InAppPurchase(string identifier,
                                          string pid,
                                          string serverId,

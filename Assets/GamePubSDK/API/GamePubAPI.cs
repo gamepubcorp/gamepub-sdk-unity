@@ -72,6 +72,12 @@ namespace GamePub.PubSDK
             NativeInterface.ImageBanner(identifier, ratioWidth, ratioHeight);
         }
 
+        public static void PurchaseInit(Action<Result<PubInAppListResult>> action)
+        {
+            var identifier = AddAction(FlattenAction.JsonFlatten<PubInAppListResult>(action));
+            NativeInterface.PurchaseInit(identifier);
+        }
+
         public static void InAppPurchase(string pid,
                                          string serverId,
                                          string playerId,

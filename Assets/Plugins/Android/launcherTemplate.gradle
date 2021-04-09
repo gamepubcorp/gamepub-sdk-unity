@@ -28,7 +28,7 @@ android {
 
         multiDexEnabled true
 
-        resValue("string", "gamepub_server_base_url", "")
+        resValue("string", "gamepub_server_base_url", "https://pubsdkapidev.igamepub.co.kr")
         resValue("string", "facebook_app_id", "206076617381252")
         resValue("string", "google_web_client_id", "892923933661-1218sobcuhmmt93haj2j22dom4vdppgl.apps.googleusercontent.com")
     }

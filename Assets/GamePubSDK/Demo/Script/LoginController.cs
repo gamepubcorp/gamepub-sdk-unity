@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using GamePub.PubSDK;
 
+
 public class LoginController : MonoBehaviour
 {
     public Text messageText;
