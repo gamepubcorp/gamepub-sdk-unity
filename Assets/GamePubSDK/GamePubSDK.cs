@@ -9,11 +9,7 @@ namespace GamePub.PubSDK
         static GamePubSDK instance;
 
         private bool isSetup = false;
-        private bool isPaused;
-
-        //temp
-        //public PubInAppProduct[] ProductList { get; set; }
-        //public List<PubLanguageCode> LangList = new List<PubLanguageCode>();
+        private bool isPaused;        
 
         void Awake()
         {
@@ -95,9 +91,9 @@ namespace GamePub.PubSDK
             GamePubAPI.Login(loginType, serviceType, action);
         }
 
-        public void Logout(PubLoginType type, Action<Result<PubUnit>> action)
+        public void Logout(Action<Result<PubUnit>> action)
         {            
-            GamePubAPI.Logout(type, action);
+            GamePubAPI.Logout(action);
             StopPing();
         }
 
@@ -110,36 +106,32 @@ namespace GamePub.PubSDK
             GamePubAPI.UserInfoUpdate(languageCode, push, pushNight, pushAd, action);
         }
 
-        public void AutoLogin(Action<Result<PubLoginResult>> action)
-        {
-            GamePubAPI.AutoLogin(action);
-        }
-
         public void Secede(Action<Result<PubUnit>> action)
         {
             GamePubAPI.Secede(action);
         }
 
-        public void SecedeCancel(Action<Result<PubUnit>> action)
+        public void SecedeCancel(PubLoginType type, Action<Result<PubUnit>> action)
         {
-            GamePubAPI.SecedeCancel(action);
+            GamePubAPI.SecedeCancel(type, action);
         }
 
-        //private PubAuthenticationState AuthenticationState
-        //{
-        //    get {
-        //        var result = NativeInterface.AuthenticationState();                
-        //        if (string.IsNullOrEmpty(result)) { return null; }
-        //        return JsonUtility.FromJson<PubAuthenticationState>(result);
-        //    }
-        //}
+        private PubAuthenticationState AuthenticationState
+        {
+            get
+            {
+                var result = NativeInterface.AuthenticationState();
+                if (string.IsNullOrEmpty(result)) { return null; }
+                return JsonUtility.FromJson<PubAuthenticationState>(result);
+            }
+        }
 
-        //public PubLoginType GetActiveLoginType()
-        //{
-        //    if (AuthenticationState == null)
-        //        return PubLoginType.NONE;
-        //    return (PubLoginType)AuthenticationState.LoginType;
-        //}
+        public PubLoginType GetActiveLoginType()
+        {
+            if (AuthenticationState == null)
+                return PubLoginType.NONE;
+            return (PubLoginType)AuthenticationState.LoginType;
+        }
 
         public void OpenPolicyLink(PubPolicyType policyType)
         {

@@ -41,13 +41,13 @@ namespace GamePub.PubSDK
         }
 
         [DllImport("__Internal")]
-        private static extern void pub_sdk_logout(string identifier, int loginType);
-        public static void Logout(string identifier, PubLoginType loginType)
+        private static extern void pub_sdk_logout(string identifier);
+        public static void Logout(string identifier)
         {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(identifier)) { return; }
 
-            pub_sdk_logout(identifier, (int)loginType);
+            pub_sdk_logout(identifier);
         }
 
         [DllImport("__Internal")]
@@ -69,23 +69,13 @@ namespace GamePub.PubSDK
         }
 
         [DllImport("__Internal")]
-        private static extern void pub_sdk_autoLogin(string identifier);
-        public static void AutoLogin(string identifier)
+        private static extern string pub_sdk_authenticationState();
+        public static string AuthenticationState()
         {
-            if (!Application.isPlaying) { return; }
-            if (IsInvalidRuntime(identifier)) { return; }
+            if (!Application.isPlaying) { return null; }
+            if (IsInvalidRuntime(null)) { return null; }
 
-            pub_sdk_autoLogin(identifier);
-        }
-
-        [DllImport("__Internal")]
-        private static extern void pub_sdk_authenticationState(string identifier);
-        public static void AuthenticationState(string identifier)
-        {
-            if (!Application.isPlaying) { return; }
-            if (IsInvalidRuntime(null)) { return; }
-
-            pub_sdk_authenticationState(identifier);
+            return pub_sdk_authenticationState();
         }
 
         [DllImport("__Internal")]
@@ -99,13 +89,13 @@ namespace GamePub.PubSDK
         }
 
         [DllImport("__Internal")]
-        private static extern void pub_sdk_secedeCancel(string identifier);
-        public static void SecedeCancel(string identifier)
+        private static extern void pub_sdk_secedeCancel(string identifier, int loginType);
+        public static void SecedeCancel(string identifier, PubLoginType loginType)
         {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(identifier)) { return; }
 
-            pub_sdk_secedeCancel(identifier);
+            pub_sdk_secedeCancel(identifier, (int)loginType);
         }
 
         [DllImport("__Internal")]

@@ -291,7 +291,7 @@ public class MainController : MonoBehaviour
 
     public void OnClickLogout()
     {
-        GamePubSDK.Ins.Logout(PubLoginType.GOOGLE, result =>
+        GamePubSDK.Ins.Logout(result =>
         {
             result.Match(
                 value =>

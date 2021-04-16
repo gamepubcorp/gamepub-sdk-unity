@@ -40,9 +40,7 @@ PUB_SDK_EXTERNC void pub_sdk_UnitySendMessage(const char *name, const char *meth
 
 // MARK: - Extern APIs
 
-PUB_SDK_EXTERNC void pub_sdk_setup(const char* identifier);
-void pub_sdk_setup(const char* identifier)
-{
+PUB_SDK_EXTERNC void pub_sdk_setup(const char* identifier) {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
     [[PubSDKWrapper sharedInstance] setupSDK:nsIdentifier];
 }
@@ -60,12 +58,9 @@ void pub_sdk_login(const char* identifier,
                               serviceType:serviceType];
 }
 
-PUB_SDK_EXTERNC void pub_sdk_logout(const char* identifier, int loginType);
-void pub_sdk_logout(const char* identifier, int loginType)
-{
+PUB_SDK_EXTERNC void pub_sdk_logout(const char* identifier) {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
-    [[PubSDKWrapper sharedInstance] logout:nsIdentifier
-                                 loginType:loginType];
+    [[PubSDKWrapper sharedInstance] logout:nsIdentifier];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_userInfoUpdate(const char* identifier,
@@ -88,30 +83,24 @@ void pub_sdk_userInfoUpdate(const char* identifier,
                                             pushAd:pushAd];
 }
 
-PUB_SDK_EXTERNC void pub_sdk_autoLogin(const char* identifier);
-void pub_sdk_autoLogin(const char* identifier)
+PUB_SDK_EXTERNC const char* pub_sdk_authenticationState();
+const char* pub_sdk_authenticationState()
 {
+    NSString *result = [[PubSDKWrapper sharedInstance] currentLoginType];
+    return PubSDKMakeCString(result);
 }
 
-PUB_SDK_EXTERNC void pub_sdk_authenticationState(const char* identifier);
-void pub_sdk_authenticationState(const char* identifier)
-{
-    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
-    [[PubSDKWrapper sharedInstance] authenticationState:nsIdentifier];
-}
-
-PUB_SDK_EXTERNC void pub_sdk_secede(const char* identifier);
-void pub_sdk_secede(const char* identifier)
-{
+PUB_SDK_EXTERNC void pub_sdk_secede(const char* identifier) {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);    
     [[PubSDKWrapper sharedInstance] secede:nsIdentifier];
 }
 
-PUB_SDK_EXTERNC void pub_sdk_secedeCancel(const char* identifier);
-void pub_sdk_secedeCancel(const char* identifier)
+PUB_SDK_EXTERNC void pub_sdk_secedeCancel(const char* identifier, int loginType);
+void pub_sdk_secedeCancel(const char* identifier, int loginType)
 {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
-    [[PubSDKWrapper sharedInstance] secedeCancel:nsIdentifier];
+    [[PubSDKWrapper sharedInstance] secedeCancel:nsIdentifier
+                                       loginType:loginType];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_openPolicyLink(const char* identifier, int policyType);
@@ -137,9 +126,7 @@ void pub_sdk_imageBanner(const char* identifier,
                                     ratioHeight:nsRatioHeight];
 }
 
-PUB_SDK_EXTERNC void pub_sdk_purchaseInit(const char* identifier);
-void pub_sdk_purchaseInit(const char* identifier)
-{
+PUB_SDK_EXTERNC void pub_sdk_purchaseInit(const char* identifier) {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
     [[PubSDKWrapper sharedInstance] purchaseInit:nsIdentifier];
 }
@@ -167,23 +154,17 @@ void pub_sdk_inAppPurchase(const char* identifier,
                                                etc:nsEtc];
 }
 
-PUB_SDK_EXTERNC void pub_sdk_versionCheck(const char* identifier);
-void pub_sdk_versionCheck(const char* identifier)
-{
+PUB_SDK_EXTERNC void pub_sdk_versionCheck(const char* identifier) {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
     [[PubSDKWrapper sharedInstance] versionCheck:nsIdentifier];
 }
 
-PUB_SDK_EXTERNC void pub_sdk_openNotice(const char* identifier);
-void pub_sdk_openNotice(const char* identifier)
-{
+PUB_SDK_EXTERNC void pub_sdk_openNotice(const char* identifier) {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
     [[PubSDKWrapper sharedInstance] openNotice:nsIdentifier];
 }
 
-PUB_SDK_EXTERNC void pub_sdk_openHelpURL(const char* identifier);
-void pub_sdk_openHelpURL(const char* identifier)
-{
+PUB_SDK_EXTERNC void pub_sdk_openHelpURL(const char* identifier) {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
     [[PubSDKWrapper sharedInstance] openHelpURL:nsIdentifier];
 }
@@ -211,17 +192,11 @@ void pub_sdk_couponUse(const char* identifier,
                                           etc:nsEtc];
 }
 
-PUB_SDK_EXTERNC void pub_sdk_ping(const char* identifier);
-void pub_sdk_ping(const char* identifier)
-{
+PUB_SDK_EXTERNC void pub_sdk_ping(const char* identifier){
 }
 
-PUB_SDK_EXTERNC void pub_sdk_startPing();
-void pub_sdk_startPing()
-{
+PUB_SDK_EXTERNC void pub_sdk_startPing(){
 }
 
-PUB_SDK_EXTERNC void pub_sdk_stopPing();
-void pub_sdk_stopPing()
-{
+PUB_SDK_EXTERNC void pub_sdk_stopPing(){
 }

@@ -44,14 +44,13 @@ namespace GamePub.PubSDK
                 pubSdkWrapper.Call("login", param);
         }
 
-        public static void Logout(string identifier, PubLoginType loginType)
+        public static void Logout(string identifier)
         {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(identifier)) { return; }
 
-            object[] param = new object[2];
-            param[0] = identifier;
-            param[1] = (int)loginType;
+            object[] param = new object[1];
+            param[0] = identifier;            
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("logout", param);
@@ -75,19 +74,7 @@ namespace GamePub.PubSDK
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("userInfoUpdate", param);
-        }
-
-        public static void AutoLogin(string identifier)
-        {
-            if (!Application.isPlaying) { return; }
-            if (IsInvalidRuntime(identifier)) { return; }
-
-            object[] param = new object[1];
-            param[0] = identifier;
-
-            if (pubSdkWrapper != null)
-                pubSdkWrapper.Call("autoLogin", param);
-        }
+        }        
 
         public static string AuthenticationState()
         {
@@ -109,13 +96,14 @@ namespace GamePub.PubSDK
                 pubSdkWrapper.Call("secede", param);
         }
 
-        public static void SecedeCancel(string identifier)
+        public static void SecedeCancel(string identifier, PubLoginType loginType)
         {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(identifier)) { return; }
 
-            object[] param = new object[1];
+            object[] param = new object[2];
             param[0] = identifier;
+            param[1] = (int)loginType;
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("secedeCancel", param);

@@ -73,10 +73,8 @@
 }
 
 - (void)logout:(NSString *)identifier
-     loginType:(int)loginType
 {
-    [[PubApiClient getInstance] logout:loginType
-                            completion:^(NSString * _Nullable unitResult, NSError * _Nullable error)
+    [[PubApiClient getInstance] logout:^(NSString * _Nullable unitResult, NSError * _Nullable error)
     {
         if(error)
         {
@@ -112,30 +110,14 @@
     }];
 }
 
-- (void)autoLogin:(NSString *)identifier
+- (NSString *)currentLoginType
 {
-    
-}
-
-- (void)authenticationState:(NSString *)identifier
-{
-    [[PubApiClient getInstance] getAuthState:^(NSString *unitResult, NSError *error)
-    {
-        if(error)
-        {
-            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
-            [callbackMsg sendMessageError];
-        }else{
-            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
-            [callbackMsg sendMessageOK];
-        }
-    }];
+    return [[PubApiClient getInstance] getAuthState];
 }
 
 - (void)secede:(NSString *)identifier
 {
-    [[PubApiClient getInstance] secede:0
-                            completion:^(NSString *unitResult, NSError *error)
+    [[PubApiClient getInstance] secede:^(NSString *unitResult, NSError *error)
     {
         if(error)
         {
@@ -149,8 +131,9 @@
 }
 
 - (void)secedeCancel:(NSString *)identifier
+           loginType:(int)loginType
 {
-    [[PubApiClient getInstance] secedeCancel:0
+    [[PubApiClient getInstance] secedeCancel:loginType
                                   completion:^(NSString *unitResult, NSError *error)
     {
         if(error)
@@ -169,7 +152,19 @@
 
 {
     [[PubApiClient getInstance] openPolicyLinkSafariView:UnityGetGLViewController()
-                                              policyType:policyType];
+                                              policyType:policyType
+                                              completion:^(NSString * _Nullable unitResult,
+                                                           NSError * _Nullable error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
 }
 
 - (void)imageBanner:(NSString *)identifier

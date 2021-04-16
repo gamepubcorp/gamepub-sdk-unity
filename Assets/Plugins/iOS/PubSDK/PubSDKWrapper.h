@@ -18,8 +18,7 @@
          type:(int)loginType
   serviceType:(int)accountServiceType;
 
-- (void)logout:(NSString *)identifier
-     loginType:(int)loginType;
+- (void)logout:(NSString *)identifier;
 
 - (void)userInfoUpdate:(NSString *)identifier
           languageCode:(NSString *)languageCode
@@ -27,12 +26,11 @@
              pushNight:(BOOL)pushNight
                 pushAd:(BOOL)pushAd;
 
-- (void)autoLogin:(NSString *)identifier;
-
-- (void)authenticationState:(NSString *)identifier;
+- (NSString *)currentLoginType;
 
 - (void)secede:(NSString *)identifier;
-- (void)secedeCancel:(NSString *)identifier;
+- (void)secedeCancel:(NSString *)identifier
+           loginType:(int)loginType;
 
 - (void)openPolicyLink:(NSString *)identifier
             policyType:(int)policyType;

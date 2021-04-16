@@ -11,10 +11,46 @@ public class LoginController : MonoBehaviour
     public Text messageText;
     public GameObject popup_panel;
 
+    public GameObject content;
+    public GameObject autoLogin;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+#if UNITY_IOS
+        if (GamePubSDK.Ins.GetActiveLoginType() != PubLoginType.NONE)
+        {
+            content.SetActive(false);
+            autoLogin.SetActive(true);
+        }
+        else
+        {
+            content.SetActive(true);
+            autoLogin.SetActive(false);
+        }
+#endif
+    }
+
+    public void OnClickAutoLogin()
+    {
+        if (GamePubSDK.Ins.GetActiveLoginType() != PubLoginType.NONE)
+        {
+            GamePubSDK.Ins.Login(GamePubSDK.Ins.GetActiveLoginType(),
+            PubAccountServiceType.ACCOUNT_LOGIN, result =>
+            {
+                result.Match(
+                    value =>
+                    {
+                        UserInfoManager.Instance.loginResult = value;
+                        UpdateLoginResult(value);
+                    },
+                    error =>
+                    {
+                        messageText.text = error.Message;
+                        popup_panel.SetActive(true);
+                    });
+            });
+        }
     }
 
     public void OnClickGoogleLogin()
@@ -56,7 +92,7 @@ public class LoginController : MonoBehaviour
     public void OnClickGuestLogin()
     {
         GamePubSDK.Ins.Login(PubLoginType.GUEST,
-            PubAccountServiceType.NONE, result =>
+            PubAccountServiceType.ACCOUNT_LOGIN, result =>
             {
                 result.Match(
                     value => {
@@ -67,7 +103,7 @@ public class LoginController : MonoBehaviour
                         messageText.text = error.Message;
                         popup_panel.SetActive(true);
                     });
-            });
+            }); 
     }
 
     public void OnClickAppleLogin()

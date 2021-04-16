@@ -25,11 +25,10 @@ namespace GamePub.PubSDK
             NativeInterface.Login(identifier, loginType, serviceType);
         }
 
-        public static void Logout(PubLoginType loginType,
-                                  Action<Result<PubUnit>> action)
+        public static void Logout(Action<Result<PubUnit>> action)
         {
             var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
-            NativeInterface.Logout(identifier, loginType);
+            NativeInterface.Logout(identifier);
         }
 
         public static void UserInfoUpdate(string languageCode,
@@ -44,13 +43,7 @@ namespace GamePub.PubSDK
                                            push,
                                            pushNight,
                                            pushAd);
-        }
-
-        public static void AutoLogin(Action<Result<PubLoginResult>> action)
-        {
-            var identifier = AddAction(FlattenAction.JsonFlatten<PubLoginResult>(action));
-            NativeInterface.AutoLogin(identifier);
-        }
+        }        
 
         public static void Secede(Action<Result<PubUnit>> action)
         {
@@ -58,10 +51,11 @@ namespace GamePub.PubSDK
             NativeInterface.Secede(identifier);
         }
 
-        public static void SecedeCancel(Action<Result<PubUnit>> action)
+        public static void SecedeCancel(PubLoginType loginType,
+                                        Action<Result<PubUnit>> action)
         {
             var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
-            NativeInterface.SecedeCancel(identifier);
+            NativeInterface.SecedeCancel(identifier, loginType);
         }
 
         public static void ImageBanner(string ratioWidth,
