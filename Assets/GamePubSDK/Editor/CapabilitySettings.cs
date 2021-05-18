@@ -22,8 +22,8 @@ namespace GamePub.PubSDK.Editor
             project.ReadFromFile(projectPath);
             string targetGuid = project.GetUnityMainTargetGuid();
 
-            project.AddFileToBuild(targetGuid, project.AddFile("GoogleService-Info.plist", "GoogleService-Info.plist"));
-            project.WriteToFile(projectPath);
+            //project.AddFileToBuild(targetGuid, project.AddFile("GoogleService-Info.plist", "GoogleService-Info.plist"));
+            //project.WriteToFile(projectPath);
 
             project.AddFrameworkToProject(targetGuid, "StoreKit.framework", false);
             File.WriteAllText(projectPath, project.WriteToString());

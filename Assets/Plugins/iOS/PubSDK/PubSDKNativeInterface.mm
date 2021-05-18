@@ -193,10 +193,14 @@ void pub_sdk_couponUse(const char* identifier,
 }
 
 PUB_SDK_EXTERNC void pub_sdk_ping(const char* identifier){
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    [[PubSDKWrapper sharedInstance] ping:nsIdentifier];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_startPing(){
+    [[PubSDKWrapper sharedInstance] startPing];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_stopPing(){
+    [[PubSDKWrapper sharedInstance] stopPing];
 }

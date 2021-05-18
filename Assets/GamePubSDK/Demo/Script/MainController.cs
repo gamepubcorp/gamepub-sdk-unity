@@ -50,7 +50,7 @@ public class MainController : MonoBehaviour
 
     void Awake()
     {
-        //GamePubSDK.Ins.Ping(Test);
+        GamePubSDK.Ins.Ping(Test);
         GamePubSDK.Ins.PurchaseInit(result =>
         {
             result.Match(
@@ -79,6 +79,7 @@ public class MainController : MonoBehaviour
 
     private void Test(Result<PubUnit> result)
     {
+        Debug.Log("Test Listener");
         result.Match(
             value =>
             {

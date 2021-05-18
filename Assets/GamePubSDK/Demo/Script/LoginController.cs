@@ -17,7 +17,6 @@ public class LoginController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-#if UNITY_IOS
         if (GamePubSDK.Ins.GetActiveLoginType() != PubLoginType.NONE)
         {
             content.SetActive(false);
@@ -28,7 +27,6 @@ public class LoginController : MonoBehaviour
             content.SetActive(true);
             autoLogin.SetActive(false);
         }
-#endif
     }
 
     public void OnClickAutoLogin()

@@ -20,6 +20,10 @@ namespace GamePub.PubSDK.Editor
         private bool facebookLogin;
         [SerializeField]
         private string facebookAppID;
+        [SerializeField]
+        private string reversedClientID;
+        [SerializeField]
+        private string googleClientID;
 
         internal static int DependencySelectedIndex(string selected)
         {
@@ -28,6 +32,8 @@ namespace GamePub.PubSDK.Editor
 
         internal bool UseCocoaPods { get { return iOSDependencyManager.Equals("CocoaPods"); } }
         internal string FacebookAppID { get { return facebookAppID; } }
+        internal string GoogleClientID { get { return googleClientID; } }
+        internal string ReversedClientID { get { return reversedClientID; } }
         internal bool UseAppleLogin { get { return appleLogin; } }
         internal bool UseFacebookLogin { get { return facebookLogin; } }
 
@@ -94,6 +100,12 @@ namespace GamePub.PubSDK.Editor
 
             var propertyFacebookAppId = settings.FindProperty("facebookAppID");
             var facebookAppId = propertyFacebookAppId.stringValue;
+            
+            var propertyGoogleClientId = settings.FindProperty("googleClientID");
+            var googleClientId = propertyGoogleClientId.stringValue;
+
+            var propertyReversedClientId = settings.FindProperty("reversedClientID");
+            var reversedClientId = propertyReversedClientId.stringValue;
 
             selected = EditorGUILayout.Popup("iOS Dependency Manager", selected, PubSDKSettings.dependencyManagerOptions);
             enableAppleLogin = EditorGUILayout.Toggle("Apple Login Enable", enableAppleLogin);
@@ -103,6 +115,9 @@ namespace GamePub.PubSDK.Editor
             GUILayout.Label("Facebook", GUILayout.Width(200), GUILayout.Height(30));
             enableFacebookLogin = EditorGUILayout.BeginToggleGroup("Facebook Login Enable", enableFacebookLogin);
             facebookAppId = EditorGUILayout.TextField("Facebook App ID", facebookAppId);
+            GUILayout.Label("Google", GUILayout.Width(200), GUILayout.Height(30));
+            googleClientId = EditorGUILayout.TextField("Google Client ID", googleClientId);
+            reversedClientId = EditorGUILayout.TextField("REVERSED Client ID", reversedClientId);
             EditorGUILayout.EndToggleGroup();
 
             if (selected < 0)
@@ -113,6 +128,8 @@ namespace GamePub.PubSDK.Editor
             propertyAppleLogin.boolValue = enableAppleLogin;
             propertyFacebookLogin.boolValue = enableFacebookLogin;
             propertyFacebookAppId.stringValue = facebookAppId;
+            propertyGoogleClientId.stringValue = googleClientId;
+            propertyReversedClientId.stringValue = reversedClientId;
 
             if (EditorGUI.EndChangeCheck())
             {

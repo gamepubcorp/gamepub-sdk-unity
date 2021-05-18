@@ -16,3 +16,5 @@ MonoBehaviour:
   appleLogin: 1
   facebookLogin: 1
   facebookAppID: 206076617381252
+  reversedClientID: com.googleusercontent.apps.892923933661-q436l9ngqgbtt3qr043bh0o333htoje7
+  googleClientID: 892923933661-q436l9ngqgbtt3qr043bh0o333htoje7.apps.googleusercontent.com

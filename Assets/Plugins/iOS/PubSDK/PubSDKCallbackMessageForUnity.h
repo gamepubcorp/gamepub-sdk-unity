@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithIdentifier:(NSString *)identifier value:(NSString *)value;
 - (void)sendMessageOK;
 - (void)sendMessageError;
+- (void)sendMessageUpdate;
 
 @end
 

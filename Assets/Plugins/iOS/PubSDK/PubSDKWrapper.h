@@ -59,7 +59,6 @@
               etc:(NSString *)etc;
 
 - (void)ping:(NSString *)identifier;
-
 - (void)startPing;
 - (void)stopPing;
 

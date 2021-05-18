@@ -59,4 +59,8 @@
     pub_sdk_UnitySendMessage("GamePubSDK", "OnApiError", [self generateMessageJson]);
 }
 
+- (void)sendMessageUpdate {
+    pub_sdk_UnitySendMessage("GamePubSDK", "OnApiUpdate", [self generateMessageJson]);
+}
+
 @end

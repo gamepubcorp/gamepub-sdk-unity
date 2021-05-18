@@ -23,29 +23,31 @@ namespace GamePub.PubSDK
             }
             DontDestroyOnLoad(gameObject);
             SetupSDK();
+
+            Debug.Log("GamePubSDK::Awake");
         }
 
         private void OnApplicationPause(bool pause)
         {
             //초기화체크, 로그인체크
-            //if (isSetup && AuthenticationState.LoginType != 0)
-            //{
-            //    if (pause)
-            //    {
-            //        isPaused = true;
-            //        Debug.Log("stop");
-            //        StopPing();
-            //    }
-            //    else
-            //    {
-            //        if (isPaused)
-            //        {
-            //            isPaused = false;
-            //            Debug.Log("start");
-            //            StartPing();
-            //        }
-            //    }
-            //}
+            if (isSetup)
+            {
+                if (pause)
+                {
+                    isPaused = true;
+                    Debug.Log("stop");
+                    StopPing();
+                }
+                else
+                {
+                    if (isPaused)
+                    {
+                        isPaused = false;
+                        Debug.Log("start");
+                        StartPing();
+                    }
+                }
+            }
         }
 
         public static GamePubSDK Ins

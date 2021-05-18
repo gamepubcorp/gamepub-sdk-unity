@@ -13,6 +13,6 @@ public class UserInfoManager : Singleton<UserInfoManager>
 
     private void Awake()
     {
-        Debug.Log("Awake");
+        Debug.Log("UserInfoManager::Awake");
     }
 }

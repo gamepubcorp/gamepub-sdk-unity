@@ -296,17 +296,28 @@
 
 - (void)ping:(NSString *)identifier
 {
-    
+    [[PubApiClient getInstance] pingListener:^(NSString * _Nullable unitResult,
+                                               NSError * _Nullable error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageUpdate];
+        }
+    }];
 }
 
 - (void)startPing
 {
-    
+    [[PubApiClient getInstance] startPing];
 }
 
 - (void)stopPing
 {
-    
+    [[PubApiClient getInstance] stopPing];
 }
 
 - (NSString *)wrapError:(NSError *)error {
