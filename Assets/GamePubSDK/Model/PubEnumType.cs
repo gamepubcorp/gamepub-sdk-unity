@@ -46,13 +46,20 @@ namespace GamePub.PubSDK
         CANCEL,
         NETWORK_ERROR,
         SERVER_ERROR,
-        AUTHENTICATION_AGENT_ERROR,
-        ALREADY_LOGGED_IN,
-        ALREADY_ACCOUNT_USE,
+        AUTHENTICATION_AGENT_ERROR,        
         BLOCK_IP_CHECK,
         SERVICE_MAINTENANCE,
         INTERNAL_ERROR,
         PURCHASE_ERROR,
+    }
+
+    public enum PubMessageCode
+    {
+        OK = 200,
+        MultiStatus = 207,
+        PRECONDITION_FAILED = 412,
+        Locked = 423,
+        SERVICE_UNAVAILABLE = 503,
     }
 
     public enum PubAccountStatus

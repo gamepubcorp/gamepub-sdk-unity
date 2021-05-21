@@ -8,7 +8,7 @@ namespace GamePub.PubSDK
     {
         static GamePubSDK instance;
 
-        private bool isSetup = false;
+        //private bool isSetup = false;
         private bool isPaused;        
 
         void Awake()
@@ -21,16 +21,12 @@ namespace GamePub.PubSDK
             {
                 Destroy(gameObject);
             }
-            DontDestroyOnLoad(gameObject);
-            SetupSDK();
-
-            Debug.Log("GamePubSDK::Awake");
+            DontDestroyOnLoad(gameObject);            
         }
 
         private void OnApplicationPause(bool pause)
-        {
-            //초기화체크, 로그인체크
-            if (isSetup)
+        {            
+            if (GetActiveLoginType() != PubLoginType.NONE)
             {
                 if (pause)
                 {
@@ -61,35 +57,15 @@ namespace GamePub.PubSDK
                 }
                 return instance;
             }
-        }        
+        }
 
-        private void SetupSDK()
+        public void SetupSDK(Action<Result<PubSetupSDKResult>> action)
         {
-            Debug.LogError("isSetup = " + isSetup);            
-            PubLanguageCode langCode;
-
-            GamePubAPI.SetupSDK(result =>
-            {
-                result.Match(
-                    value =>
-                    {                        
-                        foreach (string strLang in value.LangList)
-                        {
-                            Enum.TryParse(strLang, out langCode);
-                            UserInfoManager.Instance.LangList.Add(langCode);
-                        }
-                        isSetup = true;
-                    },
-                    error =>
-                    {
-                        Debug.LogError("code = " + error.Code + ", msg = " + error.Message);
-                    });
-            });
+            GamePubAPI.SetupSDK(action);            
         }
 
         public void Login(PubLoginType loginType, PubAccountServiceType serviceType, Action<Result<PubLoginResult>> action)
-        {
-            //this.loginType = loginType;
+        {            
             GamePubAPI.Login(loginType, serviceType, action);
         }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,16 +17,36 @@ public class LoginController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (GamePubSDK.Ins.GetActiveLoginType() != PubLoginType.NONE)
+        PubLanguageCode langCode;
+        GamePubSDK.Ins.SetupSDK(result =>
         {
-            content.SetActive(false);
-            autoLogin.SetActive(true);
-        }
-        else
-        {
-            content.SetActive(true);
-            autoLogin.SetActive(false);
-        }
+            result.Match(
+                value =>
+                {
+                    //언어설정
+                    foreach (string strLang in value.LangList)
+                    {
+                        Enum.TryParse(strLang, out langCode);
+                        UserInfoManager.Instance.LangList.Add(langCode);
+                    }
+
+                    //자동로그인 활성화 설정
+                    if (GamePubSDK.Ins.GetActiveLoginType() != PubLoginType.NONE)
+                    {
+                        content.SetActive(false);
+                        autoLogin.SetActive(true);
+                    }
+                    else
+                    {
+                        content.SetActive(true);
+                        autoLogin.SetActive(false);
+                    }
+                },
+                error =>
+                {
+                    Debug.LogError("code = " + error.Code + ", msg = " + error.Message);
+                });
+        });        
     }
 
     public void OnClickAutoLogin()
@@ -152,6 +172,11 @@ public class LoginController : MonoBehaviour
             else if (result.ResponseCode == (int)PubApiResponseCode.SERVICE_MAINTENANCE)
             {
                 messageText.text = result.Maintenance.Message;
+                popup_panel.SetActive(true);
+            }
+            else if (result.ResponseCode == (int)PubApiResponseCode.BLOCK_IP_CHECK)
+            {
+                messageText.text = "IP Block";
                 popup_panel.SetActive(true);
             }
         }

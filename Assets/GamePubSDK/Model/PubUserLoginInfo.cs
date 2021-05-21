@@ -27,11 +27,11 @@ namespace GamePub.PubSDK
         [SerializeField]
         private int status = 0;
         [SerializeField]
-        private int agreePush = 0;
+        private bool agreePush = false;
         [SerializeField]
-        private int agreeNight = 0;
+        private bool agreeNight = false;
         [SerializeField]
-        private int agreeAd = 0;
+        private bool agreeAd;
         [SerializeField]
         private int blockReason = 0;
 
@@ -47,9 +47,9 @@ namespace GamePub.PubSDK
         public int AppId { get { return appId; } }
         public int IntDate { get { return intDate; } }
         public int Status { get { return status; } }
-        public int AgreePush { get { return agreePush; } }
-        public int AgreeNight { get { return agreeNight; } }
-        public int AgreeAd { get { return agreeAd; } }
+        public bool AgreePush { get { return agreePush; } }
+        public bool AgreeNight { get { return agreeNight; } }
+        public bool AgreeAd { get { return agreeAd; } }
         public int BlockReason { get { return blockReason; } }
     }
 }

@@ -9,7 +9,10 @@ public class UserInfoManager : Singleton<UserInfoManager>
     public PubInAppProduct[] ProductList { get; set; }
     public List<PubLanguageCode> LangList = new List<PubLanguageCode>();
 
-    public string temp = "test msg";
+    public PubLanguageCode currentCode = PubLanguageCode.en;
+    public bool push = false;
+    public bool pushAd = false;
+    public bool pushNight = false;
 
     private void Awake()
     {

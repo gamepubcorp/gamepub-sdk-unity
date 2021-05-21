@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using GamePub.PubSDK;
 
 public class MainController : MonoBehaviour
@@ -50,7 +51,7 @@ public class MainController : MonoBehaviour
 
     void Awake()
     {
-        GamePubSDK.Ins.Ping(Test);
+        GamePubSDK.Ins.Ping(PingListener);
         GamePubSDK.Ins.PurchaseInit(result =>
         {
             result.Match(
@@ -77,28 +78,28 @@ public class MainController : MonoBehaviour
         }
     }    
 
-    private void Test(Result<PubUnit> result)
+    private void PingListener(Result<PubUnit> result)
     {
-        Debug.Log("Test Listener");
+        Debug.Log("Ping Listener");
         result.Match(
             value =>
             {
                 UpdateRawSection(value);
                 switch(value.Code)
                 {
-                    case 207:
+                    case (int)PubMessageCode.MultiStatus:
                         {
                             break;
                         }
-                    case 412:
+                    case (int)PubMessageCode.PRECONDITION_FAILED:
                         {
                             break;
                         }
-                    case 423:
+                    case (int)PubMessageCode.Locked:
                         {
                             break;
                         }
-                    case 503:
+                    case (int)PubMessageCode.SERVICE_UNAVAILABLE:
                         {
                             break;
                         }
@@ -116,7 +117,7 @@ public class MainController : MonoBehaviour
     }    
 
     public void OnClickSecede()
-    {
+    {        
         GamePubSDK.Ins.Secede(result =>
         {
             result.Match(
@@ -216,9 +217,25 @@ public class MainController : MonoBehaviour
     {
         SliderToggle push = pushToggle.GetComponent<SliderToggle>();
         push.callback = (bool status) =>
-        {
-            //push.SetToggle(!status);
-            Debug.Log(status);
+        {            
+            GamePubSDK.Ins.UserInfoUpdate(
+            UserInfoManager.Instance.currentCode.ToString(),
+            status,
+            UserInfoManager.Instance.pushNight,
+            UserInfoManager.Instance.pushAd,
+            result =>
+            {
+                result.Match(
+                    value =>
+                    {
+                        UpdateRawSection(value);
+                        UserInfoManager.Instance.push = value.AgreePush;
+                    },
+                    error =>
+                    {
+                        UpdateRawSection(error);
+                    });
+            });
         };
         push.ChangeToggle();
     }
@@ -228,7 +245,24 @@ public class MainController : MonoBehaviour
         SliderToggle push = adPushToggle.GetComponent<SliderToggle>();
         push.callback = (bool status) =>
         {
-            Debug.Log(status);
+            GamePubSDK.Ins.UserInfoUpdate(
+            UserInfoManager.Instance.currentCode.ToString(),
+            UserInfoManager.Instance.push,
+            UserInfoManager.Instance.pushNight,
+            status,
+            result =>
+            {
+                result.Match(
+                    value =>
+                    {
+                        UpdateRawSection(value);
+                        UserInfoManager.Instance.pushAd = value.AgreeAd;
+                    },
+                    error =>
+                    {
+                        UpdateRawSection(error);
+                    });
+            });
         };
         push.ChangeToggle();
     }
@@ -238,57 +272,49 @@ public class MainController : MonoBehaviour
         SliderToggle push = nightPushToggle.GetComponent<SliderToggle>();
         push.callback = (bool status) =>
         {
-            Debug.Log(status);
+            GamePubSDK.Ins.UserInfoUpdate(
+            UserInfoManager.Instance.currentCode.ToString(),
+            UserInfoManager.Instance.push,
+            status,
+            UserInfoManager.Instance.pushAd,
+            result =>
+            {
+                result.Match(
+                    value =>
+                    {
+                        UpdateRawSection(value);
+                        UserInfoManager.Instance.pushNight = value.AgreeNight;
+                    },
+                    error =>
+                    {
+                        UpdateRawSection(error);
+                    });
+            });
         };
         push.ChangeToggle();
     }
 
     public void SelectedLangBtn(int index)
     {
-        
-        switch (index)
-        {
-            case 0:
-                {
-                    currentCode = UserInfoManager.Instance.LangList[0];
-                    
-                }
-                break;
-            case 1:
-                {
-                    currentCode = UserInfoManager.Instance.LangList[1];
-                    
-                }
-                break;
-            case 2:
-                {
-                    currentCode = UserInfoManager.Instance.LangList[2];
-                    
-                }
-                break;
-        }
-    }
-
-    public void UserInfoUpdate()
-    {
+        UserInfoManager.Instance.currentCode = UserInfoManager.Instance.LangList[index];
         GamePubSDK.Ins.UserInfoUpdate(
-            currentCode.ToString(),
-            false,
-            false,
-            false,
+            UserInfoManager.Instance.currentCode.ToString(),
+            UserInfoManager.Instance.push,
+            UserInfoManager.Instance.pushNight,
+            UserInfoManager.Instance.pushAd,
             result =>
             {
                 result.Match(
                     value =>
                     {
-                        //value.AccountId
+                        UpdateRawSection(value);
                     },
                     error =>
                     {
-                        //error.Message
+                        UpdateRawSection(error);
                     });
             });
-    }
+    }   
 
     public void OnClickLogout()
     {
@@ -508,6 +534,7 @@ public class MainController : MonoBehaviour
                     emailText.text = result.UserProfile.Email;
 
                     accountIdText.text = result.UserLoginInfo.AccountID;
+                    StartCoroutine(UpdateProfile(result.UserProfile.PhotoURL));
                 }
                 else if (result.UserLoginInfo.Status == (int)PubAccountStatus.S)
                 {
@@ -519,7 +546,38 @@ public class MainController : MonoBehaviour
             {
                 popupMessageText.text = result.Maintenance.Message;
                 popup_panel.SetActive(true);
-            }            
+            }
+            else if (result.ResponseCode == (int)PubApiResponseCode.BLOCK_IP_CHECK)
+            {
+                popupMessageText.text = "IP Block";
+                popup_panel.SetActive(true);
+            }
         }
+    }
+
+    IEnumerator UpdateProfile(string url)
+    {
+        if (url != null)
+        {
+            var www = UnityWebRequestTexture.GetTexture(url);
+            yield return www.SendWebRequest();
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.LogError(www.error);
+            }
+            else
+            {
+                var texture = DownloadHandlerTexture.GetContent(www);
+                userImage.color = Color.white;
+                userImage.sprite = Sprite.Create(
+                    texture,
+                    new Rect(0, 0, texture.width, texture.height),
+                    new Vector2(0, 0));
+            }
+        }
+        else
+        {
+            yield return null;
+        }        
     }
 }
