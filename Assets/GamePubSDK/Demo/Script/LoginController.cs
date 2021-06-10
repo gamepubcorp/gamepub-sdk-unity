@@ -14,39 +14,20 @@ public class LoginController : MonoBehaviour
     public GameObject content;
     public GameObject autoLogin;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        PubLanguageCode langCode;
-        GamePubSDK.Ins.SetupSDK(result =>
+        //자동로그인 활성화 설정
+        if (GamePubSDK.Ins.GetActiveLoginType() != PubLoginType.NONE)
         {
-            result.Match(
-                value =>
-                {
-                    //언어설정
-                    foreach (string strLang in value.LangList)
-                    {
-                        Enum.TryParse(strLang, out langCode);
-                        UserInfoManager.Instance.LangList.Add(langCode);
-                    }
+            content.SetActive(false);
+            autoLogin.SetActive(true);
+        }
+        else
+        {
+            content.SetActive(true);
+            autoLogin.SetActive(false);
+        }
 
-                    //자동로그인 활성화 설정
-                    if (GamePubSDK.Ins.GetActiveLoginType() != PubLoginType.NONE)
-                    {
-                        content.SetActive(false);
-                        autoLogin.SetActive(true);
-                    }
-                    else
-                    {
-                        content.SetActive(true);
-                        autoLogin.SetActive(false);
-                    }
-                },
-                error =>
-                {
-                    Debug.LogError("code = " + error.Code + ", msg = " + error.Message);
-                });
-        });        
     }
 
     public void OnClickAutoLogin()
@@ -59,7 +40,7 @@ public class LoginController : MonoBehaviour
                 result.Match(
                     value =>
                     {
-                        UserInfoManager.Instance.loginResult = value;
+                        UserInfoManager.Ins.loginResult = value;
                         UpdateLoginResult(value);
                     },
                     error =>
@@ -79,7 +60,7 @@ public class LoginController : MonoBehaviour
                 result.Match(
                     value =>
                     {
-                        UserInfoManager.Instance.loginResult = value;
+                        UserInfoManager.Ins.loginResult = value;
                         UpdateLoginResult(value);
                     },
                     error =>
@@ -97,7 +78,7 @@ public class LoginController : MonoBehaviour
             {
                 result.Match(
                     value => {
-                        UserInfoManager.Instance.loginResult = value;
+                        UserInfoManager.Ins.loginResult = value;
                         UpdateLoginResult(value);
                     },
                     error => {
@@ -114,7 +95,7 @@ public class LoginController : MonoBehaviour
             {
                 result.Match(
                     value => {
-                        UserInfoManager.Instance.loginResult = value;
+                        UserInfoManager.Ins.loginResult = value;
                         UpdateLoginResult(value);
                     },
                     error => {
@@ -132,7 +113,7 @@ public class LoginController : MonoBehaviour
                 result.Match(
                     value =>
                     {
-                        UserInfoManager.Instance.loginResult = value;
+                        UserInfoManager.Ins.loginResult = value;
                         UpdateLoginResult(value);
                     },
                     error =>

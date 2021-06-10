@@ -17,13 +17,13 @@ namespace GamePub.PubSDK
         }
 
         [DllImport("__Internal")]
-        private static extern void pub_sdk_setup(string identifier);
-        public static void SetupSDK(string identifier)
+        private static extern void pub_sdk_setup(string domainURL);
+        public static void SetupSDK(string domainURL)
         {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(null)) { return; }
 
-            pub_sdk_setup(identifier);
+            pub_sdk_setup(domainURL);
         }
 
         [DllImport("__Internal")]
@@ -69,13 +69,33 @@ namespace GamePub.PubSDK
         }
 
         [DllImport("__Internal")]
-        private static extern string pub_sdk_authenticationState();
-        public static string AuthenticationState()
+        private static extern string pub_sdk_getLoginType();
+        public static string GetLoginType()
         {
             if (!Application.isPlaying) { return null; }
             if (IsInvalidRuntime(null)) { return null; }
 
-            return pub_sdk_authenticationState();
+            return pub_sdk_getLoginType();
+        }
+
+        [DllImport("__Internal")]
+        private static extern string pub_sdk_getLanguageList();
+        public static string GetLanguageList()
+        {
+            if (!Application.isPlaying) { return null; }
+            if (IsInvalidRuntime(null)) { return null; }
+
+            return pub_sdk_getLanguageList();
+        }
+
+        [DllImport("__Internal")]
+        private static extern string pub_sdk_getProductList();
+        public static string GetProductList()
+        {
+            if (!Application.isPlaying) { return null; }
+            if (IsInvalidRuntime(null)) { return null; }
+
+            return pub_sdk_getProductList();
         }
 
         [DllImport("__Internal")]
@@ -118,17 +138,7 @@ namespace GamePub.PubSDK
             if (IsInvalidRuntime(identifier)) { return; }
 
             pub_sdk_imageBanner(identifier, ratioWidth, ratioHeight);
-        }
-
-        [DllImport("__Internal")]
-        private static extern void pub_sdk_purchaseInit(string identifier);
-        public static void PurchaseInit(string identifier)
-        {
-            if (!Application.isPlaying) { return; }
-            if (IsInvalidRuntime(identifier)) { return; }
-
-            pub_sdk_purchaseInit(identifier);
-        }
+        }        
 
         [DllImport("__Internal")]
         private static extern void pub_sdk_inAppPurchase(string identifier,

@@ -29,25 +29,15 @@
     return sharedInstance;
 }
 
-- (void)setupSDK:(NSString *)identifier
+- (void)setupSDK:(NSString *)domainURL
 {
     if(self.setup) {
         return;
     }
     self.setup = YES;
     
-    [[PubApiClient getInstance] setupSDK:^(NSString *sdkResult,
-                                           NSError *error)
-    {
-        if(error)
-        {
-            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
-            [callbackMsg sendMessageError];
-        }else{
-            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:sdkResult];
-            [callbackMsg sendMessageOK];
-        }
-    }];
+    [[PubApiClient getInstance] setupSDK:UnityGetGLViewController()
+                               domainURL:domainURL];
     
     [[PubWebviewController GetInstance] InitializeWithParentUIView:UnityGetGLViewController().view pubDelegate:nil];
 }
@@ -110,9 +100,19 @@
     }];
 }
 
-- (NSString *)currentLoginType
+- (NSString *)getLoginType
 {
-    return [[PubApiClient getInstance] getAuthState];
+    return [[PubApiClient getInstance] getLoginType];
+}
+
+- (NSString *)getLanguageList
+{
+    return [[PubApiClient getInstance] getLanguageList];
+}
+
+- (NSString *)getProductList
+{
+    return [[PubApiClient getInstance] getProductList];
 }
 
 - (void)secede:(NSString *)identifier
@@ -174,22 +174,6 @@
     [[PubApiClient getInstance] imageBanner:ratioWidth
                                 ratioHeight:ratioHeight
                                  completion:^(NSString *unitResult, NSError *error)
-    {
-        if(error)
-        {
-            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
-            [callbackMsg sendMessageError];
-        }else{
-            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
-            [callbackMsg sendMessageOK];
-        }
-    }];
-}
-
-- (void)purchaseInit:(NSString *)identifier
-{
-    [[PubApiClient getInstance] purchaseInit:^(NSString * _Nullable unitResult,
-                                               NSError * _Nullable error)
     {
         if(error)
         {

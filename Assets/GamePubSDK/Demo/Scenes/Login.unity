@@ -350,6 +350,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1395787309880690841, guid: 1dc1c752f1e6f415a9d05a802a68a815,
+        type: 3}
+      propertyPath: domainURL
+      value: https://pubsdkapidev.igamepub.co.kr
+      objectReference: {fileID: 0}
     - target: {fileID: 2072475885106603582, guid: 1dc1c752f1e6f415a9d05a802a68a815,
         type: 3}
       propertyPath: m_Name

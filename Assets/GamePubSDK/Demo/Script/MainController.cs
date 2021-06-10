@@ -51,26 +51,24 @@ public class MainController : MonoBehaviour
 
     void Awake()
     {
+        //Ping 설정
         GamePubSDK.Ins.Ping(PingListener);
-        GamePubSDK.Ins.PurchaseInit(result =>
+        //인앱상품리스트 받아오기
+        UserInfoManager.Ins.ProductList = GamePubSDK.Ins.GetProductList().InAppProducts;
+        //언어설정
+        PubLanguageCode langCode;
+        foreach (string strLang in GamePubSDK.Ins.GetLanguageList().LangList)
         {
-            result.Match(
-                value =>
-                {
-                    UserInfoManager.Instance.ProductList = value.InAppProducts;
-                    UpdateRawSection(value);
-                }, error =>
-                 {
-                     UpdateRawSection(error);
-                 });
-        });
+            Enum.TryParse(strLang, out langCode);
+            UserInfoManager.Ins.LangList.Add(langCode);
+        }
 
-        //demo
+        //ui demo
         //UserInfoManager.Instance.LangList.Add(PubLanguageCode.ko);
         //UserInfoManager.Instance.LangList.Add(PubLanguageCode.en);
         //UserInfoManager.Instance.LangList.Add(PubLanguageCode.ja);
         dropdownLang.captionText.text = "언어설정";
-        foreach (PubLanguageCode code in UserInfoManager.Instance.LangList)
+        foreach (PubLanguageCode code in UserInfoManager.Ins.LangList)
         {
             Dropdown.OptionData option = new Dropdown.OptionData();
             option.text = code.ToString();
@@ -112,7 +110,7 @@ public class MainController : MonoBehaviour
 
     void Start()
     {
-        PubLoginResult result = UserInfoManager.Instance.loginResult;
+        PubLoginResult result = UserInfoManager.Ins.loginResult;
         UpdateUserInfo(result);
     }    
 
@@ -219,17 +217,17 @@ public class MainController : MonoBehaviour
         push.callback = (bool status) =>
         {            
             GamePubSDK.Ins.UserInfoUpdate(
-            UserInfoManager.Instance.currentCode.ToString(),
+            UserInfoManager.Ins.currentCode.ToString(),
             status,
-            UserInfoManager.Instance.pushNight,
-            UserInfoManager.Instance.pushAd,
+            UserInfoManager.Ins.pushNight,
+            UserInfoManager.Ins.pushAd,
             result =>
             {
                 result.Match(
                     value =>
                     {
                         UpdateRawSection(value);
-                        UserInfoManager.Instance.push = value.AgreePush;
+                        UserInfoManager.Ins.push = value.AgreePush;
                     },
                     error =>
                     {
@@ -246,9 +244,9 @@ public class MainController : MonoBehaviour
         push.callback = (bool status) =>
         {
             GamePubSDK.Ins.UserInfoUpdate(
-            UserInfoManager.Instance.currentCode.ToString(),
-            UserInfoManager.Instance.push,
-            UserInfoManager.Instance.pushNight,
+            UserInfoManager.Ins.currentCode.ToString(),
+            UserInfoManager.Ins.push,
+            UserInfoManager.Ins.pushNight,
             status,
             result =>
             {
@@ -256,7 +254,7 @@ public class MainController : MonoBehaviour
                     value =>
                     {
                         UpdateRawSection(value);
-                        UserInfoManager.Instance.pushAd = value.AgreeAd;
+                        UserInfoManager.Ins.pushAd = value.AgreeAd;
                     },
                     error =>
                     {
@@ -273,17 +271,17 @@ public class MainController : MonoBehaviour
         push.callback = (bool status) =>
         {
             GamePubSDK.Ins.UserInfoUpdate(
-            UserInfoManager.Instance.currentCode.ToString(),
-            UserInfoManager.Instance.push,
+            UserInfoManager.Ins.currentCode.ToString(),
+            UserInfoManager.Ins.push,
             status,
-            UserInfoManager.Instance.pushAd,
+            UserInfoManager.Ins.pushAd,
             result =>
             {
                 result.Match(
                     value =>
                     {
                         UpdateRawSection(value);
-                        UserInfoManager.Instance.pushNight = value.AgreeNight;
+                        UserInfoManager.Ins.pushNight = value.AgreeNight;
                     },
                     error =>
                     {
@@ -296,12 +294,12 @@ public class MainController : MonoBehaviour
 
     public void SelectedLangBtn(int index)
     {
-        UserInfoManager.Instance.currentCode = UserInfoManager.Instance.LangList[index];
+        UserInfoManager.Ins.currentCode = UserInfoManager.Ins.LangList[index];
         GamePubSDK.Ins.UserInfoUpdate(
-            UserInfoManager.Instance.currentCode.ToString(),
-            UserInfoManager.Instance.push,
-            UserInfoManager.Instance.pushNight,
-            UserInfoManager.Instance.pushAd,
+            UserInfoManager.Ins.currentCode.ToString(),
+            UserInfoManager.Ins.push,
+            UserInfoManager.Ins.pushNight,
+            UserInfoManager.Ins.pushAd,
             result =>
             {
                 result.Match(
@@ -317,7 +315,7 @@ public class MainController : MonoBehaviour
     }   
 
     public void OnClickLogout()
-    {
+    {        
         GamePubSDK.Ins.Logout(result =>
         {
             result.Match(

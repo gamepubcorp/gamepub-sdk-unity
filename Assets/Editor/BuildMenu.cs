@@ -2,6 +2,7 @@
 using UnityEditor;
 using System;
 using System.Collections.Generic;
+using GamePub.PubSDK;
 using GamePub.PubSDK.Editor;
 
 public class BuildMenu : ScriptableObject
@@ -114,7 +115,7 @@ public class BuildMenu : ScriptableObject
     [UnityEditor.MenuItem("BuildMenu/iOS_TEST", false, 3003)]
     static void Buildmachine_iOSAuto()
     {
-        Debug.Log("fb"+PubSDKSettings.GetOrCreateSettings().FacebookAppID);
+        //Debug.Log("fb"+PubSDKSettings.GetOrCreateSettings().FacebookAppID);        
     }
     
     static void PrepareAndroidBuild(string bundleID)
@@ -141,7 +142,7 @@ public class BuildMenu : ScriptableObject
     static string PerformAndroidBuild(string output, string define, bool isDev)
     {
         Debug.Log("PerformAndroidBuild()");
-        Debug.Log(output);       
+        Debug.Log(output);        
 
         //PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, define);
         

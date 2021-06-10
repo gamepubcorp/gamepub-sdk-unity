@@ -7,14 +7,7 @@ namespace GamePub.PubSDK
     public class GamePubAPI
     {
         public static Dictionary<String, FlattenAction> actions =
-            new Dictionary<string, FlattenAction>();
-
-        public static void SetupSDK(Action<Result<PubSetupSDKResult>> action)
-        {
-            var identifier = AddAction(FlattenAction.JsonFlatten<PubSetupSDKResult>(action));
-
-            NativeInterface.SetupSDK(identifier);
-        }
+            new Dictionary<string, FlattenAction>();        
 
         public static void Login(PubLoginType loginType,
                                  PubAccountServiceType serviceType,
@@ -64,13 +57,7 @@ namespace GamePub.PubSDK
         {
             var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
             NativeInterface.ImageBanner(identifier, ratioWidth, ratioHeight);
-        }
-
-        public static void PurchaseInit(Action<Result<PubInAppListResult>> action)
-        {
-            var identifier = AddAction(FlattenAction.JsonFlatten<PubInAppListResult>(action));
-            NativeInterface.PurchaseInit(identifier);
-        }
+        }        
 
         public static void InAppPurchase(string pid,
                                          string serverId,

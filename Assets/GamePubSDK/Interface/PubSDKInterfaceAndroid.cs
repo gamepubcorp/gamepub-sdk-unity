@@ -16,13 +16,13 @@ namespace GamePub.PubSDK
             var _ = GamePubSDK.Ins;
         }
 
-        public static void SetupSDK(string identifier)
+        public static void SetupSDK(string url)
         {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(null)) { return; }
 
             object[] param = new object[1];
-            param[0] = identifier;            
+            param[0] = url;            
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("setupSDK", param);
@@ -76,12 +76,28 @@ namespace GamePub.PubSDK
                 pubSdkWrapper.Call("userInfoUpdate", param);
         }        
 
-        public static string AuthenticationState()
+        public static string GetLoginType()
         {
             if (!Application.isPlaying) { return null; }
             if (IsInvalidRuntime(null)) { return null; }            
 
-            return pubSdkWrapper.Call<string>("authenticationState");
+            return pubSdkWrapper.Call<string>("getLoginType");
+        }
+
+        public static string GetLanguageList()
+        {
+            if (!Application.isPlaying) { return null; }
+            if (IsInvalidRuntime(null)) { return null; }
+
+            return pubSdkWrapper.Call<string>("getLanguageList");
+        }
+
+        public static string GetProductList()
+        {
+            if (!Application.isPlaying) { return null; }
+            if (IsInvalidRuntime(null)) { return null; }
+
+            return pubSdkWrapper.Call<string>("getProductList");
         }
 
         public static void Secede(string identifier)
@@ -137,19 +153,7 @@ namespace GamePub.PubSDK
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("imageBanner", param);
-        }
-
-        public static void PurchaseInit(string identifier)
-        {
-            if (!Application.isPlaying) { return; }
-            if (IsInvalidRuntime(identifier)) { return; }
-
-            object[] param = new object[1];
-            param[0] = identifier;
-
-            if (pubSdkWrapper != null)
-                pubSdkWrapper.Call("purchaseInit", param);
-        }
+        }        
 
         public static void InAppPurchase(string identifier,
                                          string pid,
@@ -254,7 +258,7 @@ namespace GamePub.PubSDK
             if (IsInvalidRuntime(null)) { return; }
 
             if (pubSdkWrapper != null)
-                pubSdkWrapper.Call("stopPing");            
+                pubSdkWrapper.Call("stopPing");
         }
 
         private static bool IsInvalidRuntime(string identifier)

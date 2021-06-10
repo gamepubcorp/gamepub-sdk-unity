@@ -5,12 +5,15 @@ namespace GamePub.PubSDK
 {
     public class NativeInterface
     {
-        public static void SetupSDK(string identifier, string deviceUID) { }
+        public static void SetupSDK(string url) { }
         public static void Login(string identifier, PubLoginType loginType, PubAccountServiceType serviceType) { }
-        public static void Logout(string identifier, PubLoginType loginType) { }
-        public static void UserInfoUpdate(string identifier, string languageCode, bool push, bool pushNight, bool pushAd) { }
-        public static void AutoLogin(string identifier) { }
-        public static string AuthenticationState() { return null; }
+        public static void Logout(string identifier) { }
+        public static void UserInfoUpdate(string identifier, string languageCode, bool push, bool pushNight, bool pushAd) { }        
+        public static string GetLoginType() { return null; }
+        public static string GetLanguageList() { return null; }
+        public static string GetProductList() { return null; }
+        public static void Secede(string identifier) { }
+        public static void SecedeCancel(string identifier, PubLoginType loginType) { }
         public static void OpenPolicyLink(string identifier, PubPolicyType policyType) { }
         public static void ImageBanner(string identifier, string ratioWidth, string ratioHeight) { }
         public static void InAppPurchase(string identifier, string pid, string serverId, string playerId, string etc) { }

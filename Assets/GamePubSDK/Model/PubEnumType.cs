@@ -55,11 +55,11 @@ namespace GamePub.PubSDK
 
     public enum PubMessageCode
     {
-        OK = 200,
-        MultiStatus = 207,
-        PRECONDITION_FAILED = 412,
-        Locked = 423,
-        SERVICE_UNAVAILABLE = 503,
+        OK = 200,                   //정상
+        MultiStatus = 207,          //중복로그인
+        PRECONDITION_FAILED = 412,  //IP차단
+        Locked = 423,               //회원제재
+        SERVICE_UNAVAILABLE = 503,  //서버점검
     }
 
     public enum PubAccountStatus

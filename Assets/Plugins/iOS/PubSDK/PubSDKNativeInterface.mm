@@ -40,9 +40,9 @@ PUB_SDK_EXTERNC void pub_sdk_UnitySendMessage(const char *name, const char *meth
 
 // MARK: - Extern APIs
 
-PUB_SDK_EXTERNC void pub_sdk_setup(const char* identifier) {
-    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
-    [[PubSDKWrapper sharedInstance] setupSDK:nsIdentifier];
+PUB_SDK_EXTERNC void pub_sdk_setup(const char* domainURL) {
+    NSString *nsDomainURL = PubSDKMakeNSString(domainURL);
+    [[PubSDKWrapper sharedInstance] setupSDK:nsDomainURL];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_login(const char* identifier,
@@ -83,10 +83,24 @@ void pub_sdk_userInfoUpdate(const char* identifier,
                                             pushAd:pushAd];
 }
 
-PUB_SDK_EXTERNC const char* pub_sdk_authenticationState();
-const char* pub_sdk_authenticationState()
+PUB_SDK_EXTERNC const char* pub_sdk_getLoginType();
+const char* pub_sdk_getLoginType()
 {
-    NSString *result = [[PubSDKWrapper sharedInstance] currentLoginType];
+    NSString *result = [[PubSDKWrapper sharedInstance] getLoginType];
+    return PubSDKMakeCString(result);
+}
+
+PUB_SDK_EXTERNC const char* pub_sdk_getLanguageList();
+const char* pub_sdk_getLanguageList()
+{
+    NSString *result = [[PubSDKWrapper sharedInstance] getLanguageList];
+    return PubSDKMakeCString(result);
+}
+
+PUB_SDK_EXTERNC const char* pub_sdk_getProductList();
+const char* pub_sdk_getProductList()
+{
+    NSString *result = [[PubSDKWrapper sharedInstance] getProductList];
     return PubSDKMakeCString(result);
 }
 
@@ -124,11 +138,6 @@ void pub_sdk_imageBanner(const char* identifier,
     [[PubSDKWrapper sharedInstance] imageBanner:nsIdentifier
                                      ratioWidth:nsRatioWidth
                                     ratioHeight:nsRatioHeight];
-}
-
-PUB_SDK_EXTERNC void pub_sdk_purchaseInit(const char* identifier) {
-    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
-    [[PubSDKWrapper sharedInstance] purchaseInit:nsIdentifier];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_inAppPurchase(const char* identifier,

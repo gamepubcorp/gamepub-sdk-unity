@@ -6,44 +6,24 @@ namespace GamePub.PubSDK
 {
     public class GamePubSDK : MonoBehaviour
     {
-        static GamePubSDK instance;
+        private static GamePubSDK instance;
 
-        //private bool isSetup = false;
-        private bool isPaused;        
+        private bool isSetup = false;
 
         void Awake()
-        {
+        {                        
+            Debug.Log("domainURL : " + GamePubSDKSettings.ServiceDomain);
             if (instance == null)
             {
-                instance = this;
+                instance = this;                
+                Debug.Log("instance == null");
             }
             else if (instance != this)
             {
-                Destroy(gameObject);
+                Destroy(gameObject);                
             }
-            DontDestroyOnLoad(gameObject);            
-        }
-
-        private void OnApplicationPause(bool pause)
-        {            
-            if (GetActiveLoginType() != PubLoginType.NONE)
-            {
-                if (pause)
-                {
-                    isPaused = true;
-                    Debug.Log("stop");
-                    StopPing();
-                }
-                else
-                {
-                    if (isPaused)
-                    {
-                        isPaused = false;
-                        Debug.Log("start");
-                        StartPing();
-                    }
-                }
-            }
+            DontDestroyOnLoad(gameObject);
+            SetupSDK();
         }
 
         public static GamePubSDK Ins
@@ -53,15 +33,37 @@ namespace GamePub.PubSDK
                 if (instance == null)
                 {
                     GameObject go = new GameObject("GamePubSDK");
-                    instance = go.AddComponent<GamePubSDK>();
+                    instance = go.AddComponent<GamePubSDK>();                    
                 }
                 return instance;
-            }
+            }            
         }
 
-        public void SetupSDK(Action<Result<PubSetupSDKResult>> action)
+        private void OnApplicationPause(bool pause)
+        {            
+            if (GetActiveLoginType() != PubLoginType.NONE)
+            {
+                if (pause)
+                {                    
+                    Debug.Log("ping stop");
+                    StopPing();
+                }
+                else
+                {
+                    Debug.Log("ping start");
+                    StartPing();                    
+                }
+            }
+        }       
+
+        public void SetupSDK()
         {
-            GamePubAPI.SetupSDK(action);            
+            Debug.Log("GamePubSDK::SetupSDK()");
+            if (string.IsNullOrEmpty(GamePubSDKSettings.ServiceDomain))
+            {
+                throw new System.Exception("Gamepub SDK domainURL is not set.");
+            }            
+            NativeInterface.SetupSDK(GamePubSDKSettings.ServiceDomain);
         }
 
         public void Login(PubLoginType loginType, PubAccountServiceType serviceType, Action<Result<PubLoginResult>> action)
@@ -95,10 +97,10 @@ namespace GamePub.PubSDK
         }
 
         private PubAuthenticationState AuthenticationState
-        {
+        {            
             get
             {
-                var result = NativeInterface.AuthenticationState();
+                var result = NativeInterface.GetLoginType();
                 if (string.IsNullOrEmpty(result)) { return null; }
                 return JsonUtility.FromJson<PubAuthenticationState>(result);
             }
@@ -111,6 +113,20 @@ namespace GamePub.PubSDK
             return (PubLoginType)AuthenticationState.LoginType;
         }
 
+        public PubInAppListResult GetProductList()
+        {            
+            var result = NativeInterface.GetProductList();
+            if (string.IsNullOrEmpty(result)) { return null; }
+            return JsonUtility.FromJson<PubInAppListResult>(result);
+        }
+
+        public PubLanguageList GetLanguageList()
+        {
+            var result = NativeInterface.GetLanguageList();
+            if (string.IsNullOrEmpty(result)) { return null; }
+            return JsonUtility.FromJson<PubLanguageList>(result);
+        }
+
         public void OpenPolicyLink(PubPolicyType policyType)
         {
             NativeInterface.OpenPolicyLink(Guid.NewGuid().ToString(), policyType);
@@ -119,12 +135,7 @@ namespace GamePub.PubSDK
         public void ImageBanner(string ratioWidth, string ratioHeight, Action<Result<PubUnit>> action)
         {
             GamePubAPI.ImageBanner(ratioWidth, ratioHeight, action);
-        }
-
-        public void PurchaseInit(Action<Result<PubInAppListResult>> action)
-        {
-            GamePubAPI.PurchaseInit(action);
-        }
+        }        
 
         public void InAppPurchase(string pid,
                                   string serverId,

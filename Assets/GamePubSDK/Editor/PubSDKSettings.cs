@@ -8,12 +8,12 @@ namespace GamePub.PubSDK.Editor
 {
     class PubSDKSettings : ScriptableObject
     {
-        const string assetPath = "Assets/Editor/GamePubSDK/GamePubSDKSettings.asset";
+        const string assetPath = "Assets/Editor/GamePubSDK/PubSDKiOSSettings.asset";
 
         internal static string[] dependencyManagerOptions = new string[] { "CocoaPods" };
 
         [SerializeField]
-        private string iOSDependencyManager;        
+        private string iOSDependencyManager;
         [SerializeField]
         private bool appleLogin;
         [SerializeField]
@@ -21,9 +21,9 @@ namespace GamePub.PubSDK.Editor
         [SerializeField]
         private string facebookAppID;
         [SerializeField]
-        private string reversedClientID;
-        [SerializeField]
         private string googleClientID;
+        [SerializeField]
+        private string reversedClientID;        
 
         internal static int DependencySelectedIndex(string selected)
         {
@@ -63,7 +63,6 @@ namespace GamePub.PubSDK.Editor
 
     static class PubSDKSettingsProvider
     {
-
         static SerializedObject settings;
 
         private class Provider : SettingsProvider
@@ -77,7 +76,7 @@ namespace GamePub.PubSDK.Editor
         [SettingsProvider]
         static SettingsProvider MyNewPrefCode()
         {
-            return new Provider("Preferences/GamePub SDK");
+            return new Provider("Preferences/GamePub iOS SDK");
         }
 
         static void DrawPref()
@@ -115,10 +114,11 @@ namespace GamePub.PubSDK.Editor
             GUILayout.Label("Facebook", GUILayout.Width(200), GUILayout.Height(30));
             enableFacebookLogin = EditorGUILayout.BeginToggleGroup("Facebook Login Enable", enableFacebookLogin);
             facebookAppId = EditorGUILayout.TextField("Facebook App ID", facebookAppId);
+            EditorGUILayout.EndToggleGroup();
+
             GUILayout.Label("Google", GUILayout.Width(200), GUILayout.Height(30));
             googleClientId = EditorGUILayout.TextField("Google Client ID", googleClientId);
-            reversedClientId = EditorGUILayout.TextField("REVERSED Client ID", reversedClientId);
-            EditorGUILayout.EndToggleGroup();
+            reversedClientId = EditorGUILayout.TextField("REVERSED Client ID", reversedClientId);                        
 
             if (selected < 0)
             {

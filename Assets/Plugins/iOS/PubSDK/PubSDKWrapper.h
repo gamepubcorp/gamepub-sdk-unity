@@ -12,7 +12,7 @@
 
 + (instancetype)sharedInstance;
 
-- (void)setupSDK:(NSString *)identifier;
+- (void)setupSDK:(NSString *)domainURL;
 
 - (void)login:(NSString *)identifier
          type:(int)loginType
@@ -26,7 +26,9 @@
              pushNight:(BOOL)pushNight
                 pushAd:(BOOL)pushAd;
 
-- (NSString *)currentLoginType;
+- (NSString *)getLoginType;
+- (NSString *)getLanguageList;
+- (NSString *)getProductList;
 
 - (void)secede:(NSString *)identifier;
 - (void)secedeCancel:(NSString *)identifier
@@ -39,7 +41,6 @@
          ratioWidth:(NSString *)ratioWidth
         ratioHeight:(NSString *)ratioHeight;
 
-- (void)purchaseInit:(NSString *)identifier;
 - (void)purchaseLaunch:(NSString *)identifier
                    pid:(NSString *)pid
               serverId:(NSString *)serverId
