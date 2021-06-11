@@ -20,10 +20,7 @@ namespace GamePub.PubSDK.Editor
             string projectPath = PBXProject.GetPBXProjectPath(pathToBuiltProject);
             var project = new PBXProject();
             project.ReadFromFile(projectPath);
-            string targetGuid = project.GetUnityMainTargetGuid();
-
-            //project.AddFileToBuild(targetGuid, project.AddFile("GoogleService-Info.plist", "GoogleService-Info.plist"));
-            //project.WriteToFile(projectPath);
+            string targetGuid = project.GetUnityMainTargetGuid();            
 
             project.AddFrameworkToProject(targetGuid, "StoreKit.framework", false);
             File.WriteAllText(projectPath, project.WriteToString());

@@ -11,12 +11,10 @@ namespace GamePub.PubSDK
         private bool isSetup = false;
 
         void Awake()
-        {                        
-            Debug.Log("domainURL : " + GamePubSDKSettings.ServiceDomain);
+        {                                    
             if (instance == null)
             {
-                instance = this;                
-                Debug.Log("instance == null");
+                instance = this;
             }
             else if (instance != this)
             {
@@ -57,8 +55,7 @@ namespace GamePub.PubSDK
         }       
 
         public void SetupSDK()
-        {
-            Debug.Log("GamePubSDK::SetupSDK()");
+        {           
             if (string.IsNullOrEmpty(GamePubSDKSettings.ServiceDomain))
             {
                 throw new System.Exception("Gamepub SDK domainURL is not set.");

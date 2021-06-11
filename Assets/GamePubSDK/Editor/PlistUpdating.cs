@@ -16,15 +16,6 @@ namespace GamePub.PubSDK.Editor
             {
                 return;
             }
-            
-            //-------
-            //string googlePlistPath = Application.dataPath + "/Plugins/iOS/GoogleService-Info.plist";
-            //File.Copy(googlePlistPath, pathToBuiltProject + "/GoogleService-Info.plist");
-
-            //-------
-            //PlistDocument googlePlist = new PlistDocument();
-            //googlePlist.ReadFromString(File.ReadAllText(googlePlistPath));
-            //PlistElementDict googleDict = googlePlist.root;
 
             //-------
             string plistPath = pathToBuiltProject + "/Info.plist";

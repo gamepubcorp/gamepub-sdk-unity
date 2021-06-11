@@ -10,7 +10,7 @@ namespace GamePub.PubSDK.Editor
     {
         const string assetPath = "Assets/Editor/GamePubSDK/PubSDKiOSSettings.asset";
 
-        internal static string[] dependencyManagerOptions = new string[] { "CocoaPods" };
+        internal static string[] dependencyManagerOptions = new string[] { "CocoaPods", "None" };
 
         [SerializeField]
         private string iOSDependencyManager;

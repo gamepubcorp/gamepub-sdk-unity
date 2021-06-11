@@ -14,6 +14,7 @@ namespace GamePub.PubSDK.Editor
         [PostProcessBuildAttribute(3)]
         public static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject)
         {
+            UnityEngine.Debug.Log("CocoaPodsInstalling::OnPostprocessBuild");
             if (target != BuildTarget.iOS)
             {
                 return;
@@ -21,6 +22,7 @@ namespace GamePub.PubSDK.Editor
 
             if (!PubSDKSettings.GetOrCreateSettings().UseCocoaPods)
             {
+                UnityEngine.Debug.Log("PubSDKiOSSettings::iOSDependencyManager None");
                 return;
             }
 

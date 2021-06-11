@@ -77,8 +77,7 @@ public class MainController : MonoBehaviour
     }    
 
     private void PingListener(Result<PubUnit> result)
-    {
-        Debug.Log("Ping Listener");
+    {        
         result.Match(
             value =>
             {
