@@ -6,9 +6,7 @@ namespace GamePub.PubSDK
 {
     public class GamePubSDK : MonoBehaviour
     {
-        private static GamePubSDK instance;
-
-        private bool isSetup = false;
+        private static GamePubSDK instance;        
 
         void Awake()
         {                                    
@@ -20,8 +18,7 @@ namespace GamePub.PubSDK
             {
                 Destroy(gameObject);                
             }
-            DontDestroyOnLoad(gameObject);
-            SetupSDK();
+            DontDestroyOnLoad(gameObject);            
         }
 
         public static GamePubSDK Ins
@@ -38,29 +35,29 @@ namespace GamePub.PubSDK
         }
 
         private void OnApplicationPause(bool pause)
-        {            
+        {
             if (GetActiveLoginType() != PubLoginType.NONE)
             {
                 if (pause)
-                {                    
+                {
                     Debug.Log("ping stop");
                     StopPing();
                 }
                 else
                 {
                     Debug.Log("ping start");
-                    StartPing();                    
+                    StartPing();
                 }
             }
-        }       
+        }
 
-        public void SetupSDK()
+        public void SetupSDK(Action<Result<PubUnit>> action)
         {           
             if (string.IsNullOrEmpty(GamePubSDKSettings.ServiceDomain))
             {
                 throw new System.Exception("Gamepub SDK domainURL is not set.");
-            }            
-            NativeInterface.SetupSDK(GamePubSDKSettings.ServiceDomain);
+            }
+            GamePubAPI.SetupSDK(GamePubSDKSettings.ServiceDomain, GamePubSDKSettings.AppID, action);
         }
 
         public void Login(PubLoginType loginType, PubAccountServiceType serviceType, Action<Result<PubLoginResult>> action)
@@ -166,6 +163,11 @@ namespace GamePub.PubSDK
         {
             GamePubAPI.CouponUse(key, serverId, playerId, etc, action);
         }
+
+        //public void RemoteConfig(Action<Result<PubUnit>> action)
+        //{
+        //    GamePubAPI.RemoteConfig(action);
+        //}
 
         public void Ping(Action<Result<PubUnit>> action)
         {

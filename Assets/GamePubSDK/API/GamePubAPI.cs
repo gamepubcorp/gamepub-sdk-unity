@@ -7,7 +7,15 @@ namespace GamePub.PubSDK
     public class GamePubAPI
     {
         public static Dictionary<String, FlattenAction> actions =
-            new Dictionary<string, FlattenAction>();        
+            new Dictionary<string, FlattenAction>();
+
+        public static void SetupSDK(string url,
+                                    string sdkAppId,
+                                    Action<Result<PubUnit>> action)
+        {
+            var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
+            NativeInterface.SetupSDK(identifier, url, sdkAppId);
+        }
 
         public static void Login(PubLoginType loginType,
                                  PubAccountServiceType serviceType,
@@ -36,7 +44,7 @@ namespace GamePub.PubSDK
                                            push,
                                            pushNight,
                                            pushAd);
-        }        
+        }
 
         public static void Secede(Action<Result<PubUnit>> action)
         {
@@ -96,6 +104,12 @@ namespace GamePub.PubSDK
             var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
             NativeInterface.CouponUse(identifier, key, serverId, playerId, etc);
         }
+
+        //public static void RemoteConfig(Action<Result<PubUnit>> action)
+        //{
+        //    var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
+        //    NativeInterface.RemoteConfig(identifier);
+        //}
 
         public static void Ping(Action<Result<PubUnit>> action)
         {

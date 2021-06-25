@@ -29,15 +29,29 @@
     return sharedInstance;
 }
 
-- (void)setupSDK:(NSString *)domainURL
+- (void)setupSDK:(NSString *)identifier
+       projectId:(NSString *)projectId
+       domainURL:(NSString *)domainURL
 {
     if(self.setup) {
         return;
     }
     self.setup = YES;
     
-    [[PubApiClient getInstance] setupSDK:UnityGetGLViewController()
-                               domainURL:domainURL];
+    [[PubApiClient getInstance] setupSDK:projectId
+                               domainURL:domainURL
+                              completion:^(NSString * _Nullable unitResult,
+                                           NSError * _Nullable error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
     
     [[PubWebviewController GetInstance] InitializeWithParentUIView:UnityGetGLViewController().view pubDelegate:nil];
 }
@@ -276,6 +290,11 @@
             [callbackMsg sendMessageOK];
         }
     }];
+}
+
+- (void)remoteConfig
+{
+    
 }
 
 - (void)ping:(NSString *)identifier

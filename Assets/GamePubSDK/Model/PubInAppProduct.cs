@@ -7,16 +7,24 @@ namespace GamePub.PubSDK
     public class PubInAppProduct
     {
         [SerializeField]
-        private int AppId = 0;
+        private string productId = "";
         [SerializeField]
-        private string Store = "";
+        private string currency = "";
         [SerializeField]
-        private string ProductID = "";        
-        
-        public int appId { get { return AppId; } }
+        private string price = "";
+        [SerializeField]
+        private string title = "";
+        [SerializeField]
+        private string decs = "";
 
-        public string store { get { return Store; } }
+        public string ProductID { get { return productId; } }
 
-        public string productID { get { return ProductID; } }        
+        public string Currency { get { return currency; } }
+
+        public string Price { get { return price; } }
+
+        public string Title { get { return title; } }
+
+        public string Decs { get { return decs; } }
     }
 }

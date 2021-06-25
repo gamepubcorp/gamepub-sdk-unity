@@ -40,9 +40,16 @@ PUB_SDK_EXTERNC void pub_sdk_UnitySendMessage(const char *name, const char *meth
 
 // MARK: - Extern APIs
 
-PUB_SDK_EXTERNC void pub_sdk_setup(const char* domainURL) {
+PUB_SDK_EXTERNC void pub_sdk_setup(const char* identifier,
+                                   const char* domainURL,
+                                   const char* projectId)
+{
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
     NSString *nsDomainURL = PubSDKMakeNSString(domainURL);
-    [[PubSDKWrapper sharedInstance] setupSDK:nsDomainURL];
+    NSString *nsProjectId = PubSDKMakeNSString(projectId);
+    [[PubSDKWrapper sharedInstance] setupSDK:nsIdentifier
+                                   projectId:nsProjectId
+                                   domainURL:nsDomainURL];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_login(const char* identifier,
@@ -58,7 +65,8 @@ void pub_sdk_login(const char* identifier,
                               serviceType:serviceType];
 }
 
-PUB_SDK_EXTERNC void pub_sdk_logout(const char* identifier) {
+PUB_SDK_EXTERNC void pub_sdk_logout(const char* identifier)
+{
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
     [[PubSDKWrapper sharedInstance] logout:nsIdentifier];
 }
@@ -199,6 +207,11 @@ void pub_sdk_couponUse(const char* identifier,
                                      serverId:nsServerId
                                      playerId:nsPlayerId
                                           etc:nsEtc];
+}
+
+PUB_SDK_EXTERNC void pub_sdk_remoteConfig(const char* identifier){
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    [[PubSDKWrapper sharedInstance] remoteConfig];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_ping(const char* identifier){

@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   liveServerUrlBase: pubsdkapitest.igamepub.co.kr
   testServerUrlBase: pubsdkapidev.igamepub.co.kr
+  sdkAppId: 200901
   testBuild: 1

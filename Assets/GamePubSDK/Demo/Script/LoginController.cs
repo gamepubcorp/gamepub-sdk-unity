@@ -14,6 +14,24 @@ public class LoginController : MonoBehaviour
     public GameObject content;
     public GameObject autoLogin;
 
+    private void Awake()
+    {
+        GamePubSDK.Ins.SetupSDK(result =>
+        {
+            result.Match(
+                value =>
+                {
+                    //value.Code = 0
+                    //value.Msg = "setupSDK Success"
+                },
+                error =>
+                {
+                    messageText.text = error.Message;
+                    popup_panel.SetActive(true);
+                });
+        });
+    }
+
     private void Start()
     {
         //자동로그인 활성화 설정
@@ -155,7 +173,7 @@ public class LoginController : MonoBehaviour
                 messageText.text = result.Maintenance.Message;
                 popup_panel.SetActive(true);
             }
-            else if (result.ResponseCode == (int)PubApiResponseCode.BLOCK_IP_CHECK)
+            else if (result.ResponseCode == (int)PubApiResponseCode.USER_IP_BLOCK)
             {
                 messageText.text = "IP Block";
                 popup_panel.SetActive(true);

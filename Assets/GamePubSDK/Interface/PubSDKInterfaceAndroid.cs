@@ -16,13 +16,17 @@ namespace GamePub.PubSDK
             var _ = GamePubSDK.Ins;
         }
 
-        public static void SetupSDK(string url)
+        public static void SetupSDK(string identifier,
+                                    string url,
+                                    string sdkAppId)
         {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(null)) { return; }
 
-            object[] param = new object[1];
-            param[0] = url;            
+            object[] param = new object[3];
+            param[0] = identifier;
+            param[1] = url;
+            param[2] = sdkAppId;
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("setupSDK", param);
@@ -229,6 +233,18 @@ namespace GamePub.PubSDK
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("couponUse", param);
+        }
+
+        public static void RemoteConfig(string identifier)
+        {            
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
+
+            object[] param = new object[1];
+            param[0] = identifier;
+
+            if (pubSdkWrapper != null)
+                pubSdkWrapper.Call("remoteConfig", param);
         }
 
         public static void Ping(string identifier)

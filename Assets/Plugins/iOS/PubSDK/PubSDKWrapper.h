@@ -12,7 +12,9 @@
 
 + (instancetype)sharedInstance;
 
-- (void)setupSDK:(NSString *)domainURL;
+- (void)setupSDK:(NSString *)identifier
+       projectId:(NSString *)projectId
+       domainURL:(NSString *)domainURL;
 
 - (void)login:(NSString *)identifier
          type:(int)loginType
@@ -58,6 +60,8 @@
          serverId:(NSString *)serverId
          playerId:(NSString *)playerId
               etc:(NSString *)etc;
+
+- (void)remoteConfig;
 
 - (void)ping:(NSString *)identifier;
 - (void)startPing;

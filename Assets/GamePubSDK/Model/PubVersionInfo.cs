@@ -5,23 +5,23 @@ namespace GamePub.PubSDK
 {
     [Serializable]
     public class PubVersionInfo
-    {
+    {        
         [SerializeField]
-        private int isUpdate = 0;
+        private string store = "";
         [SerializeField]
-        private int isActive = 0;
+        private string type = "";
         [SerializeField]
         private string versionName = "";
         [SerializeField]
+        private string versionCode = "";
+        [SerializeField]
         private string link = "";
-
-        public int IsUpdate { get { return isUpdate; } }
-
-        public int IsActive { get { return isActive; } }
-
-        public string VersionName { get { return versionName; } }
-
-        public string Link { get { return link; } }
         
+        public string Store { get { return store; } }
+        public string Type { get { return type; } }
+        public string VersionName { get { return versionName; } }
+        public string VersionCode { get { return versionCode; } }
+        public string Link { get { return link; } }
+
     }
 }

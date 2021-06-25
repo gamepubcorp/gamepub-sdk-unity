@@ -8,7 +8,7 @@ using GamePub.PubSDK;
 
 public class MainController : MonoBehaviour
 {
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_EDITOR
     string productID_1 = "gamepub_1000";
     string productID_2 = "gamepub_2000";
 #elif UNITY_IOS
@@ -52,21 +52,14 @@ public class MainController : MonoBehaviour
     void Awake()
     {
         //Ping 설정
-        GamePubSDK.Ins.Ping(PingListener);
-        //인앱상품리스트 받아오기
-        UserInfoManager.Ins.ProductList = GamePubSDK.Ins.GetProductList().InAppProducts;
+        GamePubSDK.Ins.Ping(PingListener);        
         //언어설정
         PubLanguageCode langCode;
         foreach (string strLang in GamePubSDK.Ins.GetLanguageList().LangList)
         {
             Enum.TryParse(strLang, out langCode);
             UserInfoManager.Ins.LangList.Add(langCode);
-        }
-
-        //ui demo
-        //UserInfoManager.Instance.LangList.Add(PubLanguageCode.ko);
-        //UserInfoManager.Instance.LangList.Add(PubLanguageCode.en);
-        //UserInfoManager.Instance.LangList.Add(PubLanguageCode.ja);
+        }        
         dropdownLang.captionText.text = "언어설정";
         foreach (PubLanguageCode code in UserInfoManager.Ins.LangList)
         {
@@ -111,6 +104,13 @@ public class MainController : MonoBehaviour
     {
         PubLoginResult result = UserInfoManager.Ins.loginResult;
         UpdateUserInfo(result);
+
+        //인앱상품리스트 받아오기
+        UserInfoManager.Ins.ProductList = GamePubSDK.Ins.GetProductList().InAppProducts;        
+        for (int i=0; i< UserInfoManager.Ins.ProductList.Length; i++)
+        {            
+            UpdateRawSection(UserInfoManager.Ins.ProductList[i]);            
+        }        
     }    
 
     public void OnClickSecede()
@@ -432,17 +432,12 @@ public class MainController : MonoBehaviour
     }
 
     public void OnClickOpenVersionCheck()
-    {        
+    {
         GamePubSDK.Ins.VersionCheck(result =>
         {
             result.Match(
                 value =>
                 {
-                    if (value.IsUpdate == 1)
-                    {
-                        versionCheck_panel.gameObject.SetActive(true);
-                        appUrl = value.Link;
-                    }
                     UpdateRawSection(value);
                 },
                 error =>
@@ -487,6 +482,10 @@ public class MainController : MonoBehaviour
                 UpdateRawSection(error);
             });
         });
+    }
+
+    public void OnClickRemoteConfig()
+    {        
     }
 
     public void OnClickCloseMaintenance()
@@ -544,7 +543,7 @@ public class MainController : MonoBehaviour
                 popupMessageText.text = result.Maintenance.Message;
                 popup_panel.SetActive(true);
             }
-            else if (result.ResponseCode == (int)PubApiResponseCode.BLOCK_IP_CHECK)
+            else if (result.ResponseCode == (int)PubApiResponseCode.USER_IP_BLOCK)
             {
                 popupMessageText.text = "IP Block";
                 popup_panel.SetActive(true);

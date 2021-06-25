@@ -33,6 +33,8 @@ namespace GamePub.PubSDK
         [SerializeField]
         private string testServerUrlBase = "";
         [SerializeField]
+        private string sdkAppId = "";
+        [SerializeField]
         private bool testBuild = true;
 
         public static string LiveServer
@@ -45,6 +47,12 @@ namespace GamePub.PubSDK
         {
             get { return Instance.testServerUrlBase; }
             set { Instance.testServerUrlBase = value; }
+        }
+
+        public static string AppID
+        {
+            get { return Instance.sdkAppId; }
+            set { Instance.sdkAppId = value; }
         }
 
         public static bool TestBuild

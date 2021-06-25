@@ -5,7 +5,7 @@ namespace GamePub.PubSDK
 {
     public class NativeInterface
     {
-        public static void SetupSDK(string url) { }
+        public static void SetupSDK(string identifier, string url, string sdkAppId) { }
         public static void Login(string identifier, PubLoginType loginType, PubAccountServiceType serviceType) { }
         public static void Logout(string identifier) { }
         public static void UserInfoUpdate(string identifier, string languageCode, bool push, bool pushNight, bool pushAd) { }        
@@ -21,6 +21,7 @@ namespace GamePub.PubSDK
         public static void OpenNotice(string identifier) { }
         public static void OpenHelpURL(string identifier) { }
         public static void CouponUse(string identifier, string key, string serverId, string playerId, string etc) { }
+        public static void RemoteConfig(string identifier) { }
         public static void Ping(string identifier) { }
         public static void StartPing() { }
         public static void StopPing() { }

@@ -42,12 +42,12 @@ namespace GamePub.PubSDK
 
     public enum PubApiResponseCode
     {        
-        SUCCESS,
+        SUCCESS = 1000,
         CANCEL,
         NETWORK_ERROR,
         SERVER_ERROR,
-        AUTHENTICATION_AGENT_ERROR,        
-        BLOCK_IP_CHECK,
+        AUTHENTICATION_AGENT_ERROR,
+        USER_IP_BLOCK,
         SERVICE_MAINTENANCE,
         INTERNAL_ERROR,
         PURCHASE_ERROR,

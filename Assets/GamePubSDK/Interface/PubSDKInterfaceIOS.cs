@@ -17,13 +17,17 @@ namespace GamePub.PubSDK
         }
 
         [DllImport("__Internal")]
-        private static extern void pub_sdk_setup(string domainURL);
-        public static void SetupSDK(string domainURL)
+        private static extern void pub_sdk_setup(string identifier,
+                                                 string domainURL,
+                                                 string projectId);
+        public static void SetupSDK(string identifier,
+                                    string domainURL,
+                                    string projectId)
         {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(null)) { return; }
 
-            pub_sdk_setup(domainURL);
+            pub_sdk_setup(identifier, domainURL, projectId);
         }
 
         [DllImport("__Internal")]
@@ -204,6 +208,16 @@ namespace GamePub.PubSDK
             if (IsInvalidRuntime(identifier)) { return; }
 
             pub_sdk_couponUse(identifier, key, serverId, playerId, etc);
+        }
+
+        [DllImport("__Internal")]
+        private static extern void pub_sdk_remoteConfig(string identifier);
+        public static void RemoteConfig(string identifier)
+        {
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
+
+            pub_sdk_remoteConfig(identifier);
         }
 
         [DllImport("__Internal")]

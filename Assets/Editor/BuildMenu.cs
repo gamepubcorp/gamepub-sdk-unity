@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System;
+using System.Globalization;
 using System.Collections.Generic;
 using GamePub.PubSDK;
 using GamePub.PubSDK.Editor;
@@ -35,8 +36,8 @@ public class BuildMenu : ScriptableObject
             }
         }
         if (buildid == null)
-        {
-            buildid = string.Format(@"{0:yyyy-MM-dd-hh-mm}", DateTime.Now);            
+        {            
+            buildid = string.Format(@"{0:yyyy-MM-dd-HH-mm}", DateTime.Now);            
         }
 
         return buildid;
@@ -56,18 +57,7 @@ public class BuildMenu : ScriptableObject
         }
 
         return buildid;
-    }
-
-    //static string GetAndroidOutputFile()
-    //{
-    //    string output = string.Format("{0}/{1}_{2}_ver_{3}_b{4}.apk", Application.dataPath,						//{0}
-    //                                                                "../build/gamepub",				                //{1} app name
-    //                                                                GetBuildID(),									//{2}
-    //                                                                PlayerSettings.bundleVersion,					//{3} version
-    //                                                                PlayerSettings.Android.bundleVersionCode);                                                                    
-
-    //    return output;
-    //}
+    }    
 
     static string GetAndroidOutputFile()
     {
@@ -112,9 +102,9 @@ public class BuildMenu : ScriptableObject
         PerformiOSBuild(GetIOSOutputFile(), "", false);
     }
 
-    [UnityEditor.MenuItem("BuildMenu/iOS_TEST", false, 3003)]
-    static void Buildmachine_iOSAuto()
-    {
+    [UnityEditor.MenuItem("BuildMenu/TEST", false, 3003)]
+    static void Buildmachine_TEST()
+    {        
         //Debug.Log("fb"+PubSDKSettings.GetOrCreateSettings().FacebookAppID);        
     }
     
