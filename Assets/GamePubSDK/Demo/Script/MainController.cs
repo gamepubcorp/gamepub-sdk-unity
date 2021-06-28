@@ -341,13 +341,35 @@ public class MainController : MonoBehaviour
     }
 
     public void OnClickOpenPrivacy()
-    {
-        GamePubSDK.Ins.OpenPolicyLink(PubPolicyType.PRIVACY);
+    {     
+        GamePubSDK.Ins.OpenPolicyLink(PubPolicyType.PRIVACY, result =>
+        {
+            result.Match(
+                value =>
+                {
+                    UpdateRawSection(value);
+                },
+                error =>
+                {
+                    UpdateRawSection(error);
+                });
+        });
     }    
 
     public void OnClickOpenService()
-    {
-        GamePubSDK.Ins.OpenPolicyLink(PubPolicyType.SERVICE);
+    {        
+        GamePubSDK.Ins.OpenPolicyLink(PubPolicyType.SERVICE, result =>
+        {
+            result.Match(
+                value =>
+                {
+                    UpdateRawSection(value);
+                },
+                error =>
+                {
+                    UpdateRawSection(error);
+                });
+        });
     }
 
     public void OnClickImageBanner()

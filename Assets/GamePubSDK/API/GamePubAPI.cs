@@ -89,6 +89,13 @@ namespace GamePub.PubSDK
             NativeInterface.OpenNotice(identifier);
         }
 
+        public static void OpenPolicyLink(PubPolicyType policyType,
+                                          Action<Result<PubUnit>> action)
+        {
+            var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
+            NativeInterface.OpenPolicyLink(identifier, policyType);
+        }
+
         public static void OpenHelpURL(Action<Result<PubUnit>> action)
         {
             var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));

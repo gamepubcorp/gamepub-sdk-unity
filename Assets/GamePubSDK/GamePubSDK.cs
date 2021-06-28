@@ -121,9 +121,10 @@ namespace GamePub.PubSDK
             return JsonUtility.FromJson<PubLanguageList>(result);
         }
 
-        public void OpenPolicyLink(PubPolicyType policyType)
+        public void OpenPolicyLink(PubPolicyType policyType,
+                                   Action<Result<PubUnit>> action)
         {
-            NativeInterface.OpenPolicyLink(Guid.NewGuid().ToString(), policyType);
+            GamePubAPI.OpenPolicyLink(policyType, action);            
         }
 
         public void ImageBanner(string ratioWidth, string ratioHeight, Action<Result<PubUnit>> action)
