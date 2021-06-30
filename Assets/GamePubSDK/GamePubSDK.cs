@@ -165,10 +165,17 @@ namespace GamePub.PubSDK
             GamePubAPI.CouponUse(key, serverId, playerId, etc, action);
         }
 
-        //public void RemoteConfig(Action<Result<PubUnit>> action)
-        //{
-        //    GamePubAPI.RemoteConfig(action);
-        //}
+        public void SyncRemoteConfig(Action<Result<PubUnit>> action)
+        {
+            GamePubAPI.SyncRemoteConfig(action);
+        }
+
+        public string GetValue(string key)
+        {
+            var result = NativeInterface.GetRemoteConfigValue(key);
+            if (string.IsNullOrEmpty(result)) { return null; }
+            return result;
+        }
 
         public void Ping(Action<Result<PubUnit>> action)
         {

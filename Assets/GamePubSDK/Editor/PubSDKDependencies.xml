@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dependencies>
     <iosPods>
-        <iosPod name="PubSDK" minTargetSdk="10.0" version="0.3.13">
+        <iosPod name="PubSDK" minTargetSdk="10.0" version="0.3.15">
         </iosPod>        
     </iosPods>
     <androidPackages>
-        <androidPackage spec="io.github.gamepubcorp:pubsdk:[0.3.41]"/>        
+        <androidPackage spec="io.github.gamepubcorp:pubsdk:[0.3.44]"/>        
         <repositories>
             <repository>https://s01.oss.sonatype.org/content/repositories/releases</repository>
         </repositories>

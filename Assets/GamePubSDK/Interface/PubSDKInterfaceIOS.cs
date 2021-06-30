@@ -211,13 +211,23 @@ namespace GamePub.PubSDK
         }
 
         [DllImport("__Internal")]
-        private static extern void pub_sdk_remoteConfig(string identifier);
-        public static void RemoteConfig(string identifier)
+        private static extern void pub_sdk_syncRemoteConfig(string identifier);
+        public static void SyncRemoteConfig(string identifier)
         {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(identifier)) { return; }
 
-            pub_sdk_remoteConfig(identifier);
+            pub_sdk_syncRemoteConfig(identifier);
+        }
+
+        [DllImport("__Internal")]
+        private static extern string pub_sdk_getRemoteConfigValue(string key);
+        public static string GetRemoteConfigValue(string key)
+        {
+            if (!Application.isPlaying) { return null; }
+            if (IsInvalidRuntime(null)) { return null; }
+
+            return pub_sdk_getRemoteConfigValue(key);
         }
 
         [DllImport("__Internal")]

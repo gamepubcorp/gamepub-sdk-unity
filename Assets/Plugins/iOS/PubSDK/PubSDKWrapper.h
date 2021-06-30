@@ -61,7 +61,8 @@
          playerId:(NSString *)playerId
               etc:(NSString *)etc;
 
-- (void)remoteConfig;
+- (void)syncRemoteConfig:(NSString *)identifier;
+- (NSString *)getRemoteConfigValue:(NSString *)key;
 
 - (void)ping:(NSString *)identifier;
 - (void)startPing;

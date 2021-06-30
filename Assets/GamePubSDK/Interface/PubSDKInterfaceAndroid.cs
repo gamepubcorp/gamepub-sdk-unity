@@ -233,10 +233,10 @@ namespace GamePub.PubSDK
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("couponUse", param);
-        }
+        }        
 
-        public static void RemoteConfig(string identifier)
-        {            
+        public static void SyncRemoteConfig(string identifier)
+        {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(identifier)) { return; }
 
@@ -244,7 +244,18 @@ namespace GamePub.PubSDK
             param[0] = identifier;
 
             if (pubSdkWrapper != null)
-                pubSdkWrapper.Call("remoteConfig", param);
+                pubSdkWrapper.Call("syncRemoteConfig", param);
+        }
+
+        public static string GetRemoteConfigValue(string key)
+        {
+            if (!Application.isPlaying) { return null; }
+            if (IsInvalidRuntime(null)) { return null; }
+
+            object[] param = new object[1];
+            param[0] = key;
+
+            return pubSdkWrapper.Call<string>("getRemoteConfigValue", param);            
         }
 
         public static void Ping(string identifier)

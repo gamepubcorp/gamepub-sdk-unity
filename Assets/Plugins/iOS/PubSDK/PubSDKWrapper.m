@@ -292,9 +292,25 @@
     }];
 }
 
-- (void)remoteConfig
+- (void)syncRemoteConfig:(NSString *)identifier
 {
-    
+    [[PubApiClient getInstance] syncRemoteConfig:^(NSString * _Nullable unitResult,
+                                                   NSError * _Nullable error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
+}
+
+- (NSString *)getRemoteConfigValue:(NSString *)key
+{
+    return [[PubApiClient getInstance] getRemoteConfigValue:key];
 }
 
 - (void)ping:(NSString *)identifier

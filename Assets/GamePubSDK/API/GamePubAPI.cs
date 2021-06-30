@@ -112,11 +112,11 @@ namespace GamePub.PubSDK
             NativeInterface.CouponUse(identifier, key, serverId, playerId, etc);
         }
 
-        //public static void RemoteConfig(Action<Result<PubUnit>> action)
-        //{
-        //    var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
-        //    NativeInterface.RemoteConfig(identifier);
-        //}
+        public static void SyncRemoteConfig(Action<Result<PubUnit>> action)
+        {
+            var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
+            NativeInterface.SyncRemoteConfig(identifier);
+        }
 
         public static void Ping(Action<Result<PubUnit>> action)
         {

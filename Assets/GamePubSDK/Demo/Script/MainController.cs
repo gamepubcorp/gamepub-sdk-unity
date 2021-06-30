@@ -507,7 +507,20 @@ public class MainController : MonoBehaviour
     }
 
     public void OnClickRemoteConfig()
-    {        
+    {
+        GamePubSDK.Ins.SyncRemoteConfig(result =>
+        {
+            result.Match(value =>
+            {
+                UpdateRawSection(value);
+
+                var strValue = GamePubSDK.Ins.GetValue("server");
+                Debug.Log(strValue);
+            }, error =>
+            {
+                UpdateRawSection(error);
+            });
+        });
     }
 
     public void OnClickCloseMaintenance()

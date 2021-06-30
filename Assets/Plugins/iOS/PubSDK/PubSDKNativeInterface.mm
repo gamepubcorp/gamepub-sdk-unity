@@ -209,9 +209,16 @@ void pub_sdk_couponUse(const char* identifier,
                                           etc:nsEtc];
 }
 
-PUB_SDK_EXTERNC void pub_sdk_remoteConfig(const char* identifier){
+PUB_SDK_EXTERNC void pub_sdk_syncRemoteConfig(const char* identifier){
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
-    [[PubSDKWrapper sharedInstance] remoteConfig];
+    [[PubSDKWrapper sharedInstance] syncRemoteConfig:nsIdentifier];
+}
+
+PUB_SDK_EXTERNC const char* pub_sdk_getRemoteConfigValue(const char* key)
+{
+    NSString *nsKey = PubSDKMakeNSString(key);
+    NSString *result = [[PubSDKWrapper sharedInstance] getRemoteConfigValue:nsKey];
+    return PubSDKMakeCString(result);
 }
 
 PUB_SDK_EXTERNC void pub_sdk_ping(const char* identifier){
