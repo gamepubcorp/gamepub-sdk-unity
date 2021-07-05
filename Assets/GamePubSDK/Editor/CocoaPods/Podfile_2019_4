@@ -2,7 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 
 target 'UnityFramework' do
-    pod 'PubSDK', '0.3.15'
+    pod 'PubSDK', '0.3.16'
 end
 
 target 'Unity-iPhone' do

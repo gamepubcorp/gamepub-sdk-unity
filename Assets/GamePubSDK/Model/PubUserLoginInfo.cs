@@ -15,6 +15,8 @@ namespace GamePub.PubSDK
         [SerializeField]
         private string secedeDate = "";
         [SerializeField]
+        private string secedeWaitDate = "";
+        [SerializeField]
         private string blockDate = "";
         [SerializeField]
         private string blockExpire = "";
@@ -40,6 +42,7 @@ namespace GamePub.PubSDK
         
         public string RegDate { get { return regDate; } }
         public string SecedeDate { get { return secedeDate; } }
+        public string SecedeWaitDate { get { return secedeWaitDate; } }
         public string BlockDate { get { return blockDate; } }
         public string BlockExpire { get { return blockExpire; } }
         public string BlockMessage { get { return blockMessage; } }
