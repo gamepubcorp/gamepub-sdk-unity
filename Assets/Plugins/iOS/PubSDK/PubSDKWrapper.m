@@ -116,7 +116,7 @@
 
 - (NSString *)getLoginType
 {
-    return [[PubApiClient getInstance] getLoginType];
+    return [[PubApiClient getInstance] getLastLoginType];
 }
 
 - (NSString *)getLanguageList
