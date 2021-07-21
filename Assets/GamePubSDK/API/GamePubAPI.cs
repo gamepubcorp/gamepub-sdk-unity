@@ -32,7 +32,7 @@ namespace GamePub.PubSDK
             NativeInterface.Logout(identifier);
         }
 
-        public static void UserInfoUpdate(string languageCode,
+        public static void UserInfoUpdate(PubLanguageCode languageCode,
                                           bool push,
                                           bool pushNight,
                                           bool pushAd,
@@ -75,6 +75,23 @@ namespace GamePub.PubSDK
         {
             var identifier = AddAction(FlattenAction.JsonFlatten<PubPurchaseData>(action));
             NativeInterface.InAppPurchase(identifier, pid, serverId, playerId, etc);
+        }
+
+        public static void UserRefundListSearch(Action<Result<PubUnit>> action)
+        {
+            var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
+            //NativeInterface.UserRefundListSearch(identifier);
+        }
+
+        public static void UserRefundRepurchase(string pid,
+                                                string serverId,
+                                                string playerId,
+                                                string etc,
+                                                string voidedTid,
+                                                Action<Result<PubPurchaseData>> action)
+        {
+            var identifier = AddAction(FlattenAction.JsonFlatten<PubPurchaseData>(action));
+            //NativeInterface.UserRefundRepurchase(identifier, pid, serverId, playerId, etc, voidedTid);
         }
 
         public static void VersionCheck(Action<Result<PubVersionInfo>> action)

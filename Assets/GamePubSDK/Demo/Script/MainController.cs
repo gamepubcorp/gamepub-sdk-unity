@@ -42,6 +42,7 @@ public class MainController : MonoBehaviour
     public GameObject setting_panel;
     public GameObject coupon_panel;
     public GameObject popup_panel;
+    public GameObject img_banner_panel;
 
     public GameObject   pushToggle;
     public GameObject   adPushToggle;
@@ -52,12 +53,12 @@ public class MainController : MonoBehaviour
     void Awake()
     {
         //Ping 설정
-        GamePubSDK.Ins.Ping(PingListener);        
-        //언어설정
-        PubLanguageCode langCode;
-        foreach (string strLang in GamePubSDK.Ins.GetLanguageList().LangList)
+        GamePubSDK.Ins.Ping(PingListener);
+
+        //언어설정        
+        foreach (PubLanguageCode langCode in GamePubSDK.Ins.GetLanguageList().LangList)
         {
-            Enum.TryParse(strLang, out langCode);
+            //Enum.TryParse(strLang, out langCode);
             UserInfoManager.Ins.LangList.Add(langCode);
         }        
         dropdownLang.captionText.text = "언어설정";
@@ -216,7 +217,7 @@ public class MainController : MonoBehaviour
         push.callback = (bool status) =>
         {            
             GamePubSDK.Ins.UserInfoUpdate(
-            UserInfoManager.Ins.currentCode.ToString(),
+            UserInfoManager.Ins.currentCode,
             status,
             UserInfoManager.Ins.pushNight,
             UserInfoManager.Ins.pushAd,
@@ -243,7 +244,7 @@ public class MainController : MonoBehaviour
         push.callback = (bool status) =>
         {
             GamePubSDK.Ins.UserInfoUpdate(
-            UserInfoManager.Ins.currentCode.ToString(),
+            UserInfoManager.Ins.currentCode,
             UserInfoManager.Ins.push,
             UserInfoManager.Ins.pushNight,
             status,
@@ -270,7 +271,7 @@ public class MainController : MonoBehaviour
         push.callback = (bool status) =>
         {
             GamePubSDK.Ins.UserInfoUpdate(
-            UserInfoManager.Ins.currentCode.ToString(),
+            UserInfoManager.Ins.currentCode,
             UserInfoManager.Ins.push,
             status,
             UserInfoManager.Ins.pushAd,
@@ -295,7 +296,7 @@ public class MainController : MonoBehaviour
     {
         UserInfoManager.Ins.currentCode = UserInfoManager.Ins.LangList[index];
         GamePubSDK.Ins.UserInfoUpdate(
-            UserInfoManager.Ins.currentCode.ToString(),
+            UserInfoManager.Ins.currentCode,
             UserInfoManager.Ins.push,
             UserInfoManager.Ins.pushNight,
             UserInfoManager.Ins.pushAd,
@@ -374,18 +375,24 @@ public class MainController : MonoBehaviour
 
     public void OnClickImageBanner()
     {
-        GamePubSDK.Ins.ImageBanner("9", "16", result =>
-        {
-            result.Match(
-                value =>
-                {
-                    UpdateRawSection(value);
-                },
-                error =>
-                {
-                    UpdateRawSection(error);
-                });
-        });
+        //GamePubSDK.Ins.ImageBanner("9", "16", result =>
+        //{
+        //    result.Match(
+        //        value =>
+        //        {
+        //            UpdateRawSection(value);
+        //        },
+        //        error =>
+        //        {
+        //            UpdateRawSection(error);
+        //        });
+        //});
+        img_banner_panel.gameObject.SetActive(true);
+    }
+
+    public void OnClickImageBannerClose()
+    {
+        img_banner_panel.gameObject.SetActive(false);
     }
 
     public void OnClickInPurchase1000()

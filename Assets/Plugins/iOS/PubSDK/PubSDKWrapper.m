@@ -92,12 +92,12 @@
 }
 
 - (void)userInfoUpdate:(NSString *)identifier
-          languageCode:(NSString *)languageCode
+          languageCode:(int)languageCode
                   push:(BOOL)push
              pushNight:(BOOL)pushNight
                 pushAd:(BOOL)pushAd
 {
-    [[PubApiClient getInstance] userInfoUpdate:languageCode
+    [[PubApiClient getInstance] userInfoUpdate:(PubLanguageCode)languageCode
                                           push:push
                                      pushNight:pushNight
                                         pushAd:pushAd

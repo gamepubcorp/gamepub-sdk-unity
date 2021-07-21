@@ -16,14 +16,12 @@ namespace GamePub.PubSDK.Editor
             {
                 return;
             }
-
-            //-------
+            
             string plistPath = pathToBuiltProject + "/Info.plist";
             PlistDocument plist = new PlistDocument();
             plist.ReadFromString(File.ReadAllText(plistPath));
 
             PlistElementDict rootDict = plist.root;
-            //-------
 
             SetupURLScheme(rootDict);
             SetupQueriesSchemes(rootDict);
@@ -42,14 +40,19 @@ namespace GamePub.PubSDK.Editor
             lineURLScheme.SetString("CFBundleURLName", "Client");
             var schemes = lineURLScheme.CreateArray("CFBundleURLSchemes");
             schemes.AddString(PubSDKSettings.GetOrCreateSettings().ReversedClientID);
-            schemes.AddString("fb"+ PubSDKSettings.GetOrCreateSettings().FacebookAppID);
+
+            if (PubSDKSettings.GetOrCreateSettings().UseFacebookLogin)
+                schemes.AddString("fb"+ PubSDKSettings.GetOrCreateSettings().FacebookAppID);
         }
 
         static void SetupQueriesSchemes(PlistElementDict rootDict)
         {
-            PlistElementArray array = GetOrCreateArray(rootDict, "LSApplicationQueriesSchemes");
-            array.AddString("fbapi");
-            array.AddString("fbauth2");
+            if (PubSDKSettings.GetOrCreateSettings().UseFacebookLogin)
+            {
+                PlistElementArray array = GetOrCreateArray(rootDict, "LSApplicationQueriesSchemes");
+                array.AddString("fbapi");
+                array.AddString("fbauth2");
+            }                
         }
 
         static void SetupGoogleSetting(PlistElementDict rootDict)
@@ -59,7 +62,8 @@ namespace GamePub.PubSDK.Editor
 
         static void SetupFacebookSetting(PlistElementDict rootDict)
         {
-            rootDict.SetString("FacebookAppID", PubSDKSettings.GetOrCreateSettings().FacebookAppID);
+            if (PubSDKSettings.GetOrCreateSettings().UseFacebookLogin)
+                rootDict.SetString("FacebookAppID", PubSDKSettings.GetOrCreateSettings().FacebookAppID);
         }
 
         static PlistElementArray GetOrCreateArray(PlistElementDict dict, string key)

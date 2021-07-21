@@ -17,6 +17,8 @@ namespace GamePub.PubSDK
         public static void OpenPolicyLink(string identifier, PubPolicyType policyType) { }
         public static void ImageBanner(string identifier, string ratioWidth, string ratioHeight) { }
         public static void InAppPurchase(string identifier, string pid, string serverId, string playerId, string etc) { }
+        public static void UserRefundListSearch(string identifier) { }
+        public static void UserRefundRepurchase(string identifier, string pid, string serverId, string playerId, string etc, string voidedTid) { }
         public static void VersionCheck(string identifier) { }
         public static void OpenNotice(string identifier) { }
         public static void OpenHelpURL(string identifier) { }

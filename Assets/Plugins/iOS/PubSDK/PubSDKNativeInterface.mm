@@ -72,20 +72,19 @@ PUB_SDK_EXTERNC void pub_sdk_logout(const char* identifier)
 }
 
 PUB_SDK_EXTERNC void pub_sdk_userInfoUpdate(const char* identifier,
-                                            const char* languageCode,
+                                            int languageCode,
                                             bool push,
                                             bool pushNight,
                                             bool pushAd);
 void pub_sdk_userInfoUpdate(const char* identifier,
-                            const char* languageCode,
+                            int languageCode,
                             bool push,
                             bool pushNight,
                             bool pushAd)
 {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
-    NSString *nsLanguageCode = PubSDKMakeNSString(languageCode);
     [[PubSDKWrapper sharedInstance] userInfoUpdate:nsIdentifier
-                                      languageCode:nsLanguageCode
+                                      languageCode:languageCode
                                               push:push
                                          pushNight:pushNight
                                             pushAd:pushAd];

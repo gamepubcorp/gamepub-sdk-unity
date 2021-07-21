@@ -61,7 +61,7 @@ namespace GamePub.PubSDK
         }
 
         public static void UserInfoUpdate(string identifier,
-                                          string languageCode,
+                                          PubLanguageCode languageCode,
                                           bool push,
                                           bool pushNight,
                                           bool pushAd)
@@ -71,7 +71,7 @@ namespace GamePub.PubSDK
 
             object[] param = new object[5];
             param[0] = identifier;
-            param[1] = languageCode;
+            param[1] = (int)languageCode;
             param[2] = push;
             param[3] = pushNight;
             param[4] = pushAd;
@@ -157,7 +157,19 @@ namespace GamePub.PubSDK
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("imageBanner", param);
-        }        
+        }
+
+        public static void GetImageBanner(string identifier)
+        {
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
+
+            object[] param = new object[1];
+            param[0] = identifier;            
+
+            if (pubSdkWrapper != null)
+                pubSdkWrapper.Call("getImageBanner", param);
+        }
 
         public static void InAppPurchase(string identifier,
                                          string pid,
@@ -177,6 +189,40 @@ namespace GamePub.PubSDK
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("purchaseLaunch", param);
+        }
+
+        public static void UserRefundListSearch(string identifier)
+        {
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
+
+            object[] param = new object[1];
+            param[0] = identifier;
+
+            if (pubSdkWrapper != null)
+                pubSdkWrapper.Call("userRefundListSearch", param);
+        }
+
+        public static void UserRefundRepurchase(string identifier,
+                                                string pid,
+                                                string serverId,
+                                                string playerId,
+                                                string etc,
+                                                string voidedTid)
+        {
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
+
+            object[] param = new object[6];
+            param[0] = identifier;
+            param[1] = pid;
+            param[2] = serverId;
+            param[3] = playerId;
+            param[4] = etc;
+            param[5] = voidedTid;
+
+            if (pubSdkWrapper != null)
+                pubSdkWrapper.Call("userRefundRepurchase", param);
         }
 
         public static void VersionCheck(string identifier)

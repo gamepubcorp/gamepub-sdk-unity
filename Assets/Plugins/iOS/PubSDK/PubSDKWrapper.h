@@ -23,7 +23,7 @@
 - (void)logout:(NSString *)identifier;
 
 - (void)userInfoUpdate:(NSString *)identifier
-          languageCode:(NSString *)languageCode
+          languageCode:(int)languageCode
                   push:(BOOL)push
              pushNight:(BOOL)pushNight
                 pushAd:(BOOL)pushAd;

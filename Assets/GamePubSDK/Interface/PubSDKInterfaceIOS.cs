@@ -56,12 +56,12 @@ namespace GamePub.PubSDK
 
         [DllImport("__Internal")]
         private static extern void pub_sdk_userInfoUpdate(string identifier,
-                                                          string languageCode,
+                                                          int languageCode,
                                                           bool push,
                                                           bool pushNight,
                                                           bool pushAd);
         public static void UserInfoUpdate(string identifier,
-                                          string languageCode,
+                                          PubLanguageCode languageCode,
                                           bool push,
                                           bool pushNight,
                                           bool pushAd)
@@ -69,7 +69,7 @@ namespace GamePub.PubSDK
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(identifier)) { return; }
 
-            pub_sdk_userInfoUpdate(identifier, languageCode, push, pushNight, pushAd);
+            pub_sdk_userInfoUpdate(identifier, (int)languageCode, push, pushNight, pushAd);
         }
 
         [DllImport("__Internal")]
@@ -161,6 +161,36 @@ namespace GamePub.PubSDK
 
             pub_sdk_inAppPurchase(identifier, pid, serverId, playerId, etc);
         }
+
+        //[DllImport("__Internal")]
+        //private static extern void pub_sdk_userRefundListSearch(string identifier);
+        //public static void UserRefundListSearch(string identifier)
+        //{
+        //    if (!Application.isPlaying) { return; }
+        //    if (IsInvalidRuntime(identifier)) { return; }
+
+        //    pub_sdk_userRefundListSearch(identifier);
+        //}
+
+        //[DllImport("__Internal")]
+        //private static extern void pub_sdk_userRefundRepurchase(string identifier,
+        //                                                        string pid,
+        //                                                        string serverId,
+        //                                                        string playerId,
+        //                                                        string etc,
+        //                                                        string voidedTid);
+        //public static void UserRefundRepurchase(string identifier,
+        //                                        string pid,
+        //                                        string serverId,
+        //                                        string playerId,
+        //                                        string etc,
+        //                                        string voidedTid)
+        //{
+        //    if (!Application.isPlaying) { return; }
+        //    if (IsInvalidRuntime(identifier)) { return; }
+
+        //    pub_sdk_userRefundRepurchase(identifier, pid, serverId, playerId, etc, voidedTid);
+        //}
 
         [DllImport("__Internal")]
         private static extern void pub_sdk_versionCheck(string identifier);

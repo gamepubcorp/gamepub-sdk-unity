@@ -71,7 +71,7 @@ namespace GamePub.PubSDK
             StopPing();
         }
 
-        public void UserInfoUpdate(string languageCode,
+        public void UserInfoUpdate(PubLanguageCode languageCode,
                                    bool push,
                                    bool pushNight,
                                    bool pushAd,
@@ -139,6 +139,21 @@ namespace GamePub.PubSDK
                                   Action<Result<PubPurchaseData>> action)
         {
             GamePubAPI.InAppPurchase(pid, serverId, playerId, etc, action);
+        }
+
+        public void UserRefundListSearch(Action<Result<PubUnit>> action)
+        {
+            GamePubAPI.UserRefundListSearch(action);
+        }
+
+        public void UserRefundRepurchase(string pid,
+                                         string serverId,
+                                         string playerId,
+                                         string etc,
+                                         string voidedTid,
+                                         Action<Result<PubPurchaseData>> action)
+        {
+            GamePubAPI.UserRefundRepurchase(pid, serverId, playerId, etc, voidedTid, action);
         }
 
         public void VersionCheck(Action<Result<PubVersionInfo>> action)

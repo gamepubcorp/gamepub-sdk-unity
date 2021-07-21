@@ -7,8 +7,8 @@ namespace GamePub.PubSDK
     public class PubLanguageList
     {
         [SerializeField]
-        private string[] langList = null;
+        private int[] langList = null;
         
-        public string[] LangList { get { return langList; } }
+        public int[] LangList { get { return langList; } }
     }
 }

@@ -24,7 +24,8 @@ namespace GamePub.PubSDK.Editor
             var appTarget = proj.GetUnityFrameworkTargetGuid();
 
             proj.SetBuildProperty(appTarget, "CLANG_ENABLE_MODULES", "YES");
-           
+            //proj.SetBuildProperty(appTarget, "ENABLE_BITCODE", "NO");
+
             File.WriteAllText(projPath, proj.WriteToString());
         }
     }

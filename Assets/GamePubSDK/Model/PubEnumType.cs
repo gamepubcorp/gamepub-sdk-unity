@@ -24,20 +24,19 @@ namespace GamePub.PubSDK
         REFUND,
         SERVICE,
     }
-
-    //ISO Code Base
+    
     public enum PubLanguageCode
-    {        
-        en, //ENGLISH
-        fr, //FRENCH
-        de, //GERMAN
-        it, //ITALIAN
-        ja, //JAPANESE
-        ko, //KOREAN
-        zh, //CHINESE
-        ru, //RUSSIAN
-        es, //SPANISH
-        th, //THAI
+    {
+        KOREAN,     //KOREAN
+        ENGLISH,    //ENGLISH
+        JAPANESE,   //JAPANESE
+        ZH_CN,      //CHINESE(간체)
+        ZH_TW,      //CHINESE(번체)
+        THAI,       //THAI
+        VIETNAMESE, //VIETNAM
+        SPANISH,    //SPANISH
+        PORTUGAL,   //PORTUGAL
+        FRENCH,     //FRENCH
     }
 
     public enum PubApiResponseCode
