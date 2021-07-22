@@ -1,18 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
-public class PubRefundInfo : MonoBehaviour
+namespace GamePub.PubSDK
 {
-    // Start is called before the first frame update
-    void Start()
+    [Serializable]
+    public class PubRefundInfo
     {
-        
-    }
+        [SerializeField]
+        private string productId = "";
+        [SerializeField]
+        private string currency = "";
+        [SerializeField]
+        private string price = "";
+        [SerializeField]
+        private string title = "";
+        [SerializeField]
+        private string decs = "";
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public string ProductID { get { return productId; } }
+
+        public string Currency { get { return currency; } }
+
+        public string Price { get { return price; } }
+
+        public string Title { get { return title; } }
+
+        public string Decs { get { return decs; } }
     }
 }

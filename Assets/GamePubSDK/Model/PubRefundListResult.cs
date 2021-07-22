@@ -1,18 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
-public class PubRefundListResult : MonoBehaviour
+namespace GamePub.PubSDK
 {
-    // Start is called before the first frame update
-    void Start()
+    [Serializable]
+    public class PubRefundListResult
     {
-        
-    }
+        [SerializeField]
+        private PubRefundInfo[] productList = null;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public PubRefundInfo[] InAppProducts { get { return productList; } }
     }
 }

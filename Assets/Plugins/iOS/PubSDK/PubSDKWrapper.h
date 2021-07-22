@@ -42,6 +42,7 @@
 - (void)imageBanner:(NSString *)identifier
          ratioWidth:(NSString *)ratioWidth
         ratioHeight:(NSString *)ratioHeight;
+- (void) getImageBanner:(NSString *)identifier;
 
 - (void)purchaseLaunch:(NSString *)identifier
                    pid:(NSString *)pid

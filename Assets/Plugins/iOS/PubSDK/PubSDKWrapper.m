@@ -200,6 +200,21 @@
     }];
 }
 
+- (void)getImageBanner:(NSString *)identifier
+{
+    [[PubApiClient getInstance] getImageBanner:^(NSString *unitResult, NSError *error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
+}
+
 - (void)purchaseLaunch:(NSString *)identifier
                    pid:(NSString *)pid
               serverId:(NSString *)serverId

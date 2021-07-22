@@ -130,7 +130,12 @@ namespace GamePub.PubSDK
         public void ImageBanner(string ratioWidth, string ratioHeight, Action<Result<PubUnit>> action)
         {
             GamePubAPI.ImageBanner(ratioWidth, ratioHeight, action);
-        }        
+        }
+
+        public void GetImageBanner(Action<Result<PubImageBannerList>> action)
+        {
+            GamePubAPI.GetImageBanner(action);
+        }
 
         public void InAppPurchase(string pid,
                                   string serverId,

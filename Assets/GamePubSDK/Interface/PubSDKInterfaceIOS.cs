@@ -142,7 +142,17 @@ namespace GamePub.PubSDK
             if (IsInvalidRuntime(identifier)) { return; }
 
             pub_sdk_imageBanner(identifier, ratioWidth, ratioHeight);
-        }        
+        }
+
+        [DllImport("__Internal")]
+        private static extern void pub_sdk_getImageBanner(string identifier);
+        public static void GetImageBanner(string identifier)
+        {
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
+
+            pub_sdk_getImageBanner(identifier);
+        }
 
         [DllImport("__Internal")]
         private static extern void pub_sdk_inAppPurchase(string identifier,

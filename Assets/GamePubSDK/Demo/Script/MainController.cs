@@ -375,19 +375,21 @@ public class MainController : MonoBehaviour
 
     public void OnClickImageBanner()
     {
-        //GamePubSDK.Ins.ImageBanner("9", "16", result =>
-        //{
-        //    result.Match(
-        //        value =>
-        //        {
-        //            UpdateRawSection(value);
-        //        },
-        //        error =>
-        //        {
-        //            UpdateRawSection(error);
-        //        });
-        //});
-        img_banner_panel.gameObject.SetActive(true);
+        GamePubSDK.Ins.GetImageBanner(result =>
+        {
+            result.Match(
+                value =>
+                {
+                    for (int i = 0; i < value.ImgBannerList.Length; i++)
+                        UpdateRawSection(value.ImgBannerList[i]);
+                },
+                error =>
+                {
+                    UpdateRawSection(error);
+                });
+        });
+
+        //img_banner_panel.gameObject.SetActive(true);
     }
 
     public void OnClickImageBannerClose()

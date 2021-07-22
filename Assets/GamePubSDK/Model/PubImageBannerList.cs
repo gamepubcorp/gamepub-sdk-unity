@@ -1,18 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
-public class PubImageBannerList : MonoBehaviour
+namespace GamePub.PubSDK
 {
-    // Start is called before the first frame update
-    void Start()
+    [Serializable]
+    public class PubImageBannerList
     {
-        
-    }
+        [SerializeField]
+        private PubImageBannerInfo[] imgBannerList = null;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public PubImageBannerInfo[] ImgBannerList { get { return imgBannerList; } }
     }
 }

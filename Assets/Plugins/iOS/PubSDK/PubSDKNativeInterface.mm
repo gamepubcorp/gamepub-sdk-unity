@@ -147,6 +147,11 @@ void pub_sdk_imageBanner(const char* identifier,
                                     ratioHeight:nsRatioHeight];
 }
 
+PUB_SDK_EXTERNC void pub_sdk_getImageBanner(const char* identifier) {
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    [[PubSDKWrapper sharedInstance] getImageBanner:nsIdentifier];
+}
+
 PUB_SDK_EXTERNC void pub_sdk_inAppPurchase(const char* identifier,
                                            const char* pid,
                                            const char* serverId,
