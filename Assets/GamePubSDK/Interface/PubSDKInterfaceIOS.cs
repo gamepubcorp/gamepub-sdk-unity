@@ -132,17 +132,17 @@ namespace GamePub.PubSDK
             pub_sdk_openPolicyLink(identifier, (int)policyType);
         }
 
-        [DllImport("__Internal")]
-        private static extern void pub_sdk_imageBanner(string identifier,
-                                                       string ratioWidth,
-                                                       string ratioHeight);
-        public static void ImageBanner(string identifier, string ratioWidth, string ratioHeight)
-        {
-            if (!Application.isPlaying) { return; }
-            if (IsInvalidRuntime(identifier)) { return; }
+        //[DllImport("__Internal")]
+        //private static extern void pub_sdk_imageBanner(string identifier,
+        //                                               string ratioWidth,
+        //                                               string ratioHeight);
+        //public static void ImageBanner(string identifier, string ratioWidth, string ratioHeight)
+        //{
+        //    if (!Application.isPlaying) { return; }
+        //    if (IsInvalidRuntime(identifier)) { return; }
 
-            pub_sdk_imageBanner(identifier, ratioWidth, ratioHeight);
-        }
+        //    pub_sdk_imageBanner(identifier, ratioWidth, ratioHeight);
+        //}
 
         [DllImport("__Internal")]
         private static extern void pub_sdk_getImageBanner(string identifier);

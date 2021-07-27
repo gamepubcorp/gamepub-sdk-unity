@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-namespace Assets.SimpleSlider.Scripts
+namespace GamePub.PubSDK
 {
 	/// <summary>
 	/// Creates banners and paginator by given banner list.
@@ -54,8 +55,8 @@ namespace Assets.SimpleSlider.Scripts
 				{
 					button.onClick.AddListener(() => { Application.OpenURL(banner.Url); });
 				}
-
-				instance.GetComponent<Image>().sprite = banner.Sprite;
+				
+				StartCoroutine(Downloader(instance, banner.imageUrl));
 
 				if (Banners.Count > 1)
 				{
@@ -69,6 +70,32 @@ namespace Assets.SimpleSlider.Scripts
 
 			HorizontalScrollSnap.Initialize(Random);
 			HorizontalScrollSnap.GetComponent<ScrollRect>().movementType = Elastic ? ScrollRect.MovementType.Elastic : ScrollRect.MovementType.Clamped;
+		}
+
+		IEnumerator Downloader(Button go,string url)
+		{
+			if (url != null)
+			{
+				var www = UnityWebRequestTexture.GetTexture(url);
+				yield return www.SendWebRequest();
+				if (www.isNetworkError || www.isHttpError)
+				{
+					Debug.LogError(www.error);
+				}
+				else
+				{
+					var texture = DownloadHandlerTexture.GetContent(www);
+					go.GetComponent<Image>().color = Color.white;
+					go.GetComponent<Image>().sprite = Sprite.Create(
+						texture,
+						new Rect(0, 0, texture.width, texture.height),
+						new Vector2(0.5f, 0.5f));
+				}
+			}
+			else
+			{
+				yield return null;
+			}
 		}
 	}
 }

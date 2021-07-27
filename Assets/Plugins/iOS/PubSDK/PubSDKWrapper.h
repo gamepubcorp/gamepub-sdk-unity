@@ -39,9 +39,9 @@
 - (void)openPolicyLink:(NSString *)identifier
             policyType:(int)policyType;
 
-- (void)imageBanner:(NSString *)identifier
-         ratioWidth:(NSString *)ratioWidth
-        ratioHeight:(NSString *)ratioHeight;
+//- (void)imageBanner:(NSString *)identifier
+//         ratioWidth:(NSString *)ratioWidth
+//        ratioHeight:(NSString *)ratioHeight;
 - (void) getImageBanner:(NSString *)identifier;
 
 - (void)purchaseLaunch:(NSString *)identifier

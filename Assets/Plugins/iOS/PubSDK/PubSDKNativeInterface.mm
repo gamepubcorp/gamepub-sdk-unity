@@ -132,20 +132,20 @@ void pub_sdk_openPolicyLink(const char* identifier, int policyType)
                                         policyType:policyType];
 }
 
-PUB_SDK_EXTERNC void pub_sdk_imageBanner(const char* identifier,
-                                         const char* ratioWidth,
-                                         const char* ratioHeight);
-void pub_sdk_imageBanner(const char* identifier,
-                         const char* ratioWidth,
-                         const char* ratioHeight)
-{
-    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
-    NSString *nsRatioWidth = PubSDKMakeNSString(ratioWidth);
-    NSString *nsRatioHeight = PubSDKMakeNSString(ratioHeight);
-    [[PubSDKWrapper sharedInstance] imageBanner:nsIdentifier
-                                     ratioWidth:nsRatioWidth
-                                    ratioHeight:nsRatioHeight];
-}
+//PUB_SDK_EXTERNC void pub_sdk_imageBanner(const char* identifier,
+//                                         const char* ratioWidth,
+//                                         const char* ratioHeight);
+//void pub_sdk_imageBanner(const char* identifier,
+//                         const char* ratioWidth,
+//                         const char* ratioHeight)
+//{
+//    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+//    NSString *nsRatioWidth = PubSDKMakeNSString(ratioWidth);
+//    NSString *nsRatioHeight = PubSDKMakeNSString(ratioHeight);
+//    [[PubSDKWrapper sharedInstance] imageBanner:nsIdentifier
+//                                     ratioWidth:nsRatioWidth
+//                                    ratioHeight:nsRatioHeight];
+//}
 
 PUB_SDK_EXTERNC void pub_sdk_getImageBanner(const char* identifier) {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);

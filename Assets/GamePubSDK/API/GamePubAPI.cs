@@ -59,13 +59,13 @@ namespace GamePub.PubSDK
             NativeInterface.SecedeCancel(identifier, loginType);
         }
 
-        public static void ImageBanner(string ratioWidth,
-                                       string ratioHeight,
-                                       Action<Result<PubUnit>> action)
-        {
-            var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
-            NativeInterface.ImageBanner(identifier, ratioWidth, ratioHeight);
-        }
+        //public static void ImageBanner(string ratioWidth,
+        //                               string ratioHeight,
+        //                               Action<Result<PubUnit>> action)
+        //{
+        //    var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
+        //    NativeInterface.ImageBanner(identifier, ratioWidth, ratioHeight);
+        //}
 
         public static void GetImageBanner(Action<Result<PubImageBannerList>> action)
         {

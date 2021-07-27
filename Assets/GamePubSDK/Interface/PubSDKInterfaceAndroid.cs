@@ -143,21 +143,21 @@ namespace GamePub.PubSDK
                 pubSdkWrapper.Call("openPolicyLink", param);
         }
 
-        public static void ImageBanner(string identifier,
-                                       string ratioWidth,
-                                       string ratioHeight)
-        {
-            if (!Application.isPlaying) { return; }
-            if (IsInvalidRuntime(identifier)) { return; }
+        //public static void ImageBanner(string identifier,
+        //                               string ratioWidth,
+        //                               string ratioHeight)
+        //{
+        //    if (!Application.isPlaying) { return; }
+        //    if (IsInvalidRuntime(identifier)) { return; }
 
-            object[] param = new object[3];
-            param[0] = identifier;
-            param[1] = ratioWidth;
-            param[2] = ratioHeight;
+        //    object[] param = new object[3];
+        //    param[0] = identifier;
+        //    param[1] = ratioWidth;
+        //    param[2] = ratioHeight;
 
-            if (pubSdkWrapper != null)
-                pubSdkWrapper.Call("imageBanner", param);
-        }
+        //    if (pubSdkWrapper != null)
+        //        pubSdkWrapper.Call("imageBanner", param);
+        //}
 
         public static void GetImageBanner(string identifier)
         {

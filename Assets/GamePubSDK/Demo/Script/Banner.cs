@@ -1,13 +1,18 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.SimpleSlider.Scripts
+namespace GamePub.PubSDK
 {
 	[Serializable]
 	public class Banner
 	{
-		public string Name;
+		//public string Name;
 		public string Url;
-		public Sprite Sprite;
+		public string imageUrl;
+
+		public Banner(string url)
+        {
+			this.imageUrl = url;
+        }
 	}
 }

@@ -42,7 +42,7 @@ public class MainController : MonoBehaviour
     public GameObject setting_panel;
     public GameObject coupon_panel;
     public GameObject popup_panel;
-    public GameObject img_banner_panel;
+    public ImageBanner_Panel img_banner_panel;
 
     public GameObject   pushToggle;
     public GameObject   adPushToggle;
@@ -103,15 +103,36 @@ public class MainController : MonoBehaviour
 
     void Start()
     {
-        PubLoginResult result = UserInfoManager.Ins.loginResult;
-        UpdateUserInfo(result);
+        PubLoginResult loginResult = UserInfoManager.Ins.loginResult;
+        UpdateUserInfo(loginResult);
 
         //인앱상품리스트 받아오기
         UserInfoManager.Ins.ProductList = GamePubSDK.Ins.GetProductList().InAppProducts;        
         for (int i=0; i< UserInfoManager.Ins.ProductList.Length; i++)
         {            
             UpdateRawSection(UserInfoManager.Ins.ProductList[i]);            
-        }        
+        }
+
+        //이미지배너 설정
+        GamePubSDK.Ins.GetImageBanner(result =>
+        {
+            result.Match(
+                value =>
+                {
+                    if (value.ImgBannerList.Length != 0)
+                    {
+                        for (int i = 0; i < value.ImgBannerList.Length; i++)
+                        {
+                            UpdateRawSection(value.ImgBannerList[i]);
+                            img_banner_panel.imgSlider.Banners.Add(new Banner(value.ImgBannerList[i].Images));
+                        }                        
+                    }
+                },
+                error =>
+                {
+                    UpdateRawSection(error);
+                });
+        });
     }    
 
     public void OnClickSecede()
@@ -374,22 +395,10 @@ public class MainController : MonoBehaviour
     }
 
     public void OnClickImageBanner()
-    {
-        GamePubSDK.Ins.GetImageBanner(result =>
-        {
-            result.Match(
-                value =>
-                {
-                    for (int i = 0; i < value.ImgBannerList.Length; i++)
-                        UpdateRawSection(value.ImgBannerList[i]);
-                },
-                error =>
-                {
-                    UpdateRawSection(error);
-                });
-        });
-
-        //img_banner_panel.gameObject.SetActive(true);
+    {        
+        //img_banner_panel.imgSlider.Banners.Add(new Banner("https://pubsdk-cdn.gamepub.co.kr/200901/202106/P21063018071188423.jpg"));
+        //img_banner_panel.imgSlider.Banners.Add(new Banner("https://pubsdk-cdn.gamepub.co.kr/200901/202106/P21063018072739717.jpg"));
+        img_banner_panel.gameObject.SetActive(true);
     }
 
     public void OnClickImageBannerClose()

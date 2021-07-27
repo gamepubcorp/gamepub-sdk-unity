@@ -53,7 +53,7 @@
         }
     }];
     
-    [[PubWebviewController GetInstance] InitializeWithParentUIView:UnityGetGLViewController().view pubDelegate:nil];
+//    [[PubWebviewController GetInstance] InitializeWithParentUIView:UnityGetGLViewController().view pubDelegate:nil];
 }
 
 - (void)login:(NSString *)identifier
@@ -181,24 +181,24 @@
     }];
 }
 
-- (void)imageBanner:(NSString *)identifier
-         ratioWidth:(NSString *)ratioWidth
-        ratioHeight:(NSString *)ratioHeight
-{
-    [[PubApiClient getInstance] imageBanner:ratioWidth
-                                ratioHeight:ratioHeight
-                                 completion:^(NSString *unitResult, NSError *error)
-    {
-        if(error)
-        {
-            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
-            [callbackMsg sendMessageError];
-        }else{
-            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
-            [callbackMsg sendMessageOK];
-        }
-    }];
-}
+//- (void)imageBanner:(NSString *)identifier
+//         ratioWidth:(NSString *)ratioWidth
+//        ratioHeight:(NSString *)ratioHeight
+//{
+//    [[PubApiClient getInstance] imageBanner:ratioWidth
+//                                ratioHeight:ratioHeight
+//                                 completion:^(NSString *unitResult, NSError *error)
+//    {
+//        if(error)
+//        {
+//            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+//            [callbackMsg sendMessageError];
+//        }else{
+//            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+//            [callbackMsg sendMessageOK];
+//        }
+//    }];
+//}
 
 - (void)getImageBanner:(NSString *)identifier
 {

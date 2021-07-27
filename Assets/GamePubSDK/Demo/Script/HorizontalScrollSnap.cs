@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Assets.SimpleSlider.Scripts
+namespace GamePub.PubSDK
 {
 	/// <summary>
 	/// Performs center/focus on child and swipe features.
