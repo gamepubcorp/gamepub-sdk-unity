@@ -9,12 +9,11 @@ namespace GamePub.PubSDK
         public static Dictionary<String, FlattenAction> actions =
             new Dictionary<string, FlattenAction>();
 
-        public static void SetupSDK(string url,
-                                    string sdkAppId,
+        public static void SetupSDK(string sdkAppId,
                                     Action<Result<PubUnit>> action)
         {
             var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
-            NativeInterface.SetupSDK(identifier, url, sdkAppId);
+            NativeInterface.SetupSDK(identifier, sdkAppId);
         }
 
         public static void Login(PubLoginType loginType,

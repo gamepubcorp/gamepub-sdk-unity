@@ -17,16 +17,14 @@ namespace GamePub.PubSDK
         }
 
         public static void SetupSDK(string identifier,
-                                    string url,
                                     string sdkAppId)
         {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(null)) { return; }
 
-            object[] param = new object[3];
-            param[0] = identifier;
-            param[1] = url;
-            param[2] = sdkAppId;
+            object[] param = new object[2];
+            param[0] = identifier;            
+            param[1] = sdkAppId;
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("setupSDK", param);

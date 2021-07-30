@@ -52,12 +52,12 @@ namespace GamePub.PubSDK.Editor
                 PlistElementArray array = GetOrCreateArray(rootDict, "LSApplicationQueriesSchemes");
                 array.AddString("fbapi");
                 array.AddString("fbauth2");
-            }                
+            }
         }
 
         static void SetupGoogleSetting(PlistElementDict rootDict)
         {
-            rootDict.SetString("GoogleClientID", PubSDKSettings.GetOrCreateSettings().GoogleClientID);
+            rootDict.SetString("GoogleClientID", PubSDKSettings.GetOrCreateSettings().GoogleClientID);            
         }
 
         static void SetupFacebookSetting(PlistElementDict rootDict)

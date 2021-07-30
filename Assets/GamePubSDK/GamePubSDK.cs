@@ -53,11 +53,11 @@ namespace GamePub.PubSDK
 
         public void SetupSDK(Action<Result<PubUnit>> action)
         {           
-            if (string.IsNullOrEmpty(GamePubSDKSettings.ServiceDomain))
+            if (string.IsNullOrEmpty(GamePubSDKSettings.AppID))
             {
-                throw new System.Exception("Gamepub SDK domainURL is not set.");
+                throw new System.Exception("Gamepub SDK AppID is not set.");
             }
-            GamePubAPI.SetupSDK(GamePubSDKSettings.ServiceDomain, GamePubSDKSettings.AppID, action);
+            GamePubAPI.SetupSDK(GamePubSDKSettings.AppID, action);
         }
 
         public void Login(PubLoginType loginType, PubAccountServiceType serviceType, Action<Result<PubLoginResult>> action)

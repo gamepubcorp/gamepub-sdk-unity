@@ -17,17 +17,15 @@ namespace GamePub.PubSDK
         }
 
         [DllImport("__Internal")]
-        private static extern void pub_sdk_setup(string identifier,
-                                                 string domainURL,
+        private static extern void pub_sdk_setup(string identifier,                                                 
                                                  string projectId);
-        public static void SetupSDK(string identifier,
-                                    string domainURL,
+        public static void SetupSDK(string identifier,                                    
                                     string projectId)
         {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(null)) { return; }
 
-            pub_sdk_setup(identifier, domainURL, projectId);
+            pub_sdk_setup(identifier, projectId);
         }
 
         [DllImport("__Internal")]

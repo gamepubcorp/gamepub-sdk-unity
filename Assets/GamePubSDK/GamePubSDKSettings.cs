@@ -8,7 +8,7 @@ namespace GamePub.PubSDK
         public const string settingsAssetName = "GamePubSDKSettings";
         public const string settingsPath = "GamePubSDK/Resources";
         public const string settingsAssetExtension = ".asset";
-        private static readonly string httpBase = "https://{0}";
+        //private static readonly string httpBase = "https://{0}";
 
         private static GamePubSDKSettings instance;        
 
@@ -27,27 +27,11 @@ namespace GamePub.PubSDK
                 return instance;
             }
         }
-
-        [SerializeField]
-        private string liveServerUrlBase = "";
-        [SerializeField]
-        private string testServerUrlBase = "";
+       
         [SerializeField]
         private string sdkAppId = "";
         [SerializeField]
-        private bool testBuild = true;
-
-        public static string LiveServer
-        {
-            get { return Instance.liveServerUrlBase; }
-            set { Instance.liveServerUrlBase = value; }
-        }
-
-        public static string TestServer
-        {
-            get { return Instance.testServerUrlBase; }
-            set { Instance.testServerUrlBase = value; }
-        }
+        private bool testBuild = true;        
 
         public static string AppID
         {
@@ -59,18 +43,6 @@ namespace GamePub.PubSDK
         {
             get { return Instance.testBuild; }
             set { Instance.testBuild = value; }
-        }
-
-        public static string ServiceDomain
-        {
-            get
-            {
-                if (Instance.testBuild)
-                {
-                    return string.Format(httpBase, Instance.testServerUrlBase);
-                }
-                return string.Format(httpBase, Instance.liveServerUrlBase);
-            }
-        }
+        }        
     }
 }
