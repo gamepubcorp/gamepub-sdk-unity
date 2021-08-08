@@ -41,15 +41,12 @@ PUB_SDK_EXTERNC void pub_sdk_UnitySendMessage(const char *name, const char *meth
 // MARK: - Extern APIs
 
 PUB_SDK_EXTERNC void pub_sdk_setup(const char* identifier,
-                                   const char* domainURL,
                                    const char* projectId)
 {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
-    NSString *nsDomainURL = PubSDKMakeNSString(domainURL);
     NSString *nsProjectId = PubSDKMakeNSString(projectId);
     [[PubSDKWrapper sharedInstance] setupSDK:nsIdentifier
-                                   projectId:nsProjectId
-                                   domainURL:nsDomainURL];
+                                   projectId:nsProjectId];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_login(const char* identifier,
@@ -173,6 +170,38 @@ void pub_sdk_inAppPurchase(const char* identifier,
                                           serverId:nsServerId
                                           playerId:nsPlayerId
                                                etc:nsEtc];
+}
+
+PUB_SDK_EXTERNC void pub_sdk_userRefundListSearch(const char* identifier) {
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    [[PubSDKWrapper sharedInstance] userRefundListSearch:nsIdentifier];
+}
+
+PUB_SDK_EXTERNC void pub_sdk_userRefundRepurchase(const char* identifier,
+                                                  const char* pid,
+                                                  const char* serverId,
+                                                  const char* playerId,
+                                                  const char* etc,
+                                                  const char* voidedTid);
+void pub_sdk_userRefundRepurchase(const char* identifier,
+                                  const char* pid,
+                                  const char* serverId,
+                                  const char* playerId,
+                                  const char* etc,
+                                  const char* voidedTid)
+{
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    NSString *nsPid = PubSDKMakeNSString(pid);
+    NSString *nsServerId = PubSDKMakeNSString(serverId);
+    NSString *nsPlayerId = PubSDKMakeNSString(playerId);
+    NSString *nsEtc = PubSDKMakeNSString(etc);
+    NSString *nsVoidedTid = PubSDKMakeNSString(voidedTid);
+    [[PubSDKWrapper sharedInstance] userRefundRepurchase:nsIdentifier
+                                                     pid:nsPid
+                                                serverId:nsServerId
+                                                playerId:nsPlayerId
+                                                     etc:nsEtc
+                                               voidedTid:nsVoidedTid];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_versionCheck(const char* identifier) {

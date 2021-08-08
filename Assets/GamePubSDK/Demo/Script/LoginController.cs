@@ -35,7 +35,7 @@ public class LoginController : MonoBehaviour
     private void Start()
     {
         //자동로그인 활성화 설정
-        if (GamePubSDK.Ins.GetActiveLoginType() != PubLoginType.NONE)
+        if (GamePubSDK.Ins.GetLastLoginType() != PubLoginType.NONE)
         {
             content.SetActive(false);
             autoLogin.SetActive(true);
@@ -50,9 +50,9 @@ public class LoginController : MonoBehaviour
 
     public void OnClickAutoLogin()
     {
-        if (GamePubSDK.Ins.GetActiveLoginType() != PubLoginType.NONE)
+        if (GamePubSDK.Ins.GetLastLoginType() != PubLoginType.NONE)
         {
-            GamePubSDK.Ins.Login(GamePubSDK.Ins.GetActiveLoginType(),
+            GamePubSDK.Ins.Login(GamePubSDK.Ins.GetLastLoginType(),
             PubAccountServiceType.ACCOUNT_LOGIN, result =>
             {
                 result.Match(
@@ -156,11 +156,36 @@ public class LoginController : MonoBehaviour
                 if (result.UserLoginInfo.Status == (int)PubAccountStatus.B)
                 {
                     messageText.text = result.UserLoginInfo.BlockMessage;
-                    popup_panel.SetActive(true);
+                    popup_panel.SetActive(true);                    
                 }
                 else if (result.UserLoginInfo.Status == (int)PubAccountStatus.U)
-                {                    
-                    SceneManager.LoadSceneAsync("Main");
+                {
+                    if (result.UserLoginInfo.BlockReason == 0)
+                    {
+                        SceneManager.LoadSceneAsync("Main");
+                    }
+                    else if (result.UserLoginInfo.BlockReason == 100)
+                    {
+
+                    }
+                    else if (result.UserLoginInfo.BlockReason == 200)
+                    {
+
+                    }
+                    else if (result.UserLoginInfo.BlockReason == 300)
+                    {
+                        
+                        GamePubSDK.Ins.UserRefundListSearch(refundResult =>
+                        {
+                            refundResult.Match(
+                                value =>
+                                {
+                                },
+                                error =>
+                                {
+                                });
+                        });
+                    }                    
                 }
                 else if (result.UserLoginInfo.Status == (int)PubAccountStatus.S)
                 {                                        

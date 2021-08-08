@@ -31,7 +31,6 @@
 
 - (void)setupSDK:(NSString *)identifier
        projectId:(NSString *)projectId
-       domainURL:(NSString *)domainURL
 {
     if(self.setup) {
         return;
@@ -39,7 +38,6 @@
     self.setup = YES;
     
     [[PubApiClient getInstance] setupSDK:projectId
-                               domainURL:domainURL
                               completion:^(NSString * _Nullable unitResult,
                                            NSError * _Nullable error)
     {
@@ -229,6 +227,36 @@
     {
         if(error)
         {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
+}
+
+- (void)userRefundListSearch:(NSString *)identifier
+{
+    
+}
+
+- (void)userRefundRepurchase:(NSString *)identifier
+                         pid:(NSString *)pid
+                    serverId:(NSString *)serverId
+                    playerId:(NSString *)playerId
+                         etc:(NSString *)etc
+                   voidedTid:(NSString *)voidedTid
+{
+    [[PubApiClient getInstance] userRefundRepurchase:pid
+                                            serverId:serverId
+                                            playerId:playerId
+                                                 etc:etc
+                                           voidedTid:voidedTid
+                                          completion:^(NSString * _Nullable unitResult,
+                                                       NSError * _Nullable error)
+    {
+        if(error){
             PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
             [callbackMsg sendMessageError];
         }else{

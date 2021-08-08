@@ -13,8 +13,7 @@
 + (instancetype)sharedInstance;
 
 - (void)setupSDK:(NSString *)identifier
-       projectId:(NSString *)projectId
-       domainURL:(NSString *)domainURL;
+       projectId:(NSString *)projectId;
 
 - (void)login:(NSString *)identifier
          type:(int)loginType
@@ -42,13 +41,21 @@
 //- (void)imageBanner:(NSString *)identifier
 //         ratioWidth:(NSString *)ratioWidth
 //        ratioHeight:(NSString *)ratioHeight;
-- (void) getImageBanner:(NSString *)identifier;
+- (void)getImageBanner:(NSString *)identifier;
 
 - (void)purchaseLaunch:(NSString *)identifier
                    pid:(NSString *)pid
               serverId:(NSString *)serverId
               playerId:(NSString *)playerId
                    etc:(NSString *)etc;
+
+- (void)userRefundListSearch:(NSString *)identifier;
+- (void)userRefundRepurchase:(NSString *)identifier
+                         pid:(NSString *)pid
+                    serverId:(NSString *)serverId
+                    playerId:(NSString *)playerId
+                         etc:(NSString *)etc
+                   voidedTid:(NSString *)voidedTid;
 
 - (void)versionCheck:(NSString *)identifier;
 

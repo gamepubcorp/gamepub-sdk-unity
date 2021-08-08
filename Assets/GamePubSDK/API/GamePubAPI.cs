@@ -82,10 +82,10 @@ namespace GamePub.PubSDK
             NativeInterface.InAppPurchase(identifier, pid, serverId, playerId, etc);
         }
 
-        public static void UserRefundListSearch(Action<Result<PubUnit>> action)
+        public static void UserRefundListSearch(Action<Result<PubRefundListResult>> action)
         {
-            var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
-            //NativeInterface.UserRefundListSearch(identifier);
+            var identifier = AddAction(FlattenAction.JsonFlatten<PubRefundListResult>(action));
+            NativeInterface.UserRefundListSearch(identifier);
         }
 
         public static void UserRefundRepurchase(string pid,
@@ -96,7 +96,7 @@ namespace GamePub.PubSDK
                                                 Action<Result<PubPurchaseData>> action)
         {
             var identifier = AddAction(FlattenAction.JsonFlatten<PubPurchaseData>(action));
-            //NativeInterface.UserRefundRepurchase(identifier, pid, serverId, playerId, etc, voidedTid);
+            NativeInterface.UserRefundRepurchase(identifier, pid, serverId, playerId, etc, voidedTid);
         }
 
         public static void VersionCheck(Action<Result<PubVersionInfo>> action)

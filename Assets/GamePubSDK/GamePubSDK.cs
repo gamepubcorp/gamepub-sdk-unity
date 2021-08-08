@@ -36,7 +36,7 @@ namespace GamePub.PubSDK
 
         private void OnApplicationPause(bool pause)
         {
-            if (GetActiveLoginType() != PubLoginType.NONE)
+            if (GetLastLoginType() != PubLoginType.NONE)
             {
                 if (pause)
                 {
@@ -100,7 +100,7 @@ namespace GamePub.PubSDK
             }
         }
 
-        public PubLoginType GetActiveLoginType()
+        public PubLoginType GetLastLoginType()
         {
             if (AuthenticationState == null)
                 return PubLoginType.NONE;
@@ -146,7 +146,7 @@ namespace GamePub.PubSDK
             GamePubAPI.InAppPurchase(pid, serverId, playerId, etc, action);
         }
 
-        public void UserRefundListSearch(Action<Result<PubUnit>> action)
+        public void UserRefundListSearch(Action<Result<PubRefundListResult>> action)
         {
             GamePubAPI.UserRefundListSearch(action);
         }
