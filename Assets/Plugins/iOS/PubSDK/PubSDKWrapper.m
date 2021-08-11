@@ -237,18 +237,40 @@
 }
 
 - (void)userRefundListSearch:(NSString *)identifier
+                   accountId:(NSString *)accountId
+                   loginType:(NSString *)loginType
+                   channelId:(NSString *)channelId
 {
-    
+    [[PubApiClient getInstance] userRefundListSearch:loginType
+                                           channelId:channelId
+                                           accountId:accountId
+                                          completion:^(NSString * _Nullable unitResult,
+                                                       NSError * _Nullable error)
+    {
+        if(error){
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
 }
 
 - (void)userRefundRepurchase:(NSString *)identifier
+                   accountId:(NSString *)accountId
+                   loginType:(NSString *)loginType
+                   channelId:(NSString *)channelId
                          pid:(NSString *)pid
                     serverId:(NSString *)serverId
                     playerId:(NSString *)playerId
                          etc:(NSString *)etc
                    voidedTid:(NSString *)voidedTid
 {
-    [[PubApiClient getInstance] userRefundRepurchase:pid
+    [[PubApiClient getInstance] userRefundRepurchase:loginType
+                                           channelId:channelId
+                                           accountId:accountId
+                                                 pid:pid
                                             serverId:serverId
                                             playerId:playerId
                                                  etc:etc

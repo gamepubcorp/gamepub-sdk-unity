@@ -171,23 +171,35 @@ namespace GamePub.PubSDK
         }
 
         [DllImport("__Internal")]
-        private static extern void pub_sdk_userRefundListSearch(string identifier);
-        public static void UserRefundListSearch(string identifier)
+        private static extern void pub_sdk_userRefundListSearch(string identifier,
+                                                                string accountId,
+                                                                string loginType,
+                                                                string channelId);
+        public static void UserRefundListSearch(string identifier,
+                                                string accountId,
+                                                string loginType,
+                                                string channelId)
         {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(identifier)) { return; }
 
-            pub_sdk_userRefundListSearch(identifier);
+            pub_sdk_userRefundListSearch(identifier, accountId, loginType, channelId);
         }
 
         [DllImport("__Internal")]
         private static extern void pub_sdk_userRefundRepurchase(string identifier,
+                                                                string accountId,
+                                                                string loginType,
+                                                                string channelId,
                                                                 string pid,
                                                                 string serverId,
                                                                 string playerId,
                                                                 string etc,
                                                                 string voidedTid);
         public static void UserRefundRepurchase(string identifier,
+                                                string accountId,
+                                                string loginType,
+                                                string channelId,
                                                 string pid,
                                                 string serverId,
                                                 string playerId,
@@ -197,7 +209,16 @@ namespace GamePub.PubSDK
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(identifier)) { return; }
 
-            pub_sdk_userRefundRepurchase(identifier, pid, serverId, playerId, etc, voidedTid);
+            pub_sdk_userRefundRepurchase(
+                identifier,
+                accountId,
+                loginType,
+                channelId,
+                pid,
+                serverId,
+                playerId,
+                etc,
+                voidedTid);
         }
 
         [DllImport("__Internal")]

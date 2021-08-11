@@ -135,7 +135,7 @@ public class LoginController : MonoBehaviour
                         UpdateLoginResult(value);
                     },
                     error =>
-                    {
+                    {                        
                         messageText.text = error.Message;
                         popup_panel.SetActive(true);
                     });
@@ -160,31 +160,9 @@ public class LoginController : MonoBehaviour
                 }
                 else if (result.UserLoginInfo.Status == (int)PubAccountStatus.U)
                 {
-                    if (result.UserLoginInfo.BlockReason == 0)
+                    if (result.UserLoginInfo.BlockReason == (int)PubBlockReason.NORMAL)
                     {
                         SceneManager.LoadSceneAsync("Main");
-                    }
-                    else if (result.UserLoginInfo.BlockReason == 100)
-                    {
-
-                    }
-                    else if (result.UserLoginInfo.BlockReason == 200)
-                    {
-
-                    }
-                    else if (result.UserLoginInfo.BlockReason == 300)
-                    {
-                        
-                        GamePubSDK.Ins.UserRefundListSearch(refundResult =>
-                        {
-                            refundResult.Match(
-                                value =>
-                                {
-                                },
-                                error =>
-                                {
-                                });
-                        });
                     }                    
                 }
                 else if (result.UserLoginInfo.Status == (int)PubAccountStatus.S)
@@ -197,12 +175,7 @@ public class LoginController : MonoBehaviour
             {
                 messageText.text = result.Maintenance.Message;
                 popup_panel.SetActive(true);
-            }
-            else if (result.ResponseCode == (int)PubApiResponseCode.USER_IP_BLOCK)
-            {
-                messageText.text = "IP Block";
-                popup_panel.SetActive(true);
-            }
+            }            
         }
     }
 }

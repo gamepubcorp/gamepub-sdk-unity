@@ -7,8 +7,8 @@ namespace GamePub.PubSDK
     public class PubRefundListResult
     {
         [SerializeField]
-        private PubRefundInfo[] productList = null;
+        private PubRefundInfo[] refundList = null;
 
-        public PubRefundInfo[] InAppProducts { get { return productList; } }
+        public PubRefundInfo[] RefundList { get { return refundList; } }
     }
 }

@@ -172,18 +172,34 @@ void pub_sdk_inAppPurchase(const char* identifier,
                                                etc:nsEtc];
 }
 
-PUB_SDK_EXTERNC void pub_sdk_userRefundListSearch(const char* identifier) {
+PUB_SDK_EXTERNC void pub_sdk_userRefundListSearch(const char* identifier,
+                                                  const char* accountId,
+                                                  const char* loginType,
+                                                  const char* channelId)
+{
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
-    [[PubSDKWrapper sharedInstance] userRefundListSearch:nsIdentifier];
+    NSString *nsAccountId = PubSDKMakeNSString(accountId);
+    NSString *nsLoginType = PubSDKMakeNSString(loginType);
+    NSString *nsChannelId = PubSDKMakeNSString(channelId);
+    [[PubSDKWrapper sharedInstance] userRefundListSearch:nsIdentifier
+                                               accountId:nsAccountId
+                                               loginType:nsLoginType
+                                               channelId:nsChannelId];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_userRefundRepurchase(const char* identifier,
+                                                  const char* accountId,
+                                                  const char* loginType,
+                                                  const char* channelId,
                                                   const char* pid,
                                                   const char* serverId,
                                                   const char* playerId,
                                                   const char* etc,
                                                   const char* voidedTid);
 void pub_sdk_userRefundRepurchase(const char* identifier,
+                                  const char* accountId,
+                                  const char* loginType,
+                                  const char* channelId,
                                   const char* pid,
                                   const char* serverId,
                                   const char* playerId,
@@ -191,12 +207,18 @@ void pub_sdk_userRefundRepurchase(const char* identifier,
                                   const char* voidedTid)
 {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    NSString *nsAccountId = PubSDKMakeNSString(accountId);
+    NSString *nsLoginType = PubSDKMakeNSString(loginType);
+    NSString *nsChannelId = PubSDKMakeNSString(channelId);
     NSString *nsPid = PubSDKMakeNSString(pid);
     NSString *nsServerId = PubSDKMakeNSString(serverId);
     NSString *nsPlayerId = PubSDKMakeNSString(playerId);
     NSString *nsEtc = PubSDKMakeNSString(etc);
     NSString *nsVoidedTid = PubSDKMakeNSString(voidedTid);
     [[PubSDKWrapper sharedInstance] userRefundRepurchase:nsIdentifier
+                                               accountId:nsAccountId
+                                               loginType:nsLoginType
+                                               channelId:nsChannelId
                                                      pid:nsPid
                                                 serverId:nsServerId
                                                 playerId:nsPlayerId

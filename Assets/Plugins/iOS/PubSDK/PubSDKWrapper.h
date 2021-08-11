@@ -49,8 +49,14 @@
               playerId:(NSString *)playerId
                    etc:(NSString *)etc;
 
-- (void)userRefundListSearch:(NSString *)identifier;
+- (void)userRefundListSearch:(NSString *)identifier
+                   accountId:(NSString *)accountId
+                   loginType:(NSString *)loginType
+                   channelId:(NSString *)channelId;
 - (void)userRefundRepurchase:(NSString *)identifier
+                   accountId:(NSString *)accountId
+                   loginType:(NSString *)loginType
+                   channelId:(NSString *)channelId
                          pid:(NSString *)pid
                     serverId:(NSString *)serverId
                     playerId:(NSString *)playerId

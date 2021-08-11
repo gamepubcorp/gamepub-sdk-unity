@@ -30,8 +30,8 @@ namespace GamePub.PubSDK
        
         [SerializeField]
         private string sdkAppId = "";
-        [SerializeField]
-        private bool testBuild = true;        
+        //[SerializeField]
+        //private bool testBuild = true;        
 
         public static string AppID
         {
@@ -39,10 +39,10 @@ namespace GamePub.PubSDK
             set { Instance.sdkAppId = value; }
         }
 
-        public static bool TestBuild
-        {
-            get { return Instance.testBuild; }
-            set { Instance.testBuild = value; }
-        }        
+        //public static bool TestBuild
+        //{
+        //    get { return Instance.testBuild; }
+        //    set { Instance.testBuild = value; }
+        //}        
     }
 }

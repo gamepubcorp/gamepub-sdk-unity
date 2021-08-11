@@ -146,19 +146,34 @@ namespace GamePub.PubSDK
             GamePubAPI.InAppPurchase(pid, serverId, playerId, etc, action);
         }
 
-        public void UserRefundListSearch(Action<Result<PubRefundListResult>> action)
+        public void UserRefundListSearch(string accountId,
+                                         string loginType,
+                                         string channelId,
+                                         Action<Result<PubRefundListResult>> action)
         {
-            GamePubAPI.UserRefundListSearch(action);
+            GamePubAPI.UserRefundListSearch(accountId, loginType, channelId, action);
         }
 
-        public void UserRefundRepurchase(string pid,
+        public void UserRefundRepurchase(string accountId,
+                                         string loginType,
+                                         string channelId,
+                                         string pid,
                                          string serverId,
                                          string playerId,
                                          string etc,
                                          string voidedTid,
                                          Action<Result<PubPurchaseData>> action)
         {
-            GamePubAPI.UserRefundRepurchase(pid, serverId, playerId, etc, voidedTid, action);
+            GamePubAPI.UserRefundRepurchase(
+                accountId,
+                loginType,
+                channelId,
+                pid,
+                serverId,
+                playerId,
+                etc,
+                voidedTid,
+                action);
         }
 
         public void VersionCheck(Action<Result<PubVersionInfo>> action)

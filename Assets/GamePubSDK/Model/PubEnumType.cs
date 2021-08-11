@@ -67,4 +67,12 @@ namespace GamePub.PubSDK
         B, //block
         S, //secession
     }
+
+    public enum PubBlockReason
+    {
+        NORMAL,             //정상
+        ADMIN,              //관리자 차단
+        LOGIN_VERIFY_ERR,   //로그인검증 오류
+        REFUND,             //환불자 차단
+    }
 }

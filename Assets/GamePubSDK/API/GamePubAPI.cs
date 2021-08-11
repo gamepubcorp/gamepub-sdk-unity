@@ -82,13 +82,19 @@ namespace GamePub.PubSDK
             NativeInterface.InAppPurchase(identifier, pid, serverId, playerId, etc);
         }
 
-        public static void UserRefundListSearch(Action<Result<PubRefundListResult>> action)
+        public static void UserRefundListSearch(string accountId,
+                                                string loginType,
+                                                string channelId,
+                                                Action<Result<PubRefundListResult>> action)
         {
             var identifier = AddAction(FlattenAction.JsonFlatten<PubRefundListResult>(action));
-            NativeInterface.UserRefundListSearch(identifier);
+            NativeInterface.UserRefundListSearch(identifier, accountId, loginType, channelId);
         }
 
-        public static void UserRefundRepurchase(string pid,
+        public static void UserRefundRepurchase(string accountId,
+                                                string loginType,
+                                                string channelId,
+                                                string pid,
                                                 string serverId,
                                                 string playerId,
                                                 string etc,
@@ -96,7 +102,16 @@ namespace GamePub.PubSDK
                                                 Action<Result<PubPurchaseData>> action)
         {
             var identifier = AddAction(FlattenAction.JsonFlatten<PubPurchaseData>(action));
-            NativeInterface.UserRefundRepurchase(identifier, pid, serverId, playerId, etc, voidedTid);
+            NativeInterface.UserRefundRepurchase(
+                identifier,
+                accountId,
+                loginType,
+                channelId,
+                pid,
+                serverId,
+                playerId,
+                etc,
+                voidedTid);
         }
 
         public static void VersionCheck(Action<Result<PubVersionInfo>> action)

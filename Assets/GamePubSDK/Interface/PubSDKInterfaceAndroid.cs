@@ -189,19 +189,28 @@ namespace GamePub.PubSDK
                 pubSdkWrapper.Call("purchaseLaunch", param);
         }
 
-        public static void UserRefundListSearch(string identifier)
+        public static void UserRefundListSearch(string identifier,
+                                                string accountId,
+                                                string loginType,
+                                                string channelId)
         {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(identifier)) { return; }
 
-            object[] param = new object[1];
+            object[] param = new object[4];
             param[0] = identifier;
+            param[1] = accountId;
+            param[2] = loginType;
+            param[3] = channelId;
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("userRefundListSearch", param);
         }
 
         public static void UserRefundRepurchase(string identifier,
+                                                string accountId,
+                                                string loginType,
+                                                string channelId,
                                                 string pid,
                                                 string serverId,
                                                 string playerId,
@@ -211,13 +220,16 @@ namespace GamePub.PubSDK
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(identifier)) { return; }
 
-            object[] param = new object[6];
+            object[] param = new object[9];
             param[0] = identifier;
-            param[1] = pid;
-            param[2] = serverId;
-            param[3] = playerId;
-            param[4] = etc;
-            param[5] = voidedTid;
+            param[1] = accountId;
+            param[2] = loginType;
+            param[3] = channelId;
+            param[4] = pid;
+            param[5] = serverId;
+            param[6] = playerId;
+            param[7] = etc;
+            param[8] = voidedTid;
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("userRefundRepurchase", param);
