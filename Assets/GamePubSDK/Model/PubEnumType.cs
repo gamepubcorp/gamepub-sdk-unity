@@ -70,9 +70,9 @@ namespace GamePub.PubSDK
 
     public enum PubBlockReason
     {
-        NORMAL,             //정상
-        ADMIN,              //관리자 차단
-        LOGIN_VERIFY_ERR,   //로그인검증 오류
-        REFUND,             //환불자 차단
+        NORMAL = 0,               //정상
+        ADMIN = 100,              //관리자 차단
+        LOGIN_VERIFY_ERR = 200,   //로그인검증 오류
+        REFUND = 300,             //환불자 차단
     }
 }

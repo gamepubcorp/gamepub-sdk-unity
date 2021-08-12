@@ -160,10 +160,7 @@ public class LoginController : MonoBehaviour
                 }
                 else if (result.UserLoginInfo.Status == (int)PubAccountStatus.U)
                 {
-                    if (result.UserLoginInfo.BlockReason == (int)PubBlockReason.NORMAL)
-                    {
-                        SceneManager.LoadSceneAsync("Main");
-                    }                    
+                    SceneManager.LoadSceneAsync("Main");
                 }
                 else if (result.UserLoginInfo.Status == (int)PubAccountStatus.S)
                 {                                        
