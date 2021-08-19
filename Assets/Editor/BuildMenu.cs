@@ -102,10 +102,14 @@ public class BuildMenu : ScriptableObject
         PerformiOSBuild(GetIOSOutputFile(), "", false);
     }
 
-    [UnityEditor.MenuItem("BuildMenu/TEST", false, 3003)]
-    static void Buildmachine_TEST()
-    {        
-        //Debug.Log("fb"+PubSDKSettings.GetOrCreateSettings().FacebookAppID);        
+    [UnityEditor.MenuItem("BuildMenu/iOS Dev", false, 3003)]
+    static void Buildmachine_iOS_Dev()
+    {
+        //Debug.Log("fb"+PubSDKSettings.GetOrCreateSettings().FacebookAppID);
+        PlayerSettings.productName = "SDKUnityDemo";
+        PrepareiOSBuild("com.gamepub.ios.testapp");
+
+        PerformiOSBuild(GetIOSOutputFile(), "", false);
     }
     
     static void PrepareAndroidBuild(string bundleID)
@@ -146,8 +150,7 @@ public class BuildMenu : ScriptableObject
         opt.scenes = FindEnabledEditorScenes();
         opt.locationPathName = output;
         opt.target = BuildTarget.iOS;
-        opt.options = BuildOptions.None;
-
+        opt.options = BuildOptions.None;        
 
         //PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.iOS, define);               
 

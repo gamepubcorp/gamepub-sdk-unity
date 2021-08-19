@@ -27,6 +27,10 @@
              pushNight:(BOOL)pushNight
                 pushAd:(BOOL)pushAd;
 
+- (void)setAgreePush:(BOOL)push
+           pushNight:(BOOL)pushNight
+              pushAd:(BOOL)pushAd;
+
 - (NSString *)getLoginType;
 - (NSString *)getLanguageList;
 - (NSString *)getProductList;

@@ -13,6 +13,7 @@ public class LoginController : MonoBehaviour
 
     public GameObject content;
     public GameObject autoLogin;
+    public GameObject policy_panel;
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class LoginController : MonoBehaviour
                 value =>
                 {
                     //value.Code = 0
-                    //value.Msg = "setupSDK Success"
+                    //value.Msg = "setupSDK Success"                    
                 },
                 error =>
                 {
@@ -145,6 +146,66 @@ public class LoginController : MonoBehaviour
     public void OnClickClosePopup()
     {
         popup_panel.SetActive(false);
+    }
+
+    public void OnPushCheck(bool bCheck)
+    {
+        UserInfoManager.Ins.push = bCheck;
+    }
+
+    public void OnPushNightCheck(bool bCheck)
+    {
+        UserInfoManager.Ins.pushNight = bCheck;
+    }
+
+    public void OnPushAdCheck(bool bCheck)
+    {
+        UserInfoManager.Ins.pushAd = bCheck;
+    }
+
+    public void OnClickOpenPrivacy()
+    {
+        GamePubSDK.Ins.OpenPolicyLink(PubPolicyType.PRIVACY, result =>
+        {
+            result.Match(
+                value =>
+                {                    
+                },
+                error =>
+                {                    
+                });
+        });
+    }
+
+    public void OnClickOpenService()
+    {
+        GamePubSDK.Ins.OpenPolicyLink(PubPolicyType.SERVICE, result =>
+        {
+            result.Match(
+                value =>
+                {                    
+                },
+                error =>
+                {                    
+                });
+        });
+    }
+
+    public void OnClickOpenPolicyPanel()
+    {
+        policy_panel.SetActive(true);
+    }
+
+    public void OnClickClosePolicyPanel()
+    {
+        Debug.Log(UserInfoManager.Ins.push);
+        Debug.Log(UserInfoManager.Ins.pushAd);
+        Debug.Log(UserInfoManager.Ins.pushNight);
+        GamePubSDK.Ins.SetAgreePush(
+            UserInfoManager.Ins.push,
+            UserInfoManager.Ins.pushNight,
+            UserInfoManager.Ins.pushAd);
+        policy_panel.SetActive(false);
     }
 
     public void UpdateLoginResult(PubLoginResult result)

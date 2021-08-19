@@ -36,7 +36,7 @@ public class MainController : MonoBehaviour
     public Dropdown dropdownLang;
     private PubLanguageCode currentCode;
 
-    public GameObject policy_panel;
+    //public GameObject policy_panel;
     public GameObject notice_panel;
     public GameObject versionCheck_panel;
     public GameObject setting_panel;
@@ -352,52 +352,50 @@ public class MainController : MonoBehaviour
         });        
     }
 
-    public void OnClickOpenPolicyPanel()
-    {
-        policy_panel.SetActive(true);
-    }
+    //public void OnClickOpenPolicyPanel()
+    //{
+    //    policy_panel.SetActive(true);
+    //}
 
-    public void OnClickClosePolicyPanel()
-    {
-        policy_panel.SetActive(false);
-    }
+    //public void OnClickClosePolicyPanel()
+    //{
+    //    policy_panel.SetActive(false);
+    //}
 
-    public void OnClickOpenPrivacy()
-    {     
-        GamePubSDK.Ins.OpenPolicyLink(PubPolicyType.PRIVACY, result =>
-        {
-            result.Match(
-                value =>
-                {
-                    UpdateRawSection(value);
-                },
-                error =>
-                {
-                    UpdateRawSection(error);
-                });
-        });
-    }    
+    //public void OnClickOpenPrivacy()
+    //{     
+    //    GamePubSDK.Ins.OpenPolicyLink(PubPolicyType.PRIVACY, result =>
+    //    {
+    //        result.Match(
+    //            value =>
+    //            {
+    //                UpdateRawSection(value);
+    //            },
+    //            error =>
+    //            {
+    //                UpdateRawSection(error);
+    //            });
+    //    });
+    //}    
 
-    public void OnClickOpenService()
-    {        
-        GamePubSDK.Ins.OpenPolicyLink(PubPolicyType.SERVICE, result =>
-        {
-            result.Match(
-                value =>
-                {
-                    UpdateRawSection(value);
-                },
-                error =>
-                {
-                    UpdateRawSection(error);
-                });
-        });
-    }
+    //public void OnClickOpenService()
+    //{        
+    //    GamePubSDK.Ins.OpenPolicyLink(PubPolicyType.SERVICE, result =>
+    //    {
+    //        result.Match(
+    //            value =>
+    //            {
+    //                UpdateRawSection(value);
+    //            },
+    //            error =>
+    //            {
+    //                UpdateRawSection(error);
+    //            });
+    //    });
+    //}
 
     public void OnClickImageBanner()
-    {        
-        //img_banner_panel.imgSlider.Banners.Add(new Banner("https://pubsdk-cdn.gamepub.co.kr/200901/202106/P21063018071188423.jpg"));
-        //img_banner_panel.imgSlider.Banners.Add(new Banner("https://pubsdk-cdn.gamepub.co.kr/200901/202106/P21063018072739717.jpg"));
+    {
         img_banner_panel.gameObject.SetActive(true);
     }
 

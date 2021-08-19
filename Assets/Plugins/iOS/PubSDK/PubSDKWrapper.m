@@ -112,6 +112,15 @@
     }];
 }
 
+- (void)setAgreePush:(BOOL)push
+           pushNight:(BOOL)pushNight
+              pushAd:(BOOL)pushAd
+{
+    [[PubApiClient getInstance] setAgreePush:push
+                                   pushNight:pushNight
+                                      pushAd:pushAd];
+}
+
 - (NSString *)getLoginType
 {
     return [[PubApiClient getInstance] getLastLoginType];

@@ -71,6 +71,20 @@ namespace GamePub.PubSDK
         }
 
         [DllImport("__Internal")]
+        private static extern void pub_sdk_setAgreePush(bool push,
+                                                        bool pushNight,
+                                                        bool pushAd);
+        public static void SetAgreePush(bool push,
+                                        bool pushNight,
+                                        bool pushAd)
+        {
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(null)) { return; }
+
+            pub_sdk_setAgreePush(push, pushNight, pushAd);
+        }
+
+        [DllImport("__Internal")]
         private static extern string pub_sdk_getLoginType();
         public static string GetLoginType()
         {

@@ -87,6 +87,18 @@ void pub_sdk_userInfoUpdate(const char* identifier,
                                             pushAd:pushAd];
 }
 
+PUB_SDK_EXTERNC void pub_sdk_setAgreePush(bool push,
+                                          bool pushNight,
+                                          bool pushAd);
+void pub_sdk_setAgreePush(bool push,
+                          bool pushNight,
+                          bool pushAd)
+{
+    [[PubSDKWrapper sharedInstance] setAgreePush:push
+                                       pushNight:pushNight
+                                          pushAd:pushAd];
+}
+
 PUB_SDK_EXTERNC const char* pub_sdk_getLoginType();
 const char* pub_sdk_getLoginType()
 {

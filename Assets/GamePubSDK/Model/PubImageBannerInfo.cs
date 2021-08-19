@@ -9,7 +9,7 @@ namespace GamePub.PubSDK
         [SerializeField]
         private int sort = 0;
         [SerializeField]
-        private string storeList = "";        
+        private string storeList = "";
         [SerializeField]
         private string startDate = "";
         [SerializeField]

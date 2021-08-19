@@ -80,6 +80,13 @@ namespace GamePub.PubSDK
             GamePubAPI.UserInfoUpdate(languageCode, push, pushNight, pushAd, action);
         }
 
+        public void SetAgreePush(bool push,
+                                 bool pushNight,
+                                 bool pushAd)
+        {
+            NativeInterface.SetAgreePush(push, pushNight, pushAd);
+        }
+
         public void Secede(Action<Result<PubUnit>> action)
         {
             GamePubAPI.Secede(action);

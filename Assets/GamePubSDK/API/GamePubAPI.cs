@@ -43,7 +43,7 @@ namespace GamePub.PubSDK
                                            push,
                                            pushNight,
                                            pushAd);
-        }
+        }        
 
         public static void Secede(Action<Result<PubUnit>> action)
         {

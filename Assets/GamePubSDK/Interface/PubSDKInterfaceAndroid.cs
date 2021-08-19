@@ -76,7 +76,23 @@ namespace GamePub.PubSDK
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("userInfoUpdate", param);
-        }        
+        }
+
+        public static void SetAgreePush(bool push,
+                                        bool pushNight,
+                                        bool pushAd)
+        {
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(null)) { return; }
+
+            object[] param = new object[3];            
+            param[0] = push;
+            param[1] = pushNight;
+            param[2] = pushAd;
+
+            if (pubSdkWrapper != null)
+                pubSdkWrapper.Call("setAgreePush", param);
+        }
 
         public static string GetLoginType()
         {
