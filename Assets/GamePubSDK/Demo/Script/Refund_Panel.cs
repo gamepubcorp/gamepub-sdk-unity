@@ -12,7 +12,7 @@ public struct ChildData
     //public string Note2;
 
     public ChildData(string t, string n1)
-    {
+    {        
         Title = t;
         Note = n1;
         //Note2 = n2;

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using GamePub.PubSDK;
 
-
 public class LoginController : MonoBehaviour
 {
     public Text messageText;
@@ -16,7 +15,7 @@ public class LoginController : MonoBehaviour
     public GameObject policy_panel;
 
     private void Awake()
-    {
+    {       
         GamePubSDK.Ins.SetupSDK(result =>
         {
             result.Match(
@@ -197,14 +196,10 @@ public class LoginController : MonoBehaviour
     }
 
     public void OnClickClosePolicyPanel()
-    {
-        Debug.Log(UserInfoManager.Ins.push);
-        Debug.Log(UserInfoManager.Ins.pushAd);
-        Debug.Log(UserInfoManager.Ins.pushNight);
-        GamePubSDK.Ins.SetAgreePush(
-            UserInfoManager.Ins.push,
-            UserInfoManager.Ins.pushNight,
-            UserInfoManager.Ins.pushAd);
+    {        
+        GamePubSDK.Ins.SetTermsOfServiceAgreePush(UserInfoManager.Ins.push,
+                                                  UserInfoManager.Ins.pushNight,
+                                                  UserInfoManager.Ins.pushAd);
         policy_panel.SetActive(false);
     }
 

@@ -349,50 +349,13 @@ public class MainController : MonoBehaviour
                 {
                     UpdateRawSection(error);
                 });
-        });        
+        });
     }
 
-    //public void OnClickOpenPolicyPanel()
-    //{
-    //    policy_panel.SetActive(true);
-    //}
-
-    //public void OnClickClosePolicyPanel()
-    //{
-    //    policy_panel.SetActive(false);
-    //}
-
-    //public void OnClickOpenPrivacy()
-    //{     
-    //    GamePubSDK.Ins.OpenPolicyLink(PubPolicyType.PRIVACY, result =>
-    //    {
-    //        result.Match(
-    //            value =>
-    //            {
-    //                UpdateRawSection(value);
-    //            },
-    //            error =>
-    //            {
-    //                UpdateRawSection(error);
-    //            });
-    //    });
-    //}    
-
-    //public void OnClickOpenService()
-    //{        
-    //    GamePubSDK.Ins.OpenPolicyLink(PubPolicyType.SERVICE, result =>
-    //    {
-    //        result.Match(
-    //            value =>
-    //            {
-    //                UpdateRawSection(value);
-    //            },
-    //            error =>
-    //            {
-    //                UpdateRawSection(error);
-    //            });
-    //    });
-    //}
+    public void OnClickQuit()
+    {
+        Application.Quit();
+    }
 
     public void OnClickImageBanner()
     {
@@ -603,7 +566,7 @@ public class MainController : MonoBehaviour
     }
 
     IEnumerator UpdateProfile(string url)
-    {
+    {        
         if (url != null)
         {
             var www = UnityWebRequestTexture.GetTexture(url);

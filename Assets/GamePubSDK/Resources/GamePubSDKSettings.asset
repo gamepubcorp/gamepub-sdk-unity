@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e0d182f161544c99bf94a6504a8c391, type: 3}
   m_Name: GamePubSDKSettings
   m_EditorClassIdentifier: 
-  liveServerUrlBase: pubsdkapitest.igamepub.co.kr
-  testServerUrlBase: pubsdkapidev.igamepub.co.kr
   sdkAppId: 200901
-  testBuild: 1
+  devBuild: 0

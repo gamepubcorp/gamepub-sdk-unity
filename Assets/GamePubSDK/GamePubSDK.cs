@@ -6,7 +6,8 @@ namespace GamePub.PubSDK
 {
     public class GamePubSDK : MonoBehaviour
     {
-        private static GamePubSDK instance;        
+        private static GamePubSDK instance;
+        private bool isSetup = false;
 
         void Awake()
         {                                    
@@ -39,13 +40,15 @@ namespace GamePub.PubSDK
             if (GetLastLoginType() != PubLoginType.NONE)
             {
                 if (pause)
-                {
-                    Debug.Log("ping stop");
+                {                    
+                    string str = "ping stop";
+                    str.Log();
                     StopPing();
                 }
                 else
                 {
-                    Debug.Log("ping start");
+                    string str = "ping start";
+                    str.Log();
                     StartPing();
                 }
             }
@@ -58,6 +61,7 @@ namespace GamePub.PubSDK
                 throw new System.Exception("Gamepub SDK AppID is not set.");
             }
             GamePubAPI.SetupSDK(GamePubSDKSettings.AppID, action);
+            isSetup = true;
         }
 
         public void Login(PubLoginType loginType, PubAccountServiceType serviceType, Action<Result<PubLoginResult>> action)
@@ -80,11 +84,12 @@ namespace GamePub.PubSDK
             GamePubAPI.UserInfoUpdate(languageCode, push, pushNight, pushAd, action);
         }
 
-        public void SetAgreePush(bool push,
-                                 bool pushNight,
-                                 bool pushAd)
+        public void SetTermsOfServiceAgreePush(bool push,
+                                               bool pushNight,
+                                               bool pushAd)
         {
-            NativeInterface.SetAgreePush(push, pushNight, pushAd);
+            if(isSetup)
+                NativeInterface.SetAgreePush(push, pushNight, pushAd);
         }
 
         public void Secede(Action<Result<PubUnit>> action)
@@ -109,6 +114,8 @@ namespace GamePub.PubSDK
 
         public PubLoginType GetLastLoginType()
         {
+            if(!isSetup)
+                return PubLoginType.NONE;
             if (AuthenticationState == null)
                 return PubLoginType.NONE;
             return (PubLoginType)AuthenticationState.LoginType;
@@ -236,19 +243,22 @@ namespace GamePub.PubSDK
 
         public void OnApiOk(string result)
         {
-            Debug.Log("OnApiOk : " + result);
+            result.SuccessLog();
+            //Debug.Log("OnApiOk : " + result);
             GamePubAPI._OnApiOk(result);
         }
 
         public void OnApiError(string result)
         {
-            Debug.Log("OnApiError : " + result);
+            result.ErrorLog();
+            //Debug.Log("OnApiError : " + result);
             GamePubAPI._OnApiError(result);
         }
 
         public void OnApiUpdate(string result)
         {
-            Debug.Log("OnApiUpdate : " + result);
+            result.UpdateLog();
+            //Debug.Log("OnApiUpdate : " + result);
             GamePubAPI._OnApiUpdate(result);
         }
     }
