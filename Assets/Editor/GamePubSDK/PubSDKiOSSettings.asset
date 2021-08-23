@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d310e1206bdf4fcaab6b25daa34ce81, type: 3}
   m_Name: PubSDKiOSSettings
   m_EditorClassIdentifier: 
-  iOSDependencyManager: CocoaPods
+  iOSDependencyManager: None
   appleLogin: 1
   facebookLogin: 1
   facebookAppID: 206076617381252

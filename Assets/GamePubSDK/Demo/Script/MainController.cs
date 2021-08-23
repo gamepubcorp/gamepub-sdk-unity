@@ -385,7 +385,7 @@ public class MainController : MonoBehaviour
                     //error.Message
                     UpdateRawSection(error);
                 });
-        });        
+        });
     }
 
     public void OnClickInPurchase2000()

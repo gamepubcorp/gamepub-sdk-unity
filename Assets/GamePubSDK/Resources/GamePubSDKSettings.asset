@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GamePubSDKSettings
   m_EditorClassIdentifier: 
   sdkAppId: 200901
-  devBuild: 0
+  devBuild: 1
