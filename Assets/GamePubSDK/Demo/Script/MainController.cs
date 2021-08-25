@@ -82,6 +82,10 @@ public class MainController : MonoBehaviour
                         {
                             break;
                         }
+                    case (int)PubMessageCode.Forbidden:
+                        {
+                            break;
+                        }
                     case (int)PubMessageCode.PRECONDITION_FAILED:
                         {
                             break;
@@ -125,8 +129,9 @@ public class MainController : MonoBehaviour
                         {
                             UpdateRawSection(value.ImgBannerList[i]);
                             img_banner_panel.imgSlider.Banners.Add(new Banner(value.ImgBannerList[i].Images));
-                        }                        
-                    }
+                        }
+                        img_banner_panel.gameObject.SetActive(true);
+                    }                    
                 },
                 error =>
                 {
@@ -355,12 +360,7 @@ public class MainController : MonoBehaviour
     public void OnClickQuit()
     {
         Application.Quit();
-    }
-
-    public void OnClickImageBanner()
-    {
-        img_banner_panel.gameObject.SetActive(true);
-    }
+    }    
 
     public void OnClickImageBannerClose()
     {

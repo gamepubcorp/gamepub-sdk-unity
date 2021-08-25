@@ -58,6 +58,7 @@ namespace GamePub.PubSDK
     {
         OK = 200,                   //정상
         MultiStatus = 207,          //중복로그인
+        Forbidden = 403,            //회원탈퇴
         PRECONDITION_FAILED = 412,  //IP차단
         Locked = 423,               //회원제재
         SERVICE_UNAVAILABLE = 503,  //서버점검

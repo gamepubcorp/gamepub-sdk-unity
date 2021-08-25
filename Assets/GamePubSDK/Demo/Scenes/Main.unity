@@ -738,7 +738,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &90636240
 RectTransform:
   m_ObjectHideFlags: 0
@@ -754,10 +754,10 @@ RectTransform:
   m_Father: {fileID: 642237821}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 151.5, y: -20}
+  m_SizeDelta: {x: 270, y: 35}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &90636241
 MonoBehaviour:
@@ -3813,7 +3813,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 909889808}
   m_HandleRect: {fileID: 909889807}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -12259,7 +12259,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1542072947}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.22075556
+  m_Size: 0.22066228
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -15324,7 +15324,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Toggle1
+  m_Text: Title
 --- !u!222 &1606163183
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18767,12 +18767,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "<color=red>* \uC624\uB958 \uC548\uB0B4 *</color>\n\uD604\uC7AC \uAC8C\uC784
-    \uADF8\uB798\uD53D \uD488\uC9C8 \uC124\uC815\uC5D0\uC11C [\uB0AE\uC74C]\uC73C\uB85C
-    \uC124\uC815 \uD55C \uACBD\uC6B0\n\uB358\uC804 \uC774\uB3D9\uC774 \uBD88\uAC00\uD558\uC624\uB2C8,\n\uC124\uC815
-    - \uD488\uC9C8 \uC124\uC815\uC5D0\uC11C \uC0AC\uC6A9\uD558\uC2DC\uB294 \uADF8\uB798\uD53D
-    \uD488\uC9C8\uC744\n\uC0C1\uD5A5\uD558\uC154\uC11C \uB358\uC804 \uBC0F \uB9C8\uC744
-    \uC774\uB3D9\uC744 \uD574\uC8FC\uC2DC\uAE30 \uBD80\uD0C1\uB4DC\uB9BD\uB2C8\uB2E4."
+  m_Text: "\uACF5\uC9C0\uAC00 \uC5C6\uC2B5\uB2C8\uB2E4."
 --- !u!222 &1951101638
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18940,8 +18935,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 44923251}
   m_HandleRect: {fileID: 44923250}
   m_Direction: 2
-  m_Value: 1.0000005
-  m_Size: 0.8044244
+  m_Value: 1
+  m_Size: 0.8040946
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

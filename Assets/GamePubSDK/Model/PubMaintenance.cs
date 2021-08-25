@@ -7,9 +7,7 @@ namespace GamePub.PubSDK
     public class PubMaintenance
     {
         [SerializeField]
-        private int appId = 0;
-        [SerializeField]
-        private string store = "";
+        private int appId = 0;        
         [SerializeField]
         private string startDate = "";
         [SerializeField]
@@ -21,11 +19,9 @@ namespace GamePub.PubSDK
         [SerializeField]
         private string language = "";
         [SerializeField]
-        private string message = "";        
+        private string message = "";
 
-        public int AppId { get { return appId; } }
-
-        public string Store { get { return store; } }
+        public int AppId { get { return appId; } }        
         public string StartDate { get { return startDate; } }
         public string EndDate { get { return endDate; } }
         public string Link { get { return link; } }

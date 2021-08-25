@@ -18,14 +18,12 @@ public class Notices
 
 public class Notice_Panel : MonoBehaviour
 {
-    
     [SerializeField]
     public List<Notices> notices;
     public GameObject[] toggleObj;
     
     void OnEnable()
-    {       
-
+    {
         GamePubSDK.Ins.OpenNotice(result =>
         {
             result.Match(
