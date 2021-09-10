@@ -44,14 +44,14 @@ namespace GamePub.PubSDK
     public enum PubApiResponseCode
     {        
         SUCCESS = 1000,
-        CANCEL,
-        NETWORK_ERROR,
-        SERVER_ERROR,
-        AUTHENTICATION_AGENT_ERROR,
-        USER_IP_BLOCK,
-        SERVICE_MAINTENANCE,
+        CANCEL,                     //사용자 취소
+        NETWORK_ERROR,              //네트워크 연결 상태 에러.
+        SERVER_ERROR,               //서버 에러
+        AUTHENTICATION_AGENT_ERROR, //로그인 인증 에러
+        USER_IP_BLOCK,              //유저 IP 차단
+        SERVICE_MAINTENANCE,        //서버 점검
         INTERNAL_ERROR,
-        PURCHASE_ERROR,
+        PURCHASE_ERROR,             //결제 에러
     }
 
     public enum PubMessageCode

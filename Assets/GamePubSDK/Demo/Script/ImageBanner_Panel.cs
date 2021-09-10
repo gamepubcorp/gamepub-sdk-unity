@@ -5,7 +5,7 @@ using GamePub.PubSDK;
 
 public class ImageBanner_Panel : MonoBehaviour
 {
-    public Slider imgSlider;
+    public ImageSlider imgSlider;
 
     // Start is called before the first frame update
     void Start()

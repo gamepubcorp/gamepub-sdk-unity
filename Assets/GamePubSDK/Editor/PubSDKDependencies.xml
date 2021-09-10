@@ -5,7 +5,7 @@
         </iosPod>
     </iosPods> -->
     <androidPackages>
-        <androidPackage spec="io.github.gamepubcorp:pubsdk:[0.3.63]"/>
+        <androidPackage spec="io.github.gamepubcorp:pubsdk:[0.3.67]"/>
         <repositories>
             <repository>https://s01.oss.sonatype.org/content/repositories/releases</repository>
         </repositories>

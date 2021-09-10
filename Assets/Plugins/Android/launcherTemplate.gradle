@@ -30,6 +30,7 @@ android {
         
         resValue("string", "facebook_app_id", "206076617381252")
         resValue("string", "google_web_client_id", "892923933661-1218sobcuhmmt93haj2j22dom4vdppgl.apps.googleusercontent.com")
+        resValue("string", "apple_client_id", "gamepub.com.PubSDKsample")
         resValue "bool", "api_dev_server", "true"
     }
 

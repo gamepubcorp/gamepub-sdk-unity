@@ -9,7 +9,7 @@ namespace GamePub.PubSDK
 	/// <summary>
 	/// Creates banners and paginator by given banner list.
 	/// </summary>
-	public class Slider : MonoBehaviour
+	public class ImageSlider : MonoBehaviour
 	{
 		[Header("Settings")]
 		public List<Banner> Banners;

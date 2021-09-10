@@ -27,6 +27,10 @@ public class LoginController : MonoBehaviour
                 error =>
                 {
                     messageText.text = error.Message;
+                    if (error.Code == (int)PubApiResponseCode.NETWORK_ERROR)
+                    {
+                        messageText.text = "네트워크 연결을 확인해주세요.";
+                    }
                     popup_panel.SetActive(true);
                 });
         });
@@ -182,7 +186,7 @@ public class LoginController : MonoBehaviour
         {
             result.Match(
                 value =>
-                {                    
+                {
                 },
                 error =>
                 {                    

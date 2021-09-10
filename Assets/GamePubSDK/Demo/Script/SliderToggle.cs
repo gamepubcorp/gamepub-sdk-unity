@@ -36,7 +36,7 @@ public class SliderToggle : MonoBehaviour
 
     public void Awake()
     {
-        slider = this.GetComponent<Slider>();
+        slider = this.GetComponent<Slider>();        
     }
 
 
