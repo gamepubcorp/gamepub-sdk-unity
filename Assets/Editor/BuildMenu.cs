@@ -75,25 +75,43 @@ public class BuildMenu : ScriptableObject
         return output;
     }
 
-    [UnityEditor.MenuItem("BuildMenu/Android", false, 3001)]
-    static void Buildmachine_Android()
+    [UnityEditor.MenuItem("BuildMenu/GoogleStore", false, 3001)]
+    static void Buildmachine_GoogleStore()
     {
-        PlayerSettings.productName = "SDKUnityDemo";
+        PlayerSettings.productName = "GoogleStoreDemo";
         PrepareAndroidBuild("com.gamepub.testapp");
 
         PerformAndroidBuild(GetAndroidOutputFile(), "", false);
     }
 
-    [UnityEditor.MenuItem("BuildMenu/Android Build And Run", false, 3002)]
-    static void Buildmachine_AndroidAuto()
+    [UnityEditor.MenuItem("BuildMenu/GoogleStore Build And Run", false, 3002)]
+    static void Buildmachine_GoogleStoreAuto()
     {
-        PlayerSettings.productName = "SDKUnityDemo";
+        PlayerSettings.productName = "GoogleStoreDemo";
         PrepareAndroidBuild("com.gamepub.testapp");
 
         PerformAndroidBuild(GetAndroidOutputFile(), "", true);
     }
 
-    [UnityEditor.MenuItem("BuildMenu/iOS", false, 3004)]
+    [UnityEditor.MenuItem("BuildMenu/OneStore", false, 3003)]
+    static void Buildmachine_OneStore()
+    {
+        PlayerSettings.productName = "OneStoreDemo";
+        PrepareAndroidBuild("com.gamepub.onestore.sample");
+
+        PerformAndroidBuild(GetAndroidOutputFile(), "", false);
+    }
+
+    [UnityEditor.MenuItem("BuildMenu/OneStore Build And Run", false, 3004)]
+    static void Buildmachine_OneStoreAuto()
+    {
+        PlayerSettings.productName = "OneStoreDemo";
+        PrepareAndroidBuild("com.gamepub.onestore.sample");
+
+        PerformAndroidBuild(GetAndroidOutputFile(), "", true);
+    }
+
+    [UnityEditor.MenuItem("BuildMenu/iOS", false, 3005)]
     static void Buildmachine_iOS()
     {
         PlayerSettings.productName = "SDKUnityDemo";
@@ -102,7 +120,7 @@ public class BuildMenu : ScriptableObject
         PerformiOSBuild(GetIOSOutputFile(), "", false);
     }
 
-    [UnityEditor.MenuItem("BuildMenu/iOS Dev", false, 3003)]
+    [UnityEditor.MenuItem("BuildMenu/iOS Dev", false, 3006)]
     static void Buildmachine_iOS_Dev()
     {
         //Debug.Log("fb"+PubSDKSettings.GetOrCreateSettings().FacebookAppID);
