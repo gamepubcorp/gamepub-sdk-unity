@@ -57,13 +57,20 @@ public class BuildMenu : ScriptableObject
         }
 
         return buildid;
-    }    
+    }
 
     static string GetAndroidOutputFile()
     {
         string output = string.Format("{0}/{1}_{2}.apk", "Android Build",
                                                      "SDKUnityDemo",
                                                      GetBuildID());
+        return output;
+    }
+
+    static string GetAndroidOutputFile(string name)
+    {
+        string output = string.Format("{0}/{1}.apk", "Android Build",
+                                                     name);
         return output;
     }
 
@@ -81,7 +88,7 @@ public class BuildMenu : ScriptableObject
         PlayerSettings.productName = "GoogleStoreDemo";
         PrepareAndroidBuild("com.gamepub.testapp");
 
-        PerformAndroidBuild(GetAndroidOutputFile(), "", false);
+        PerformAndroidBuild(GetAndroidOutputFile("Google_Local_SDKUnityDemo"), "", false);
     }
 
     [UnityEditor.MenuItem("BuildMenu/GoogleStore Build And Run", false, 3002)]
@@ -99,7 +106,7 @@ public class BuildMenu : ScriptableObject
         PlayerSettings.productName = "OneStoreDemo";
         PrepareAndroidBuild("com.gamepub.onestore.sample");
 
-        PerformAndroidBuild(GetAndroidOutputFile(), "", false);
+        PerformAndroidBuild(GetAndroidOutputFile("OneStore_Local_SDKUnityDemo"), "", false);
     }
 
     [UnityEditor.MenuItem("BuildMenu/OneStore Build And Run", false, 3004)]
