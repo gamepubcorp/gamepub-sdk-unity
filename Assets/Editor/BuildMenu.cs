@@ -61,7 +61,7 @@ public class BuildMenu : ScriptableObject
 
     static string GetAndroidOutputFile()
     {
-        string output = string.Format("{0}/{1}_{2}.apk", "Android Build",
+        string output = string.Format("{0}/{1}_{2}.apk", "AndroidBuild",
                                                      "SDKUnityDemo",
                                                      GetBuildID());
         return output;
@@ -69,14 +69,14 @@ public class BuildMenu : ScriptableObject
 
     static string GetAndroidOutputFile(string name)
     {
-        string output = string.Format("{0}/{1}.apk", "Android Build",
+        string output = string.Format("{0}/{1}.apk", "AndroidBuild",
                                                      name);
         return output;
     }
 
     static string GetIOSOutputFile()
     {
-        string output = string.Format("{0}/{1}_{2}", "iOS Build",
+        string output = string.Format("{0}/{1}_{2}", "iOSBuild",
                                                      "SDKUnityDemo",
                                                      GetBuildID());
         return output;
