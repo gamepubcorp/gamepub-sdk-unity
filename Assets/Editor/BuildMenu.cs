@@ -133,9 +133,13 @@ public class BuildMenu : ScriptableObject
     [UnityEditor.MenuItem("BuildMenu/TEST", false, 3001)]
     static void Buildmachine_TEST()
     {
+        Debug.Log("-----------------");
         Debug.Log(GetBuildPackage());
+        Debug.Log("-----------------");
         Debug.Log(GetBuildServer());
+        Debug.Log("-----------------");
         Debug.Log(GetBuildStore());
+        Debug.Log("-----------------");
     }
 
     [UnityEditor.MenuItem("BuildMenu/GoogleStore", false, 3001)]
