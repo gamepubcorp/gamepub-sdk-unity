@@ -41,23 +41,7 @@ public class BuildMenu : ScriptableObject
         }
 
         return buildid;
-    }
-
-    static string GetBuildPackage()
-    {
-        string[] args = System.Environment.GetCommandLineArgs();
-        string buildid = "10";
-        for (int i = 0; i < args.Length - 1; i++)
-        {
-            if ("-package" == args[i])
-            {
-                buildid = args[i + 1];
-                break;
-            }
-        }
-
-        return buildid;
-    }
+    }    
 
     static string GetBuildServer()
     {
@@ -116,9 +100,7 @@ public class BuildMenu : ScriptableObject
 
     [UnityEditor.MenuItem("BuildMenu/TEST", false, 3001)]
     static void Buildmachine_TEST()
-    {
-        Debug.Log("-----------------");
-        Debug.Log(GetBuildPackage());
+    {        
         Debug.Log("-----------------");
         Debug.Log(GetBuildServer());
         Debug.Log("-----------------");
