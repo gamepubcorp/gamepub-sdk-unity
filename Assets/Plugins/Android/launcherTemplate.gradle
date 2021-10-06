@@ -28,10 +28,12 @@ android {
 
         multiDexEnabled true
         
-        resValue("string", "facebook_app_id", "206076617381252")
-        resValue("string", "google_web_client_id", "892923933661-1218sobcuhmmt93haj2j22dom4vdppgl.apps.googleusercontent.com")
-        resValue("string", "apple_client_id", "gamepub.com.PubSDKsample")
-        resValue "bool", "api_dev_server", "true"
+        resValue "string", "facebook_app_id", "206076617381252"
+        resValue "string", "google_web_client_id", "892923933661-1218sobcuhmmt93haj2j22dom4vdppgl.apps.googleusercontent.com"
+        resValue "string", "apple_client_id", "gamepub.com.PubSDKsample"
+        resValue "string", "onestore_license_key", "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCKrEQiDSKIepuVq5Mw8HV8TNBwX33JjslBsItrsUOZXzsv+zQu3I1y2mDNQqd6V4rlAXbyHIm/VT9j71DA3RhPR2x6AytWK6dBnxXhKX9DNriiLA8xt9cfi7V/I1SBSMa5lsLt9WqBgNQfy6hNR5HOM1RxG33O7bxr9Dz94qNG3wIDAQAB"
+        resValue "string", "android_store", "Store"
+        resValue "string", "api_server", "Server"
     }
 
     aaptOptions {
