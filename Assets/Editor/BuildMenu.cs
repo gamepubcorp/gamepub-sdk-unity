@@ -59,6 +59,54 @@ public class BuildMenu : ScriptableObject
         return buildid;
     }
 
+    static string GetBuildPackage()
+    {
+        string[] args = System.Environment.GetCommandLineArgs();
+        string buildid = "10";
+        for (int i = 0; i < args.Length - 1; i++)
+        {
+            if ("-package" == args[i])
+            {
+                buildid = args[i + 1];
+                break;
+            }
+        }
+
+        return buildid;
+    }
+
+    static string GetBuildServer()
+    {
+        string[] args = System.Environment.GetCommandLineArgs();
+        string buildid = "10";
+        for (int i = 0; i < args.Length - 1; i++)
+        {
+            if ("-server" == args[i])
+            {
+                buildid = args[i + 1];
+                break;
+            }
+        }
+
+        return buildid;
+    }
+
+    static string GetBuildStore()
+    {
+        string[] args = System.Environment.GetCommandLineArgs();
+        string buildid = "10";
+        for (int i = 0; i < args.Length - 1; i++)
+        {
+            if ("-store" == args[i])
+            {
+                buildid = args[i + 1];
+                break;
+            }
+        }
+
+        return buildid;
+    }
+
     static string GetAndroidOutputFile()
     {
         string output = string.Format("{0}/{1}_{2}.apk", "AndroidBuild",
@@ -82,10 +130,18 @@ public class BuildMenu : ScriptableObject
         return output;
     }
 
+    [UnityEditor.MenuItem("BuildMenu/TEST", false, 3001)]
+    static void Buildmachine_TEST()
+    {
+        Debug.Log(GetBuildPackage());
+        Debug.Log(GetBuildServer());
+        Debug.Log(GetBuildStore());
+    }
+
     [UnityEditor.MenuItem("BuildMenu/GoogleStore", false, 3001)]
     static void Buildmachine_GoogleStore()
     {
-        PlayerSettings.productName = "GoogleStoreDemo";
+        PlayerSettings.productName = "GoogleLocalDemo";
         PrepareAndroidBuild("com.gamepub.testapp");
 
         PerformAndroidBuild(GetAndroidOutputFile("Google_Local_SDKUnityDemo"), "", false);
@@ -94,7 +150,7 @@ public class BuildMenu : ScriptableObject
     [UnityEditor.MenuItem("BuildMenu/GoogleStore Build And Run", false, 3002)]
     static void Buildmachine_GoogleStoreAuto()
     {
-        PlayerSettings.productName = "GoogleStoreDemo";
+        PlayerSettings.productName = "GoogleDevDemo";
         PrepareAndroidBuild("com.gamepub.testapp");
 
         PerformAndroidBuild(GetAndroidOutputFile(), "", true);
