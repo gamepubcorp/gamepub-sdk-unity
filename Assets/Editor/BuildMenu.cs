@@ -41,70 +41,67 @@ public class BuildMenu : ScriptableObject
         }
 
         return buildid;
-    }
+    }    
 
-    static string GetBuildNumber()
+    //static string GetBuildPackage()
+    //{
+    //    string[] args = System.Environment.GetCommandLineArgs();
+    //    string buildid = "10";
+    //    for (int i = 0; i < args.Length - 1; i++)
+    //    {
+    //        if ("-package" == args[i])
+    //        {
+    //            buildid = args[i + 1];
+    //            break;
+    //        }
+    //    }
+
+    //    return buildid;
+    //}
+
+    //static string GetBuildServer()
+    //{
+    //    string[] args = System.Environment.GetCommandLineArgs();
+    //    string buildid = "10";
+    //    for (int i = 0; i < args.Length - 1; i++)
+    //    {
+    //        if ("-server" == args[i])
+    //        {
+    //            buildid = args[i + 1];
+    //            break;
+    //        }
+    //    }
+
+    //    return buildid;
+    //}
+
+    //static string GetBuildStore()
+    //{
+    //    string[] args = System.Environment.GetCommandLineArgs();
+    //    string buildid = "10";
+    //    for (int i = 0; i < args.Length - 1; i++)
+    //    {
+    //        if ("-store" == args[i])
+    //        {
+    //            buildid = args[i + 1];
+    //            break;
+    //        }
+    //    }
+
+    //    return buildid;
+    //}
+
+    static string GetArg(string name)
     {
-        string[] args = System.Environment.GetCommandLineArgs();
-        string buildid = "10";
-        for (int i = 0; i < args.Length - 1; i++)
+        var args = System.Environment.GetCommandLineArgs();
+        for(int i = 0; i < args.Length; i++)
         {
-            if ("-buildno" == args[i])
+            if(args[i] == name && args.Length > i + i)
             {
-                buildid = args[i + 1];
-                break;
+                return args[i + 1];
             }
         }
-
-        return buildid;
-    }
-
-    static string GetBuildPackage()
-    {
-        string[] args = System.Environment.GetCommandLineArgs();
-        string buildid = "10";
-        for (int i = 0; i < args.Length - 1; i++)
-        {
-            if ("-package" == args[i])
-            {
-                buildid = args[i + 1];
-                break;
-            }
-        }
-
-        return buildid;
-    }
-
-    static string GetBuildServer()
-    {
-        string[] args = System.Environment.GetCommandLineArgs();
-        string buildid = "10";
-        for (int i = 0; i < args.Length - 1; i++)
-        {
-            if ("-server" == args[i])
-            {
-                buildid = args[i + 1];
-                break;
-            }
-        }
-
-        return buildid;
-    }
-
-    static string GetBuildStore()
-    {
-        string[] args = System.Environment.GetCommandLineArgs();
-        string buildid = "10";
-        for (int i = 0; i < args.Length - 1; i++)
-        {
-            if ("-store" == args[i])
-            {
-                buildid = args[i + 1];
-                break;
-            }
-        }
-
-        return buildid;
+        return null;
     }
 
     static string GetAndroidOutputFile()
@@ -134,11 +131,11 @@ public class BuildMenu : ScriptableObject
     static void Buildmachine_TEST()
     {
         Debug.Log("-----------------");
-        Debug.Log(GetBuildPackage());
+        Debug.Log(GetArg("-package"));
         Debug.Log("-----------------");
-        Debug.Log(GetBuildServer());
+        Debug.Log(GetArg("-server"));
         Debug.Log("-----------------");
-        Debug.Log(GetBuildStore());
+        Debug.Log(GetArg("-store"));
         Debug.Log("-----------------");
     }
 
