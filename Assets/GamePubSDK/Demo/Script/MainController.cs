@@ -9,8 +9,8 @@ using GamePub.PubSDK;
 public class MainController : MonoBehaviour
 {
 #if UNITY_ANDROID || UNITY_EDITOR
-    string productID_1 = "gamepub_1000";
-    string productID_2 = "gamepub_2000";
+    string productID_1 = "com.gamepub.test1000";
+    string productID_2 = "com.gamepub.test2000";
 #elif UNITY_IOS
     string productID_1 = "com.gamepub.unity.inapp1200";
     string productID_2 = "com.gamepub.unity.inapp2500";    
@@ -35,18 +35,13 @@ public class MainController : MonoBehaviour
     //language setting
     public Dropdown dropdownLang;
     private PubLanguageCode currentCode;
-
-    //public GameObject policy_panel;
+    
     public GameObject notice_panel;
     public GameObject versionCheck_panel;
     public GameObject setting_panel;
     public GameObject coupon_panel;
     public GameObject popup_panel;
-    public ImageBanner_Panel img_banner_panel;
-
-    //public GameObject   pushToggle;
-    //public GameObject   adPushToggle;
-    //public GameObject   nightPushToggle;
+    public ImageBanner_Panel img_banner_panel;    
 
     string appUrl = "";
 
@@ -137,7 +132,24 @@ public class MainController : MonoBehaviour
                 {
                     UpdateRawSection(error);
                 });
-        });        
+        });
+
+        //결제초기화(소비되지 않은 결제건에 대하여 처리후 결제정보리스트 리턴)
+        GamePubSDK.Ins.InitBilling(result =>
+        {
+            result.Match(
+                value =>
+                {
+                    foreach(PubPurchaseData data in value.PurchaseResultList)
+                    {
+                        UpdateRawSection(data);
+                    }
+                },
+                error =>
+                {
+                    UpdateRawSection(error);
+                });
+        });
     }    
 
     public void OnClickSecede()
@@ -275,88 +287,7 @@ public class MainController : MonoBehaviour
                         popup_panel.SetActive(true);
                     });
             });
-    }
-
-    //public void OnPushClick()
-    //{
-    //    SliderToggle push = pushToggle.GetComponent<SliderToggle>();
-    //    push.callback = (bool status) =>
-    //    {            
-    //        GamePubSDK.Ins.UserInfoUpdate(
-    //        UserInfoManager.Ins.currentCode,
-    //        status,
-    //        UserInfoManager.Ins.pushNight,
-    //        UserInfoManager.Ins.pushAd,
-    //        result =>
-    //        {
-    //            result.Match(
-    //                value =>
-    //                {
-    //                    UpdateRawSection(value);
-    //                    UserInfoManager.Ins.push = value.AgreePush;
-    //                },
-    //                error =>
-    //                {
-    //                    UpdateRawSection(error);
-    //                });
-    //        });
-    //    };
-    //    push.ChangeToggle();        
-    //}
-
-    //public void OnAdPushClick()
-    //{
-    //    SliderToggle push = adPushToggle.GetComponent<SliderToggle>();
-    //    push.callback = (bool status) =>
-    //    {
-    //        GamePubSDK.Ins.UserInfoUpdate(
-    //        UserInfoManager.Ins.currentCode,
-    //        UserInfoManager.Ins.push,
-    //        UserInfoManager.Ins.pushNight,
-    //        status,
-    //        result =>
-    //        {
-    //            result.Match(
-    //                value =>
-    //                {
-    //                    UpdateRawSection(value);
-    //                    UserInfoManager.Ins.pushAd = value.AgreeAd;
-    //                },
-    //                error =>
-    //                {
-    //                    UpdateRawSection(error);
-    //                });
-    //        });
-    //    };
-    //    push.ChangeToggle();
-    //}
-
-    //public void OnNightPushClick()
-    //{
-    //    SliderToggle push = nightPushToggle.GetComponent<SliderToggle>();
-    //    push.callback = (bool status) =>
-    //    {
-    //        GamePubSDK.Ins.UserInfoUpdate(
-    //        UserInfoManager.Ins.currentCode,
-    //        UserInfoManager.Ins.push,
-    //        status,
-    //        UserInfoManager.Ins.pushAd,
-    //        result =>
-    //        {
-    //            result.Match(
-    //                value =>
-    //                {
-    //                    UpdateRawSection(value);
-    //                    UserInfoManager.Ins.pushNight = value.AgreeNight;
-    //                },
-    //                error =>
-    //                {
-    //                    UpdateRawSection(error);
-    //                });
-    //        });
-    //    };
-    //    push.ChangeToggle();
-    //}
+    }    
 
     public void SelectedLangBtn(int index)
     {

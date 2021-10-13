@@ -6,7 +6,8 @@ allprojects {
             google()
             mavenCentral()
             maven {
-                url "https://s01.oss.sonatype.org/content/repositories/releases/"
+                //url "https://s01.oss.sonatype.org/content/repositories/releases/"
+                url "https://s01.oss.sonatype.org/content/groups/staging/"
             }
         }
 
@@ -26,7 +27,8 @@ allprojects {
         google()
         mavenCentral()
         maven {
-            url "https://s01.oss.sonatype.org/content/repositories/releases/"
+            //url "https://s01.oss.sonatype.org/content/repositories/releases/"
+            url "https://s01.oss.sonatype.org/content/groups/staging/"
         }
         flatDir {
             dirs "${project(':unityLibrary').projectDir}/libs"

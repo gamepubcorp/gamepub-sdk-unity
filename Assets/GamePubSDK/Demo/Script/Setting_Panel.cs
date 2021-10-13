@@ -18,7 +18,7 @@ public class Setting_Panel : MonoBehaviour
             UserInfoManager.Ins.loginResult.UserLoginInfo.AgreeAd);
         nightPushToggle.GetComponent<SliderToggle>().SetToggle(
             UserInfoManager.Ins.loginResult.UserLoginInfo.AgreeNight);
-    }    
+    }
 
     public void OnPushClick()
     {

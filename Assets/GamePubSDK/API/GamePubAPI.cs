@@ -56,20 +56,20 @@ namespace GamePub.PubSDK
         {
             var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
             NativeInterface.SecedeCancel(identifier, loginType);
-        }
-
-        //public static void ImageBanner(string ratioWidth,
-        //                               string ratioHeight,
-        //                               Action<Result<PubUnit>> action)
-        //{
-        //    var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
-        //    NativeInterface.ImageBanner(identifier, ratioWidth, ratioHeight);
-        //}
+        }        
 
         public static void GetImageBanner(Action<Result<PubImageBannerList>> action)
         {
             var identifier = AddAction(FlattenAction.JsonFlatten<PubImageBannerList>(action));
             NativeInterface.GetImageBanner(identifier);
+        }
+
+        public static void InitBilling(Action<Result<PubPurchaseResultList>> action)
+        {
+            var identifier = AddAction(FlattenAction.JsonFlatten<PubPurchaseResultList>(action));
+#if UNITY_ANDROID
+            NativeInterface.InitBilling(identifier);
+#endif
         }
 
         public static void InAppPurchase(string pid,
