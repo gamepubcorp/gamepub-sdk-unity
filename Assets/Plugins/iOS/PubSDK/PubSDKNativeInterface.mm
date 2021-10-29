@@ -113,12 +113,12 @@ const char* pub_sdk_getLanguageList()
     return PubSDKMakeCString(result);
 }
 
-PUB_SDK_EXTERNC const char* pub_sdk_getProductList();
-const char* pub_sdk_getProductList()
-{
-    NSString *result = [[PubSDKWrapper sharedInstance] getProductList];
-    return PubSDKMakeCString(result);
-}
+//PUB_SDK_EXTERNC const char* pub_sdk_getProductList();
+//const char* pub_sdk_getProductList()
+//{
+//    NSString *result = [[PubSDKWrapper sharedInstance] getProductList];
+//    return PubSDKMakeCString(result);
+//}
 
 PUB_SDK_EXTERNC void pub_sdk_secede(const char* identifier) {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);    
@@ -141,24 +141,14 @@ void pub_sdk_openPolicyLink(const char* identifier, int policyType)
                                         policyType:policyType];
 }
 
-//PUB_SDK_EXTERNC void pub_sdk_imageBanner(const char* identifier,
-//                                         const char* ratioWidth,
-//                                         const char* ratioHeight);
-//void pub_sdk_imageBanner(const char* identifier,
-//                         const char* ratioWidth,
-//                         const char* ratioHeight)
-//{
-//    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
-//    NSString *nsRatioWidth = PubSDKMakeNSString(ratioWidth);
-//    NSString *nsRatioHeight = PubSDKMakeNSString(ratioHeight);
-//    [[PubSDKWrapper sharedInstance] imageBanner:nsIdentifier
-//                                     ratioWidth:nsRatioWidth
-//                                    ratioHeight:nsRatioHeight];
-//}
-
 PUB_SDK_EXTERNC void pub_sdk_getImageBanner(const char* identifier) {
     NSString *nsIdentifier = PubSDKMakeNSString(identifier);
     [[PubSDKWrapper sharedInstance] getImageBanner:nsIdentifier];
+}
+
+PUB_SDK_EXTERNC void pub_sdk_initBilling(const char* identifier) {
+    NSString *nsIdentifier = PubSDKMakeNSString(identifier);
+    [[PubSDKWrapper sharedInstance] initBilling:nsIdentifier];
 }
 
 PUB_SDK_EXTERNC void pub_sdk_inAppPurchase(const char* identifier,

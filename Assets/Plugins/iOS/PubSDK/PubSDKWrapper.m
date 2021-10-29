@@ -131,10 +131,10 @@
     return [[PubApiClient getInstance] getLanguageList];
 }
 
-- (NSString *)getProductList
-{
-    return [[PubApiClient getInstance] getProductList];
-}
+//- (NSString *)getProductList
+//{
+//    return [[PubApiClient getInstance] getProductList];
+//}
 
 - (void)secede:(NSString *)identifier
 {
@@ -188,28 +188,26 @@
     }];
 }
 
-//- (void)imageBanner:(NSString *)identifier
-//         ratioWidth:(NSString *)ratioWidth
-//        ratioHeight:(NSString *)ratioHeight
-//{
-//    [[PubApiClient getInstance] imageBanner:ratioWidth
-//                                ratioHeight:ratioHeight
-//                                 completion:^(NSString *unitResult, NSError *error)
-//    {
-//        if(error)
-//        {
-//            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
-//            [callbackMsg sendMessageError];
-//        }else{
-//            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
-//            [callbackMsg sendMessageOK];
-//        }
-//    }];
-//}
-
 - (void)getImageBanner:(NSString *)identifier
 {
     [[PubApiClient getInstance] getImageBanner:^(NSString *unitResult, NSError *error)
+    {
+        if(error)
+        {
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:[self wrapError:error]];
+            [callbackMsg sendMessageError];
+        }else{
+            PubSDKCallbackMessageForUnity *callbackMsg = [PubSDKCallbackMessageForUnity callbackMessage:identifier value:unitResult];
+            [callbackMsg sendMessageOK];
+        }
+    }];
+}
+
+- (void)initBilling:(NSString *)identifier
+{
+    
+    [[PubApiClient getInstance] initBilling:^(NSString * _Nullable unitResult,
+                                              NSError * _Nullable error)
     {
         if(error)
         {

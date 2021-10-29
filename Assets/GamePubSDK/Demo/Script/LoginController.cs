@@ -27,7 +27,7 @@ public class LoginController : MonoBehaviour
                 error =>
                 {
                     messageText.text = error.Message;
-                    if (error.Code == (int)PubApiResponseCode.NETWORK_ERROR)
+                    if (error.Code == (int)PubErrorCode.NETWORK)
                     {
                         messageText.text = "네트워크 연결을 확인해주세요.";
                     }
@@ -211,7 +211,7 @@ public class LoginController : MonoBehaviour
     {
         if (result != null)
         {            
-            if (result.ResponseCode == (int)PubApiResponseCode.SUCCESS)
+            if (result.ResponseCode == (int)PubResponseCode.SUCCESS)
             {
                 if (result.UserLoginInfo.Status == (int)PubAccountStatus.B)
                 {
@@ -228,7 +228,7 @@ public class LoginController : MonoBehaviour
                     popup_panel.SetActive(true);
                 }
             }
-            else if (result.ResponseCode == (int)PubApiResponseCode.SERVICE_MAINTENANCE)
+            else if (result.ResponseCode == (int)PubResponseCode.SERVICE_MAINTENANCE)
             {
                 messageText.text = result.Maintenance.Message;
                 popup_panel.SetActive(true);

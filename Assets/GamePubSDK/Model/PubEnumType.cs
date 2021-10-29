@@ -41,17 +41,22 @@ namespace GamePub.PubSDK
         RUSSIAN,    //러시아
     }
 
-    public enum PubApiResponseCode
+    public enum PubResponseCode
     {        
-        SUCCESS = 1000,
-        CANCEL,                     //사용자 취소
-        NETWORK_ERROR,              //네트워크 연결 상태 에러.
-        SERVER_ERROR,               //서버 에러
-        AUTHENTICATION_AGENT_ERROR, //로그인 인증 에러
+        SUCCESS = 5000,
+        FAILED,
         USER_IP_BLOCK,              //유저 IP 차단
-        SERVICE_MAINTENANCE,        //서버 점검
-        INTERNAL_ERROR,
-        PURCHASE_ERROR,             //결제 에러
+        SERVICE_MAINTENANCE,        //서버 점검                                                                
+    }
+
+    public enum PubErrorCode
+    {
+        NOT_DEFINED = -1,
+        CANCEL = 7001,        //사용자 취소
+        NETWORK,              //네트워크 연결 상태 에러.
+        AUTHENTICATION,       //로그인 인증 에러
+        PURCHASE,             //결제 에러
+        NO_DATA,              //PubSDK 콘솔에 설정된 데이터가 없음.
     }
 
     public enum PubMessageCode
@@ -77,5 +82,5 @@ namespace GamePub.PubSDK
         ADMIN = 100,              //관리자 차단
         LOGIN_VERIFY_ERR = 200,   //로그인검증 오류
         REFUND = 300,             //환불자 차단
-    }
+    }    
 }

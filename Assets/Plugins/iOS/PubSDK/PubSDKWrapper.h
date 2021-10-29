@@ -33,7 +33,7 @@
 
 - (NSString *)getLoginType;
 - (NSString *)getLanguageList;
-- (NSString *)getProductList;
+//- (NSString *)getProductList;
 
 - (void)secede:(NSString *)identifier;
 - (void)secedeCancel:(NSString *)identifier
@@ -42,10 +42,9 @@
 - (void)openPolicyLink:(NSString *)identifier
             policyType:(int)policyType;
 
-//- (void)imageBanner:(NSString *)identifier
-//         ratioWidth:(NSString *)ratioWidth
-//        ratioHeight:(NSString *)ratioHeight;
 - (void)getImageBanner:(NSString *)identifier;
+
+- (void)initBilling:(NSString *)identifier;
 
 - (void)purchaseLaunch:(NSString *)identifier
                    pid:(NSString *)pid

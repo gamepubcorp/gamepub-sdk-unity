@@ -110,13 +110,13 @@ namespace GamePub.PubSDK
             return pubSdkWrapper.Call<string>("getLanguageList");
         }
 
-        public static string GetProductList()
-        {
-            if (!Application.isPlaying) { return null; }
-            if (IsInvalidRuntime(null)) { return null; }
+        //public static string GetProductList()
+        //{
+        //    if (!Application.isPlaying) { return null; }
+        //    if (IsInvalidRuntime(null)) { return null; }
 
-            return pubSdkWrapper.Call<string>("getProductList");
-        }
+        //    return pubSdkWrapper.Call<string>("getProductList");
+        //}
 
         public static void Secede(string identifier)
         {
@@ -179,6 +179,18 @@ namespace GamePub.PubSDK
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("initBilling", param);
+        }
+
+        public static void RestorePurchases(string identifier)
+        {
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
+
+            object[] param = new object[1];
+            param[0] = identifier;
+
+            if (pubSdkWrapper != null)
+                pubSdkWrapper.Call("restorePurchases", param);
         }
 
         public static void InAppPurchase(string identifier,

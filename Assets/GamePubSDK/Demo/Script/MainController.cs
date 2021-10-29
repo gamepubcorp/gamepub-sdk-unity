@@ -9,7 +9,7 @@ using GamePub.PubSDK;
 public class MainController : MonoBehaviour
 {
 #if UNITY_ANDROID || UNITY_EDITOR
-    string productID_1 = "com.gamepub.test1000";
+    string productID_1 = "gamepub_1000";
     string productID_2 = "com.gamepub.test2000";
 #elif UNITY_IOS
     string productID_1 = "com.gamepub.unity.inapp1200";
@@ -52,7 +52,7 @@ public class MainController : MonoBehaviour
 
         //언어설정        
         foreach (PubLanguageCode langCode in GamePubSDK.Ins.GetLanguageList().LangList)
-        {
+        {            
             //Enum.TryParse(strLang, out langCode);
             UserInfoManager.Ins.LangList.Add(langCode);
         }
@@ -105,12 +105,23 @@ public class MainController : MonoBehaviour
         PubLoginResult loginResult = UserInfoManager.Ins.loginResult;
         UpdateUserInfo(loginResult);
 
-        //인앱상품리스트 받아오기
-        UserInfoManager.Ins.ProductList = GamePubSDK.Ins.GetProductList().InAppProducts;
-        for (int i = 0; i < UserInfoManager.Ins.ProductList.Length; i++)
+        //결제초기화
+        GamePubSDK.Ins.InitBilling(result =>
         {
-            UpdateRawSection(UserInfoManager.Ins.ProductList[i]);
-        }
+            result.Match(
+                value =>
+                {
+                    UserInfoManager.Ins.ProductList = value.InAppProducts;
+
+                    for (int i = 0; i < value.InAppProducts.Length; i++)
+                    {
+                        UpdateRawSection(value.InAppProducts[i]);
+                    }
+                },error =>
+                {
+                    UpdateRawSection(error);
+                });
+        });               
 
         //이미지배너 설정
         GamePubSDK.Ins.GetImageBanner(result =>
@@ -118,7 +129,7 @@ public class MainController : MonoBehaviour
             result.Match(
                 value =>
                 {
-                    if (value.ImgBannerList.Length != 0)
+                    if (value.ImgBannerList != null && value.ImgBannerList.Length != 0)
                     {
                         for (int i = 0; i < value.ImgBannerList.Length; i++)
                         {
@@ -127,30 +138,44 @@ public class MainController : MonoBehaviour
                         }
                         img_banner_panel.gameObject.SetActive(true);
                     }
-                },
-                error =>
-                {
-                    UpdateRawSection(error);
-                });
-        });
-
-        //결제초기화(소비되지 않은 결제건에 대하여 처리후 결제정보리스트 리턴)
-        GamePubSDK.Ins.InitBilling(result =>
-        {
-            result.Match(
-                value =>
-                {
-                    foreach(PubPurchaseData data in value.PurchaseResultList)
+                    else
                     {
-                        UpdateRawSection(data);
+                        Debug.Log("ImgBannerList is NULL");
                     }
                 },
                 error =>
                 {
                     UpdateRawSection(error);
                 });
+        });        
+    }
+
+    public void OnClickRestorePurchases()
+    {
+        //소비되지 않은 결제건에 대하여 처리후 결제정보리스트 리턴)
+        GamePubSDK.Ins.RestorePurchases(result =>
+        {
+            result.Match(
+                value =>
+                {
+                    if(value.PurchaseResultList != null)
+                    {
+                        foreach (PubPurchaseData data in value.PurchaseResultList)
+                        {
+                            UpdateRawSection(data);
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("PurchaseResultList is NULL");
+                    }                    
+                },
+                error =>
+                {
+                    UpdateRawSection(error);
+                });
         });
-    }    
+    }
 
     public void OnClickSecede()
     {        
@@ -501,7 +526,7 @@ public class MainController : MonoBehaviour
         if (result != null)
         {
             UpdateRawSection(result);
-            if (result.ResponseCode == (int)PubApiResponseCode.SUCCESS)
+            if (result.ResponseCode == (int)PubResponseCode.SUCCESS)
             {
                 if (result.UserLoginInfo.Status == (int)PubAccountStatus.B)
                 {
@@ -523,12 +548,12 @@ public class MainController : MonoBehaviour
                     rawJsonText.text += "탈퇴된 계정입니다.";
                 }
             }
-            else if (result.ResponseCode == (int)PubApiResponseCode.SERVICE_MAINTENANCE)
+            else if (result.ResponseCode == (int)PubResponseCode.SERVICE_MAINTENANCE)
             {
                 popupMessageText.text = result.Maintenance.Message;
                 popup_panel.SetActive(true);
             }
-            else if (result.ResponseCode == (int)PubApiResponseCode.USER_IP_BLOCK)
+            else if (result.ResponseCode == (int)PubResponseCode.USER_IP_BLOCK)
             {
                 popupMessageText.text = "IP Block";
                 popup_panel.SetActive(true);

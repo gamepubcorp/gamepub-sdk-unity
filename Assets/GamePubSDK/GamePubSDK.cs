@@ -40,15 +40,11 @@ namespace GamePub.PubSDK
             if (GetLastLoginType() != PubLoginType.NONE)
             {
                 if (pause)
-                {                    
-                    string str = "ping stop";
-                    str.Log();
+                {                                        
                     StopPing();
                 }
                 else
-                {
-                    string str = "ping start";
-                    str.Log();
+                {                    
                     StartPing();
                 }
             }
@@ -121,12 +117,12 @@ namespace GamePub.PubSDK
             return (PubLoginType)AuthenticationState.LoginType;
         }
 
-        public PubInAppListResult GetProductList()
-        {            
-            var result = NativeInterface.GetProductList();
-            if (string.IsNullOrEmpty(result)) { return null; }
-            return JsonUtility.FromJson<PubInAppListResult>(result);
-        }
+        //public PubInAppListResult GetProductList()
+        //{            
+        //    var result = NativeInterface.GetProductList();
+        //    if (string.IsNullOrEmpty(result)) { return null; }
+        //    return JsonUtility.FromJson<PubInAppListResult>(result);
+        //}
 
         public PubLanguageList GetLanguageList()
         {
@@ -146,9 +142,14 @@ namespace GamePub.PubSDK
             GamePubAPI.GetImageBanner(action);
         }
 
-        public void InitBilling(Action<Result<PubPurchaseResultList>> action)
+        public void InitBilling(Action<Result<PubInAppListResult>> action)
         {
             GamePubAPI.InitBilling(action);
+        }
+
+        public void RestorePurchases(Action<Result<PubPurchaseResultList>> action)
+        {
+            GamePubAPI.RestorePurchases(action);
         }
 
         public void InAppPurchase(string pid,
@@ -209,7 +210,7 @@ namespace GamePub.PubSDK
                               string serverId,
                               string playerId,
                               string etc,
-                              Action<Result<PubUnit>> action)
+                              Action<Result<PubCouponInfo>> action)
         {
             GamePubAPI.CouponUse(key, serverId, playerId, etc, action);
         }
@@ -243,22 +244,19 @@ namespace GamePub.PubSDK
 
         public void OnApiOk(string result)
         {
-            result.SuccessLog();
-            //Debug.Log("OnApiOk : " + result);
+            result.SuccessLog();            
             GamePubAPI._OnApiOk(result);
         }
 
         public void OnApiError(string result)
         {
-            result.ErrorLog();
-            //Debug.Log("OnApiError : " + result);
+            result.ErrorLog();           
             GamePubAPI._OnApiError(result);
         }
 
         public void OnApiUpdate(string result)
         {
-            result.UpdateLog();
-            //Debug.Log("OnApiUpdate : " + result);
+            result.UpdateLog();            
             GamePubAPI._OnApiUpdate(result);
         }
     }

@@ -104,15 +104,15 @@ namespace GamePub.PubSDK
             return pub_sdk_getLanguageList();
         }
 
-        [DllImport("__Internal")]
-        private static extern string pub_sdk_getProductList();
-        public static string GetProductList()
-        {
-            if (!Application.isPlaying) { return null; }
-            if (IsInvalidRuntime(null)) { return null; }
+        //[DllImport("__Internal")]
+        //private static extern string pub_sdk_getProductList();
+        //public static string GetProductList()
+        //{
+        //    if (!Application.isPlaying) { return null; }
+        //    if (IsInvalidRuntime(null)) { return null; }
 
-            return pub_sdk_getProductList();
-        }
+        //    return pub_sdk_getProductList();
+        //}
 
         [DllImport("__Internal")]
         private static extern void pub_sdk_secede(string identifier);
@@ -152,6 +152,16 @@ namespace GamePub.PubSDK
             if (IsInvalidRuntime(identifier)) { return; }
 
             pub_sdk_getImageBanner(identifier);
+        }
+
+        [DllImport("__Internal")]
+        private static extern void pub_sdk_initBilling(string identifier);
+        public static void InitBilling(string identifier)
+        {
+            if (!Application.isPlaying) { return; }
+            if (IsInvalidRuntime(identifier)) { return; }
+
+            pub_sdk_initBilling(identifier);
         }
 
         [DllImport("__Internal")]

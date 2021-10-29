@@ -64,11 +64,17 @@ namespace GamePub.PubSDK
             NativeInterface.GetImageBanner(identifier);
         }
 
-        public static void InitBilling(Action<Result<PubPurchaseResultList>> action)
+        public static void InitBilling(Action<Result<PubInAppListResult>> action)
+        {
+            var identifier = AddAction(FlattenAction.JsonFlatten<PubInAppListResult>(action));
+            NativeInterface.InitBilling(identifier);
+        }
+       
+        public static void RestorePurchases(Action<Result<PubPurchaseResultList>> action)
         {
             var identifier = AddAction(FlattenAction.JsonFlatten<PubPurchaseResultList>(action));
 #if UNITY_ANDROID
-            NativeInterface.InitBilling(identifier);
+            NativeInterface.RestorePurchases(identifier);
 #endif
         }
 
@@ -143,9 +149,9 @@ namespace GamePub.PubSDK
                                      string serverId,
                                      string playerId,
                                      string etc,
-                                     Action<Result<PubUnit>> action)
+                                     Action<Result<PubCouponInfo>> action)
         {
-            var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
+            var identifier = AddAction(FlattenAction.JsonFlatten<PubCouponInfo>(action));
             NativeInterface.CouponUse(identifier, key, serverId, playerId, etc);
         }
 
