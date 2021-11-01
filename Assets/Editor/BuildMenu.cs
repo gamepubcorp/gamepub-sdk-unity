@@ -105,9 +105,7 @@ public class BuildMenu : ScriptableObject
         Debug.Log(GetBuildServer());
         Debug.Log("-----------------");
         Debug.Log(GetBuildStore());
-        Debug.Log("-----------------");
-
-        
+        Debug.Log("-----------------");        
     }
 
     [UnityEditor.MenuItem("BuildMenu/GoogleStore", false, 3001)]
@@ -132,10 +130,11 @@ public class BuildMenu : ScriptableObject
     [UnityEditor.MenuItem("BuildMenu/OneStore", false, 3003)]
     static void Buildmachine_OneStore()
     {
-        PlayerSettings.productName = "OneStoreDemo";
+        string name = GetBuildStore() + GetBuildServer();
+        PlayerSettings.productName = name;
         PrepareAndroidBuild("com.gamepub.onestore.sample");
 
-        PerformAndroidBuild(GetAndroidOutputFile("OneStore_Local_SDKUnityDemo"), "", false);
+        PerformAndroidBuild(GetAndroidOutputFile(), "", false);
     }
 
     [UnityEditor.MenuItem("BuildMenu/OneStore Build And Run", false, 3004)]
