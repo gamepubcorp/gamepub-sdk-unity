@@ -32,8 +32,8 @@ android {
         resValue "string", "google_web_client_id", "892923933661-1218sobcuhmmt93haj2j22dom4vdppgl.apps.googleusercontent.com"
         resValue "string", "apple_client_id", "gamepub.com.PubSDKsample"
         resValue "string", "onestore_license_key", "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDAcvf/UBiRonohi3q/biq1kKdyPIfZjqlXZirMUVqLPNjdEeFDZiG26FuZx7DkBV1SNdVN506m1ezUIoFwt4S6OBNDkneHGvgo3yzR1/uanub4Ix7J4zIiuu/4A/xAi3TSlFzGJhgAYlwm06J62B3pkZCTlVHIEzl4qIa3HmEy4wIDAQAB"
-        resValue "string", "android_store", "Google"
-        resValue "string", "api_server", "DEV"
+        resValue "string", "android_store", "Store"
+        resValue "string", "api_server", "Server"
     }
 
     aaptOptions {

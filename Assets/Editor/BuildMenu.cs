@@ -78,8 +78,8 @@ public class BuildMenu : ScriptableObject
     static string GetAndroidOutputFile()
     {
         string output = string.Format("{0}/{1}_{2}.apk", "AndroidBuild",
-                                                     "SDKUnityDemo",
-                                                     GetBuildID());
+                                                     GetBuildStore(),
+                                                     GetBuildServer());
         return output;
     }
 
@@ -106,15 +106,18 @@ public class BuildMenu : ScriptableObject
         Debug.Log("-----------------");
         Debug.Log(GetBuildStore());
         Debug.Log("-----------------");
+
+        
     }
 
     [UnityEditor.MenuItem("BuildMenu/GoogleStore", false, 3001)]
     static void Buildmachine_GoogleStore()
     {
-        PlayerSettings.productName = "GoogleLocalDemo";
+        string name = GetBuildStore() + GetBuildServer();
+        PlayerSettings.productName = name;
         PrepareAndroidBuild("com.gamepub.testapp");
 
-        PerformAndroidBuild(GetAndroidOutputFile("Google_Local_SDKUnityDemo"), "", false);
+        PerformAndroidBuild(GetAndroidOutputFile(), "", false);
     }
 
     [UnityEditor.MenuItem("BuildMenu/GoogleStore Build And Run", false, 3002)]
