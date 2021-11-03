@@ -58,7 +58,7 @@ namespace GamePub.PubSDK.Editor
         static void SetupGoogleSetting(PlistElementDict rootDict)
         {
             rootDict.SetString("GoogleClientID", PubSDKSettings.GetOrCreateSettings().GoogleClientID);
-            //rootDict.SetBoolean("DevServer", true);
+            //DevServer
         }
 
         static void SetupFacebookSetting(PlistElementDict rootDict)
