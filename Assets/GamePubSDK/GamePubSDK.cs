@@ -40,11 +40,11 @@ namespace GamePub.PubSDK
             if (GetLastLoginType() != PubLoginType.NONE)
             {
                 if (pause)
-                {                                        
+                {
                     StopPing();
                 }
                 else
-                {                    
+                {
                     StartPing();
                 }
             }
@@ -93,9 +93,9 @@ namespace GamePub.PubSDK
             GamePubAPI.Secede(action);
         }
 
-        public void SecedeCancel(PubLoginType type, Action<Result<PubUnit>> action)
+        public void SecedeCancel(Action<Result<PubUnit>> action)
         {
-            GamePubAPI.SecedeCancel(type, action);
+            GamePubAPI.SecedeCancel(action);
         }
 
         private PubAuthenticationState AuthenticationState

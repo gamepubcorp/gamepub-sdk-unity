@@ -185,7 +185,18 @@ public class MainController : MonoBehaviour
                 value =>
                 {
                     //UpdateRawSection(value);
-                    SceneManager.LoadSceneAsync("Login");
+                    GamePubSDK.Ins.Logout(response =>
+                    {
+                        response.Match(
+                            success =>
+                            {
+                                SceneManager.LoadSceneAsync("Login");
+                            },
+                            failed =>
+                            {
+                                UpdateRawSection(failed);
+                            });
+                    });                    
                 },
                 error =>
                 {

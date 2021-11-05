@@ -125,13 +125,13 @@ namespace GamePub.PubSDK
         }
 
         [DllImport("__Internal")]
-        private static extern void pub_sdk_secedeCancel(string identifier, int loginType);
-        public static void SecedeCancel(string identifier, PubLoginType loginType)
+        private static extern void pub_sdk_secedeCancel(string identifier);
+        public static void SecedeCancel(string identifier)
         {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(identifier)) { return; }
 
-            pub_sdk_secedeCancel(identifier, (int)loginType);
+            pub_sdk_secedeCancel(identifier);
         }
 
         [DllImport("__Internal")]

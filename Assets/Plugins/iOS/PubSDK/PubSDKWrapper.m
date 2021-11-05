@@ -152,10 +152,8 @@
 }
 
 - (void)secedeCancel:(NSString *)identifier
-           loginType:(int)loginType
 {
-    [[PubApiClient getInstance] secedeCancel:loginType
-                                  completion:^(NSString *unitResult, NSError *error)
+    [[PubApiClient getInstance] secedeCancel:^(NSString *unitResult, NSError *error)
     {
         if(error)
         {

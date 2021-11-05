@@ -36,8 +36,7 @@
 //- (NSString *)getProductList;
 
 - (void)secede:(NSString *)identifier;
-- (void)secedeCancel:(NSString *)identifier
-           loginType:(int)loginType;
+- (void)secedeCancel:(NSString *)identifier;
 
 - (void)openPolicyLink:(NSString *)identifier
             policyType:(int)policyType;

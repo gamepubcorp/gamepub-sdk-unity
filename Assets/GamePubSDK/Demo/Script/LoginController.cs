@@ -13,6 +13,7 @@ public class LoginController : MonoBehaviour
     public GameObject content;
     public GameObject autoLogin;
     public GameObject policy_panel;
+    public GameObject recovery_panel;    
 
     private void Awake()
     {       
@@ -22,7 +23,7 @@ public class LoginController : MonoBehaviour
                 value =>
                 {
                     //value.Code = 0
-                    //value.Msg = "setupSDK Success"                    
+                    //value.Msg = "setupSDK Success"
                 },
                 error =>
                 {
@@ -148,7 +149,41 @@ public class LoginController : MonoBehaviour
 
     public void OnClickClosePopup()
     {
-        popup_panel.SetActive(false);
+        popup_panel.SetActive(false);        
+    }
+
+    public void OnClickRecoveryConfirm()
+    {
+        GamePubSDK.Ins.SecedeCancel(result =>
+        {
+            result.Match(
+                value =>
+                {
+                    Debug.Log(value.Msg);
+                },
+                error =>
+                {
+                    Debug.Log(error.Message);
+                });
+        });
+        recovery_panel.SetActive(false);
+    }
+
+    public void OnClickRecoveryClose()
+    {
+        GamePubSDK.Ins.Logout(result =>
+        {
+            result.Match(
+                value =>
+                {
+                    Debug.Log(value.Msg);
+                },
+                error =>
+                {
+                    Debug.Log(error.Message);
+                });
+        });
+        recovery_panel.SetActive(false);
     }
 
     public void OnPushCheck(bool bCheck)
@@ -223,16 +258,15 @@ public class LoginController : MonoBehaviour
                     SceneManager.LoadSceneAsync("Main");
                 }
                 else if (result.UserLoginInfo.Status == (int)PubAccountStatus.S)
-                {                                        
-                    messageText.text = "탈퇴된 계정입니다.";
-                    popup_panel.SetActive(true);
+                {                    
+                    recovery_panel.SetActive(true);
                 }
             }
             else if (result.ResponseCode == (int)PubResponseCode.SERVICE_MAINTENANCE)
             {
                 messageText.text = result.Maintenance.Message;
                 popup_panel.SetActive(true);
-            }            
+            }
         }
     }
 }

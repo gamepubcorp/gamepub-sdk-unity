@@ -51,11 +51,10 @@ namespace GamePub.PubSDK
             NativeInterface.Secede(identifier);
         }
 
-        public static void SecedeCancel(PubLoginType loginType,
-                                        Action<Result<PubUnit>> action)
+        public static void SecedeCancel(Action<Result<PubUnit>> action)
         {
             var identifier = AddAction(FlattenAction.JsonFlatten<PubUnit>(action));
-            NativeInterface.SecedeCancel(identifier, loginType);
+            NativeInterface.SecedeCancel(identifier);
         }        
 
         public static void GetImageBanner(Action<Result<PubImageBannerList>> action)

@@ -15,7 +15,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
-        </activity>        
+            <meta-data android:name="unityplayer.UnityActivity" android:value="true" />            
+        </activity>
+        <meta-data android:name="iap:view_option" android:value="popup" />
     </application>
 </manifest>

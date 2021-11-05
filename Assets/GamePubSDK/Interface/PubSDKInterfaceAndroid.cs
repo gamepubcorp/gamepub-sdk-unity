@@ -130,14 +130,14 @@ namespace GamePub.PubSDK
                 pubSdkWrapper.Call("secede", param);
         }
 
-        public static void SecedeCancel(string identifier, PubLoginType loginType)
+        public static void SecedeCancel(string identifier)
         {
             if (!Application.isPlaying) { return; }
             if (IsInvalidRuntime(identifier)) { return; }
 
-            object[] param = new object[2];
+            object[] param = new object[1];
             param[0] = identifier;
-            param[1] = (int)loginType;
+            //param[1] = (int)loginType;
 
             if (pubSdkWrapper != null)
                 pubSdkWrapper.Call("secedeCancel", param);
