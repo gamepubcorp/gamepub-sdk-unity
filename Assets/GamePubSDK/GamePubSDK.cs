@@ -17,7 +17,7 @@ namespace GamePub.PubSDK
             }
             else if (instance != this)
             {
-                Destroy(gameObject);                
+                Destroy(gameObject);
             }
             DontDestroyOnLoad(gameObject);            
         }

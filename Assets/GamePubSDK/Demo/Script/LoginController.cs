@@ -149,7 +149,20 @@ public class LoginController : MonoBehaviour
 
     public void OnClickClosePopup()
     {
-        popup_panel.SetActive(false);        
+        popup_panel.SetActive(false);
+
+        GamePubSDK.Ins.Logout(res =>
+        {
+            res.Match(
+                value =>
+                {
+                    Debug.Log(value.Msg);
+                },
+                error =>
+                {
+                    Debug.Log(error.Message);
+                });
+        });
     }
 
     public void OnClickRecoveryConfirm()
