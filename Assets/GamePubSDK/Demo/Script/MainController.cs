@@ -13,7 +13,7 @@ public class MainController : MonoBehaviour
     string productID_2 = "com.gamepub.test2000";
 #elif UNITY_IOS
     string productID_1 = "com.gamepub.unity.inapp1200";
-    string productID_2 = "com.gamepub.unity.inapp2500";    
+    string productID_2 = "com.gamepub.unity.inapp2500";
 #endif
 
     public Image userImage;
@@ -52,7 +52,7 @@ public class MainController : MonoBehaviour
 
         //언어설정        
         foreach (PubLanguageCode langCode in GamePubSDK.Ins.GetLanguageList().LangList)
-        {            
+        {
             //Enum.TryParse(strLang, out langCode);
             UserInfoManager.Ins.LangList.Add(langCode);
         }
@@ -63,7 +63,7 @@ public class MainController : MonoBehaviour
             option.text = code.ToString();
             dropdownLang.options.Add(option);
         }
-    }    
+    }
 
     private void PingListener(Result<PubUnit> result)
     {        

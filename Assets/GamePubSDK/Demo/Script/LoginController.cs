@@ -84,6 +84,7 @@ public class LoginController : MonoBehaviour
                     value =>
                     {
                         UserInfoManager.Ins.loginResult = value;
+                        UserInfoManager.Ins.currentCode = (PubLanguageCode)UserInfoManager.Ins.loginResult.UserLoginInfo.Language;
                         UpdateLoginResult(value);
                     },
                     error =>

@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 82878016}
   - component: {fileID: 82878015}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Close Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -333,8 +333,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 449235870}
-        m_MethodName: OnClickClosePopup
+      - m_Target: {fileID: 1614361793}
+        m_MethodName: OnClickClose
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

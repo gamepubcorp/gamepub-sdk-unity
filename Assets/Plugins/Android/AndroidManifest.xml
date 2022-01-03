@@ -10,6 +10,7 @@
     <application android:allowBackup="false"
                 tools:replace="android:allowBackup">
         <activity android:name="com.unity3d.player.UnityPlayerActivity"
+                  android:configChanges="locale|fontScale|keyboard|keyboardHidden|layoutDirection|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode"
                   android:theme="@style/UnityThemeSelector">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

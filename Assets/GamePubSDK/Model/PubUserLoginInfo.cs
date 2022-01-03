@@ -7,9 +7,7 @@ namespace GamePub.PubSDK
     public class PubUserLoginInfo
     {
         [SerializeField]
-        private string accountID = "";
-        [SerializeField]
-        private string language = "";        
+        private string accountID = "";        
         [SerializeField]
         private string regDate = "";
         [SerializeField]
@@ -29,6 +27,8 @@ namespace GamePub.PubSDK
         [SerializeField]
         private int status = 0;
         [SerializeField]
+        private int language = 0;
+        [SerializeField]
         private bool agreePush = false;
         [SerializeField]
         private bool agreeNight = false;
@@ -38,8 +38,6 @@ namespace GamePub.PubSDK
         private int blockReason = 0;
 
         public string AccountID { get { return accountID; } }
-        public string Language { get { return language; } }
-        
         public string RegDate { get { return regDate; } }
         public string SecedeDate { get { return secedeDate; } }
         public string SecedeWaitDate { get { return secedeWaitDate; } }
@@ -49,7 +47,8 @@ namespace GamePub.PubSDK
 
         public int AppId { get { return appId; } }
         public int IntDate { get { return intDate; } }
-        public int Status { get { return status; } }
+        public int Status { get { return status; } }        //PubAccountStatus
+        public int Language { get { return language; } }    //PubLanguageCode
         public bool AgreePush { get { return agreePush; } }
         public bool AgreeNight { get { return agreeNight; } }
         public bool AgreeAd { get { return agreeAd; } }

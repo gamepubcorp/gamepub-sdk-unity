@@ -56,4 +56,9 @@ public class Refund_Panel : MonoBehaviour
         var child = item as ChildItem;
         child.ChildData = data[rowIndex];
     }
+
+    public void OnClickClose()
+    {
+        gameObject.SetActive(false);
+    }
 }
