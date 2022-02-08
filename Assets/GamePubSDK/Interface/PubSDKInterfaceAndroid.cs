@@ -110,14 +110,6 @@ namespace GamePub.PubSDK
             return pubSdkWrapper.Call<string>("getLanguageList");
         }
 
-        //public static string GetProductList()
-        //{
-        //    if (!Application.isPlaying) { return null; }
-        //    if (IsInvalidRuntime(null)) { return null; }
-
-        //    return pubSdkWrapper.Call<string>("getProductList");
-        //}
-
         public static void Secede(string identifier)
         {
             if (!Application.isPlaying) { return; }

@@ -19,7 +19,7 @@ namespace GamePub.PubSDK
             {
                 Destroy(gameObject);
             }
-            DontDestroyOnLoad(gameObject);            
+            DontDestroyOnLoad(gameObject);
         }
 
         public static GamePubSDK Ins
@@ -60,7 +60,9 @@ namespace GamePub.PubSDK
             isSetup = true;
         }
 
-        public void Login(PubLoginType loginType, PubAccountServiceType serviceType, Action<Result<PubLoginResult>> action)
+        public void Login(PubLoginType loginType,
+                          PubAccountServiceType serviceType,
+                          Action<Result<PubLoginResult>> action)
         {            
             GamePubAPI.Login(loginType, serviceType, action);
         }
@@ -115,14 +117,7 @@ namespace GamePub.PubSDK
             if (AuthenticationState == null)
                 return PubLoginType.NONE;
             return (PubLoginType)AuthenticationState.LoginType;
-        }
-
-        //public PubInAppListResult GetProductList()
-        //{            
-        //    var result = NativeInterface.GetProductList();
-        //    if (string.IsNullOrEmpty(result)) { return null; }
-        //    return JsonUtility.FromJson<PubInAppListResult>(result);
-        //}
+        }        
 
         public PubLanguageList GetLanguageList()
         {

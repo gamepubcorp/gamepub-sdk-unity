@@ -27,6 +27,8 @@ namespace GamePub.PubSDK
         [SerializeField]
         private string reward = "";
         [SerializeField]
+        private string transactionId = "";
+        [SerializeField]
         private string receiptPayLoad = "";
 
         public int IntDate { get { return intDate; } }
@@ -39,6 +41,7 @@ namespace GamePub.PubSDK
         public string VoidedTid { get { return voidedTid; } }
         public string ItemSendCode { get { return itemSendCode; } }
         public string Reward { get { return reward; } }
+        public string TransactionId { get { return transactionId; } }
         public string ReceiptPayLoad { get { return receiptPayLoad; } }
     }
 }
