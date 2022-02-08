@@ -9,11 +9,7 @@ namespace GamePub.PubSDK.Editor
     class PubSDKSettings : ScriptableObject
     {
         const string assetPath = "Assets/Editor/GamePubSDK/PubSDKiOSSettings.asset";
-
-        internal static string[] dependencyManagerOptions = new string[] { "CocoaPods", "None" };
-
-        [SerializeField]
-        private string iOSDependencyManager;
+        
         [SerializeField]
         private bool appleLogin;
         [SerializeField]
@@ -23,14 +19,8 @@ namespace GamePub.PubSDK.Editor
         [SerializeField]
         private string googleClientID;
         [SerializeField]
-        private string reversedClientID;        
-
-        internal static int DependencySelectedIndex(string selected)
-        {
-            return Array.IndexOf(dependencyManagerOptions, selected);
-        }
-
-        internal bool UseCocoaPods { get { return iOSDependencyManager.Equals("CocoaPods"); } }
+        private string reversedClientID;
+        
         internal string FacebookAppID { get { return facebookAppID; } }
         internal string GoogleClientID { get { return googleClientID; } }
         internal string ReversedClientID { get { return reversedClientID; } }
@@ -42,8 +32,7 @@ namespace GamePub.PubSDK.Editor
             var settings = AssetDatabase.LoadAssetAtPath<PubSDKSettings>(assetPath);
             if (settings == null)
             {
-                settings = ScriptableObject.CreateInstance<PubSDKSettings>();
-                settings.iOSDependencyManager = "CocoaPods";
+                settings = ScriptableObject.CreateInstance<PubSDKSettings>();                
                 settings.appleLogin = false;
                 settings.facebookLogin = false;
 
@@ -86,10 +75,7 @@ namespace GamePub.PubSDK.Editor
                 settings = PubSDKSettings.GetSerializedSettings();
             }
             settings.Update();
-            EditorGUI.BeginChangeCheck();
-
-            var property = settings.FindProperty("iOSDependencyManager");            
-            var selected = PubSDKSettings.DependencySelectedIndex(property.stringValue);
+            EditorGUI.BeginChangeCheck();            
 
             var propertyAppleLogin = settings.FindProperty("appleLogin");
             var enableAppleLogin = propertyAppleLogin.boolValue;
@@ -105,12 +91,12 @@ namespace GamePub.PubSDK.Editor
 
             var propertyReversedClientId = settings.FindProperty("reversedClientID");
             var reversedClientId = propertyReversedClientId.stringValue;
-
-            selected = EditorGUILayout.Popup("iOS Dependency Manager", selected, PubSDKSettings.dependencyManagerOptions);
-            enableAppleLogin = EditorGUILayout.Toggle("Apple Login Enable", enableAppleLogin);
-
-            GUILayout.Space(20);
+            
+            //GUILayout.Space(20);
             GUI.skin.label.fontSize = 17;
+            GUILayout.Label("Apple", GUILayout.Width(200), GUILayout.Height(30));
+            enableAppleLogin = EditorGUILayout.Toggle("Apple Login Enable", enableAppleLogin);
+            
             GUILayout.Label("Facebook", GUILayout.Width(200), GUILayout.Height(30));
             enableFacebookLogin = EditorGUILayout.BeginToggleGroup("Facebook Login Enable", enableFacebookLogin);
             facebookAppId = EditorGUILayout.TextField("Facebook App ID", facebookAppId);
@@ -120,11 +106,6 @@ namespace GamePub.PubSDK.Editor
             googleClientId = EditorGUILayout.TextField("Google Client ID", googleClientId);
             reversedClientId = EditorGUILayout.TextField("REVERSED Client ID", reversedClientId);                        
 
-            if (selected < 0)
-            {
-                selected = 0;
-            }
-            property.stringValue = PubSDKSettings.dependencyManagerOptions[selected];
             propertyAppleLogin.boolValue = enableAppleLogin;
             propertyFacebookLogin.boolValue = enableFacebookLogin;
             propertyFacebookAppId.stringValue = facebookAppId;
