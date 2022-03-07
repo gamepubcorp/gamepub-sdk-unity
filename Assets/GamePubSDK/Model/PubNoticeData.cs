@@ -5,7 +5,9 @@ namespace GamePub.PubSDK
 {
     [Serializable]
     public class PubNoticeData
-    {        
+    {
+        [SerializeField]
+        private int sort = 0;
         [SerializeField]
         private string type = "";
         [SerializeField]
@@ -22,7 +24,8 @@ namespace GamePub.PubSDK
         private string endDate = "";
         [SerializeField]
         private string regDate = "";
-        
+
+        public int Sort { get { return sort; } }
         public string Type { get { return type; } }
         public string Title { get { return title; } }
         public string Contents { get { return contents; } }

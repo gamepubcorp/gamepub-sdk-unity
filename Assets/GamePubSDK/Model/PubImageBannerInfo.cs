@@ -7,7 +7,7 @@ namespace GamePub.PubSDK
     public class PubImageBannerInfo
     {
         [SerializeField]
-        private int sort = 0;        
+        private int sort = 0;
         [SerializeField]
         private string startDate = "";
         [SerializeField]
@@ -23,7 +23,7 @@ namespace GamePub.PubSDK
         [SerializeField]
         private string link = "";
 
-        public int Sort { get { return sort; } }        
+        public int Sort { get { return sort; } }
         public string StartDate { get { return startDate; } }
         public string EndDate { get { return endDate; } }
         public string RegDate { get { return regDate; } }

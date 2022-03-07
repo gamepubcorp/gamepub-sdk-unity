@@ -69,8 +69,7 @@ namespace GamePub.PubSDK
 
         public void Logout(Action<Result<PubUnit>> action)
         {            
-            GamePubAPI.Logout(action);
-            StopPing();
+            GamePubAPI.Logout(action);            
         }
 
         public void UserInfoUpdate(PubLanguageCode languageCode,
