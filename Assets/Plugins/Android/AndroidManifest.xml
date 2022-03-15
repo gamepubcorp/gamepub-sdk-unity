@@ -19,5 +19,10 @@
             <meta-data android:name="unityplayer.UnityActivity" android:value="true" />            
         </activity>
         <meta-data android:name="iap:view_option" android:value="popup" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_stat_ic_notification" />
+            
     </application>
 </manifest>

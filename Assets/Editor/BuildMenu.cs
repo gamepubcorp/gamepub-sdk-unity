@@ -46,7 +46,7 @@ public class BuildMenu : ScriptableObject
     static string GetBuildServer()
     {
         string[] args = System.Environment.GetCommandLineArgs();
-        string buildid = "10";
+        string buildid = "server";
         for (int i = 0; i < args.Length - 1; i++)
         {
             if ("-server" == args[i])
@@ -62,7 +62,7 @@ public class BuildMenu : ScriptableObject
     static string GetBuildStore()
     {
         string[] args = System.Environment.GetCommandLineArgs();
-        string buildid = "10";
+        string buildid = "store";
         for (int i = 0; i < args.Length - 1; i++)
         {
             if ("-store" == args[i])
