@@ -52,11 +52,11 @@ namespace GamePub.PubSDK
 
         public void SetupSDK(Action<Result<PubUnit>> action)
         {           
-            if (string.IsNullOrEmpty(GamePubSDKSettings.AppID))
+            if (string.IsNullOrEmpty(GamePubSDKSettings.SdkAppID))
             {
                 throw new System.Exception("Gamepub SDK AppID is not set.");
             }
-            GamePubAPI.SetupSDK(GamePubSDKSettings.AppID, action);
+            GamePubAPI.SetupSDK(GamePubSDKSettings.SdkAppID, action);
             isSetup = true;
         }
 
@@ -244,7 +244,7 @@ namespace GamePub.PubSDK
 
         public void OnApiError(string result)
         {
-            result.ErrorLog();           
+            result.ErrorLog();
             GamePubAPI._OnApiError(result);
         }
 
