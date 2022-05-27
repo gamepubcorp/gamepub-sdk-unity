@@ -386,6 +386,7 @@ public class MainController : MonoBehaviour
                     //value.ServerId
                     //value.Status
                     UpdateRawSection(value);
+                    Debug.Log(value.Price);
                 },
                 error => {
                     //error.Code

@@ -16,7 +16,7 @@ public class LoginController : MonoBehaviour
     public GameObject recovery_panel;    
 
     private void Awake()
-    {       
+    {        
         GamePubSDK.Ins.SetupSDK(result =>
         {
             result.Match(

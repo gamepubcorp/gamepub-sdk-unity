@@ -11,6 +11,8 @@ namespace GamePub.PubSDK
         [SerializeField]
         private int status = 0;
         [SerializeField]
+        private float price = 0;
+        [SerializeField]
         private string tid = ""; 
         [SerializeField]
         private string serverId = "";
@@ -33,6 +35,7 @@ namespace GamePub.PubSDK
 
         public int IntDate { get { return intDate; } }
         public int Status { get { return status; } }
+        public float Price { get { return price; } }
         public string Tid { get { return tid; } }
         public string ServerId { get { return serverId; } }
         public string PlayerId { get { return playerId; } }

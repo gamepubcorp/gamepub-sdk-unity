@@ -8,11 +8,11 @@ namespace GamePub.PubSDK
         public const string settingsAssetName = "GamePubSDKSettings";
         public const string settingsPath = "GamePubSDK/Resources";
         public const string settingsAssetExtension = ".asset";
-        public const string unitySdkVersion = "1.1.8";
-        public const string androidSdkVersion = "1.1.28";
-        public const string iosSdkVersion = "1.1.6";
+        public const string unitySdkVersion = "1.1.10";
+        public const string androidSdkVersion = "1.1.30";
+        public const string iosSdkVersion = "1.1.9";
 
-        private static GamePubSDKSettings instance;        
+        private static GamePubSDKSettings instance;
 
         public static void SetInstance(GamePubSDKSettings settings)
         {

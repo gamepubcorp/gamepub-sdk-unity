@@ -56,7 +56,7 @@ IMPL_APP_CONTROLLER_SUBCLASS(PubSDKUnityAppDelegate)
         [hexString appendFormat:@"%02x", dataBuffer[i]];
     }
     NSString *result = [hexString copy];
-    NSLog(@"토큰 : %@", result);
+    //NSLog(@"토큰 : %@", result);
     
     [[PubApiClient getInstance] setDeviceToken:result];
 }
